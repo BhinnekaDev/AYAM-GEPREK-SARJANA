@@ -1,7 +1,7 @@
 import React from "react";
 
 function konten() {
-  return <div></div>;
+  return <div>INI BERANDA</div>;
 }
 
 export default konten;
