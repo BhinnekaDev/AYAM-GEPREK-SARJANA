@@ -8,9 +8,10 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 // GAMBAR
-import logoMasuk from "@/assets/img/masuk/logo.png";
+import logoMasuk from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
 // IKON
 import { FcGoogle } from "react-icons/fc";
@@ -18,12 +19,17 @@ import { FcGoogle } from "react-icons/fc";
 import useMasukDenganGoogle from "@/hooks/Backend/useMasukDenganGoogle";
 
 function halamanMasuk() {
+  const router = useRouter();
+  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle } =
+    useMasukDenganGoogle();
+
   useEffect(() => {
     console.log("Komponen sudah dirender");
   }, []);
 
-  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle } =
-    useMasukDenganGoogle();
+  const handleNavBeranda = () => {
+    router.push("/Beranda");
+  };
 
   return (
     <div
@@ -87,6 +93,7 @@ function halamanMasuk() {
         <CardFooter className="flex flex-col items-center -mt-5">
           <div className="flex text-center gap-1 mt-2">
             <Typography
+              onClick={handleNavBeranda}
               variant="small"
               color="gray"
               className="font-bold hover:underline cursor-pointer"

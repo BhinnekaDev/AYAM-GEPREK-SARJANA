@@ -10,50 +10,46 @@ import {
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
-// Firebase
-import { getFirestore, doc, getDoc } from "firebase/firestore"; // Import Firestore functions
-import { getAuth, onAuthStateChanged } from "firebase/auth"; // Import Firebase Auth
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 // IMAGES
-import logoMasuk from "@/assets/img/masuk/logo.png";
+import logoBiodata from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
 // HOOKS
 import handleSubmitBiodata from "@/hooks/Backend/useBiodata";
 
 function halamanBiodata() {
   const [namaLengkap, setNamaLengkap] = useState("");
-  const [email, setEmail] = useState(""); // State untuk email
+  const [email, setEmail] = useState("");
   const [noTelepon, setNoTelepon] = useState("");
   const [alamat, setAlamat] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    // Cek status autentikasi menggunakan onAuthStateChanged
     const auth = getAuth();
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        // Jika pengguna terautentikasi, ambil data mereka berdasarkan UID
         const db = getFirestore();
-        const userDocRef = doc(db, "pengguna", user.uid); // Ambil dokumen pengguna berdasarkan UID
+        const userDocRef = doc(db, "pengguna", user.uid);
         getDoc(userDocRef)
           .then((docSnapshot) => {
             if (docSnapshot.exists()) {
               const userData = docSnapshot.data();
-              setEmail(userData.Email); // Set email dari Firestore ke state
-              console.log("Email ditemukan:", userData.Email); // Log email yang ditemukan
+              setEmail(userData.Email);
+              console.log("Email ditemukan:", userData.Email);
             } else {
-              console.log("Dokumen pengguna tidak ditemukan!"); // Log jika dokumen tidak ditemukan
+              console.log("Dokumen pengguna tidak ditemukan!");
             }
           })
           .catch((error) => {
-            console.error("Error fetching user data:", error); // Log error jika ada masalah
+            console.error("Error fetching user data:", error);
           });
       } else {
         console.log("Pengguna tidak terautentikasi");
       }
     });
 
-    // Cleanup listener on component unmount
     return () => unsubscribe();
   }, []);
 
@@ -78,7 +74,7 @@ function halamanBiodata() {
       <Card className="bg-transparent w-full max-w-md shadow-none py-4 px-8">
         <div className="flex flex-col items-center mb-3">
           <Image
-            src={logoMasuk}
+            src={logoBiodata}
             alt="Sarjana Geprek Logo"
             className="w-32 h-32"
           />
@@ -111,8 +107,8 @@ function halamanBiodata() {
                 name="Email"
                 className="w-full bg-white"
                 color="blue-gray"
-                value={email} // Menampilkan email dari state
-                disabled // Disabled agar tidak bisa diubah
+                value={email}
+                disabled
               />
             </div>
             <div className="mb-3">
