@@ -3,9 +3,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
 
 const handleSubmitBiodata = async (biodata, setLoading, router) => {
-  const { namaLengkap, email, noTelepon, alamat } = biodata;
+  const { namaDepan, namaBelakang, email, noTelepon, alamat } = biodata;
 
-  if (!namaLengkap || !email || !noTelepon || !alamat) {
+  if (!namaDepan || !namaBelakang || !email || !noTelepon || !alamat) {
     toast.error("Semua data harus dilengkapi!");
     return;
   }
@@ -23,7 +23,8 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
     const docRef = doc(firestore, "pengguna", userId);
 
     await setDoc(docRef, {
-      Nama_Lengkap: namaLengkap,
+      Nama_Depan: namaDepan,
+      Nama_Belakang: namaBelakang,
       Email: email,
       No_Telepon: noTelepon,
       Alamat: alamat,

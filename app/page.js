@@ -1,18 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-} from "@material-tailwind/react";
+import React, { useEffect, useState } from "react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 // GAMBAR
 import logoMasuk from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
+import bgMobile from "@/assets/img/masuk/mobile/bg.png";
+import vektorMasuk from "@/assets/img/masuk/vektor.png";
 // IKON
 import { FcGoogle } from "react-icons/fc";
 // HOOK
@@ -27,53 +23,80 @@ function halamanMasuk() {
     console.log("Komponen sudah dirender");
   }, []);
 
-  const handleNavBeranda = () => {
-    router.push("/Beranda");
-  };
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+
+    checkMobile();
+
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-[#FFBC2B] sm:px-6 lg:px"
+      className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
       style={{
-        backgroundImage: `url(${bgMasuk.src})`,
+        backgroundImage: `url(${isMobile ? bgMobile.src : bgMasuk.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <Card className="bg-transparent w-full max-w-md shadow-none p-8">
-        <div className="flex flex-col items-center mb-3">
+      <Card className="bg-white flex flex-col sm:flex-row w-full max-w-xs h-[600px] sm:max-w-5xl sm:h-[500px] shadow-lg p-4">
+        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 sm:h-full sm:w-1/2">
+          <Image
+            src={vektorMasuk}
+            alt="Sarjana Geprek Logo"
+            className="w-60 h-60 sm:w-80 sm:h-80"
+          />
+        </div>
+        <div className="flex flex-col items-center sm:p-10 mt-6 sm:mt-0 sm:ml-6 w-full sm:w-1/2 sm:space-y-2">
           <Image
             src={logoMasuk}
             alt="Sarjana Geprek Logo"
-            className="w-32 h-32"
+            className="w-20 h-20 sm:w-32 sm:h-32 sm:block hidden"
           />
-          <Typography variant="h4" className="font-bold text-black mb-2">
-            Sarjana Geprek
+          <Typography
+            variant="h3"
+            className="font-bold text-black md:text-2xl mb-2 hidden sm:block"
+          >
+            Ayam Geprek Sarjana
           </Typography>
           <Typography
             variant="h3"
             color="gray"
-            className="text-center text-black"
+            className="text-center text-black hidden sm:block sm:text-3xl"
           >
-            Login
+            Masuk
           </Typography>
-        </div>
-        <CardBody className="bg-[#FFE893] rounded-xl shadow-md w-full">
-          <div className="text-center">
-            <Typography className="font-bold text-lg">Masuk dengan:</Typography>
-            <div className="flex items-center justify-center my-5">
+          <Typography
+            variant="h3"
+            color="gray"
+            className="text-center text-black sm:hidden"
+          >
+            Selamat Datang!
+          </Typography>
+          <div className="text-center mt-2">
+            <Typography className="font-bold text-md hidden sm:block">
+              Silahkan ketuk tombol dibawah untuk melanjutkan!
+            </Typography>
+            <Typography className="font-bold text-md sm:hidden">
+              Di Ayam Geprek Sarjana, Silahkan ketuk tombol dibawah untuk
+              melanjutkan!
+            </Typography>
+            <div className="flex items-center text-center justify-center mt-7">
               <Button
-                variant="outlined"
                 onClick={masukDenganGoogle}
                 disabled={sedangMemuatMasukDenganGoogle}
-                className={`flex text-center items-center justify-center bg-[#cb8f0e] border-black border-2 hover:bg-[#ebc87d] p-5 rounded-full ${
-                  sedangMemuatMasukDenganGoogle
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
+                className={`flex items-center justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  ${
+                  sedangMemuatMasukDenganGoogle ? "cursor-not-allowed" : ""
                 }`}
               >
-                <FcGoogle size={50} />
+                <FcGoogle size={30} className="bg-white rounded-full" />
+                Lanjutkan dengan Google
               </Button>
             </div>
             {sedangMemuatMasukDenganGoogle && (
@@ -82,29 +105,7 @@ function halamanMasuk() {
               </Typography>
             )}
           </div>
-        </CardBody>
-        <div className="flex justify-between mt-5">
-          <div className="border-t w-full border-black mt-3" />
-          <Typography className="mx-4 w-full text-center font-bold">
-            Sarjana Geprek?
-          </Typography>
-          <div className="border-t w-full border-black mt-3" />
         </div>
-        <CardFooter className="flex flex-col items-center -mt-5">
-          <div className="flex text-center gap-1 mt-2">
-            <Typography
-              onClick={handleNavBeranda}
-              variant="small"
-              color="gray"
-              className="font-bold hover:underline cursor-pointer"
-            >
-              Cek Disini !
-            </Typography>
-            <Typography variant="small">
-              Untuk melihat detail lebih lanjut.
-            </Typography>
-          </div>
-        </CardFooter>
       </Card>
     </div>
   );
