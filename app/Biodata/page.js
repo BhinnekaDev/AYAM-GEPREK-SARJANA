@@ -72,7 +72,7 @@ function halamanBiodata() {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
+      className="flex items-center justify-center min-h-screen px-4 lg:px-8"
       style={{
         backgroundImage: `url(${isMobile ? bgMobile.src : bgBiodata.src})`,
         backgroundSize: "cover",
@@ -161,7 +161,7 @@ function halamanBiodata() {
             <div className="flex justify-center">
               <Button
                 variant="outlined"
-                className="bg-[#CB6040] px-28 sm:px-32 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                className="bg-[#CB6040] px-28 lg:px-32 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider"
                 type="submit"
                 disabled={loading}
               >

@@ -37,7 +37,7 @@ function halamanMasuk() {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8"
+      className="flex items-center justify-center min-h-screen px-4 lg:px-8"
       style={{
         backgroundImage: `url(${isMobile ? bgMobile.src : bgMasuk.src})`,
         backgroundSize: "cover",
@@ -45,45 +45,45 @@ function halamanMasuk() {
       }}
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <Card className="bg-white flex flex-col sm:flex-row w-full max-w-xs h-[600px] sm:max-w-5xl sm:h-[500px] shadow-lg p-4">
-        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 sm:h-full sm:w-1/2">
+      <Card className="bg-white flex flex-col sm:flex-row w-full max-w-xs h-[600px] lg:max-w-5xl lg:h-[500px] shadow-lg p-4">
+        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 lg:h-full lg:w-1/2">
           <Image
             src={vektorMasuk}
             alt="Sarjana Geprek Logo"
-            className="w-60 h-60 sm:w-80 sm:h-80"
+            className="w-60 h-60 lg:w-80 lg:h-80"
           />
         </div>
-        <div className="flex flex-col items-center sm:p-10 mt-6 sm:mt-0 sm:ml-6 w-full sm:w-1/2 sm:space-y-2">
+        <div className="flex flex-col items-center lg:p-10 mt-6 lg:mt-0 lg:ml-6 w-full lg:w-1/2 lg:space-y-2">
           <Image
             src={logoMasuk}
             alt="Sarjana Geprek Logo"
-            className="w-20 h-20 sm:w-32 sm:h-32 sm:block hidden"
+            className="w-20 h-20 lg:w-32 lg:h-32 lg:block hidden"
           />
           <Typography
             variant="h3"
-            className="font-bold text-black md:text-2xl mb-2 hidden sm:block"
+            className="font-bold text-black md:text-2xl mb-2 hidden lg:block"
           >
             Ayam Geprek Sarjana
           </Typography>
           <Typography
             variant="h3"
             color="gray"
-            className="text-center text-black hidden sm:block sm:text-3xl"
+            className="text-center text-black hidden lg:block lg:text-3xl"
           >
             Masuk
           </Typography>
           <Typography
             variant="h3"
             color="gray"
-            className="text-center text-black sm:hidden"
+            className="text-center text-black lg:hidden"
           >
             Selamat Datang!
           </Typography>
           <div className="text-center mt-2">
-            <Typography className="font-bold text-md hidden sm:block">
+            <Typography className="font-bold text-md hidden lg:block">
               Silahkan ketuk tombol dibawah untuk melanjutkan!
             </Typography>
-            <Typography className="font-bold text-md sm:hidden">
+            <Typography className="font-bold text-md lg:hidden">
               Di Ayam Geprek Sarjana, Silahkan ketuk tombol dibawah untuk
               melanjutkan!
             </Typography>
@@ -100,7 +100,7 @@ function halamanMasuk() {
               </Button>
             </div>
             {sedangMemuatMasukDenganGoogle && (
-              <Typography className="mt-2 text-sm text-gray-600">
+              <Typography className="mt-2 text-lg text-gray-600">
                 Sedang memuat, harap tunggu...
               </Typography>
             )}

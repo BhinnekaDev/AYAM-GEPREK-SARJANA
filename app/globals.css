@@ -22,15 +22,20 @@ body {
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #cb6040;
+  background-color: #aa5656;
   border-radius: 10px;
   border: 3px solid #f5e7b2;
 }
 
 ::-webkit-scrollbar-track {
   background-color: #f5e7b2;
-  border-radius: 10px;
+  border-radius: 1px;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  -ms-border-radius: 1px;
+  -o-border-radius: 1px;
 }

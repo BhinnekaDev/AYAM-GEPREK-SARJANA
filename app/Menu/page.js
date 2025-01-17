@@ -2,7 +2,7 @@
 import React from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
-import Beranda from "@/app/Beranda/components/konten";
+import Beranda from "@/app/Menu/components/konten";
 // IMAGE
 
 function Page() {

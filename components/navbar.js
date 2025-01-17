@@ -3,12 +3,21 @@ import React, { useState } from "react";
 import Image from "next/image";
 // IMAGE
 import logo from "@/assets/img/logo.png";
-import { Button } from "@material-tailwind/react";
+import {
+  Button,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
 // ICON
 import { FiShoppingCart, FiMenu } from "react-icons/fi";
 import { GiChickenOven, GiCook } from "react-icons/gi";
 import { MdFastfood, MdContacts } from "react-icons/md";
 import { TbUserStar } from "react-icons/tb";
+import { FaCog, FaRegUserCircle, FaPowerOff } from "react-icons/fa";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,50 +68,69 @@ function Navbar() {
         }`}
       >
         <ul className="flex flex-col gap-4 text-black font-medium transition-all duration-300">
-          <li className="flex items-center gap-1 hover:underline cursor-pointer">
+          <li className="flex items-center gap-2 hover:underline cursor-pointer">
             <GiChickenOven size={20} />
-            <div className="icon-container"></div>
             Beranda
           </li>
-          <li className="flex items-center gap-1 hover:underline cursor-pointer">
-            <GiCook size={20} />
-            <div className="icon-container"></div>
-            Tentang kita
-          </li>
-          <li className="flex items-center gap-1 hover:underline cursor-pointer">
+          <li className="flex items-center gap-2 hover:underline cursor-pointer">
             <MdFastfood size={20} />
-            <div className="icon-container"></div>
             Menu
           </li>
-          <li className="flex items-center gap-1 hover:underline cursor-pointer">
-            <TbUserStar size={20} />
-            <div className="icon-container"></div>
-            Testimoni
-          </li>
-          <li className="flex items-center gap-1 hover:underline cursor-pointer">
+          <li className="flex items-center gap-2 hover:underline cursor-pointer">
             <MdContacts size={20} />
-            <div className="icon-container"></div>
-            Kontak
+            Kontak Kami
           </li>
+          <li className="flex items-center gap-2 hover:underline cursor-pointer">
+            <GiCook size={20} />
+            Tentang kita
+          </li>
+          <hr className="border-t-2 border-gray-400 mx-12" />
+          <div className="flex items-center justify-evenly hover:underline cursor-pointer">
+            <div className="flex gap-2 bg-orange-100 text-orange-900 py-1 px-3 items-center justify-center rounded-lg">
+              <FaRegUserCircle size={20} />
+              <Typography>Profile Saya</Typography>
+            </div>
+            <div className="flex gap-2 bg-red-100 py-1 px-3 items-center justify-center rounded-lg text-red-900">
+              <FaPowerOff size={20} />
+              <Typography>Keluar</Typography>
+            </div>
+          </div>
         </ul>
       </div>
 
-      <div className="hidden md:flex md:flex-row md:items-center mx-0 md:mx-14 gap-4 md:gap-12 mt-4 md:mt-0">
-        <ul className="flex flex-row gap-4 md:gap-6 text-black font-medium transition-all duration-300">
+      <div className="hidden md:flex md:flex-row md:items-center mx-0 md:mx-6 gap-8 md:gap-12 mt-4 md:mt-0">
+        <ul className="flex flex-row gap-4 md:gap-8 text-black font-medium transition-all duration-300">
           <li className="hover:underline cursor-pointer">Beranda</li>
-          <li className="hover:underline cursor-pointer">Tentang kita</li>
           <li className="hover:underline cursor-pointer">Menu</li>
-          <li className="hover:underline cursor-pointer">Testimoni</li>
-          <li className="hover:underline cursor-pointer">Kontak</li>
+          <li className="hover:underline cursor-pointer">Kontak Kami</li>
+          <li className="hover:underline cursor-pointer">Tentang kita</li>
         </ul>
-
-        <Button
-          variant="outlined"
-          color="black"
-          className="flex items-center justify-center border-none px-3 md:px-4 py-2 rounded-full text-black hover:bg-black hover:text-white transition-all duration-300"
-        >
-          <FiShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-        </Button>
+        <div className="flex gap-1">
+          <Button
+            variant="outlined"
+            color="black"
+            className="flex items-center justify-center border-none md:px-4 py-2 rounded-full text-black hover:bg-black hover:text-white transition-all duration-300"
+          >
+            <FiShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
+          </Button>
+          <Menu>
+            <MenuHandler className="bg-transparent shadow-none hover:bg-black">
+              <IconButton>
+                <FaCog className="w-5 h-5 text-black hover:text-white" />
+              </IconButton>
+            </MenuHandler>
+            <MenuList className="p-1 rounded-lg -ml-12">
+              <MenuItem className="flex items-center px-3 py-2 gap-2">
+                <FaRegUserCircle size={18} />
+                <Typography>Profile Saya</Typography>
+              </MenuItem>
+              <MenuItem className="flex items-center px-3 py-2 gap-2">
+                <FaPowerOff size={17} />
+                <Typography>Keluar</Typography>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
       </div>
     </nav>
   );

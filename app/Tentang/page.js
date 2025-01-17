@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 // COMPONENTS
 import Navbar from "@/components/navbar";
-import Beranda from "@/app/Beranda/components/konten";
+import Beranda from "@/app/Tentang/components/konten";
 // IMAGE
 import bgShape from "@/assets/img/beranda/bgShape.png";
 
