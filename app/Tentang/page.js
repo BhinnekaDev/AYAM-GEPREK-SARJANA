@@ -5,7 +5,7 @@ import Image from "next/image";
 import Navbar from "@/components/navbar";
 import Beranda from "@/app/Tentang/components/konten";
 // IMAGE
-import bgShape from "@/assets/img/beranda/bgShape.png";
+import bgShape from "@/assets/img/beranda/bgshape.png";
 
 function Page() {
   return (
