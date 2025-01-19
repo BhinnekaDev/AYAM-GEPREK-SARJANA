@@ -58,32 +58,32 @@ function Beranda() {
 
   const menuMinuman1 = [
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Matah",
+      name: "Kapal Api",
+      description: "Kopi",
       price: "Rp 15.000",
       image: MMinuman1,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Bawang",
+      name: "Kapal Api",
+      description: "Kopi",
       price: "Rp 20.000",
       image: MMinuman1,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Manis",
+      name: "Kapal Api",
+      description: "Kopi",
       price: "Rp 18.000",
       image: MMinuman1,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Pedas",
+      name: "Kapal Api",
+      description: "Kopi",
       price: "Rp 25.000",
       image: MMinuman1,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Kemangi",
+      name: "Kopi Kapal",
+      description: "Kopi",
       price: "Rp 22.000",
       image: MMinuman1,
     },
@@ -91,32 +91,32 @@ function Beranda() {
 
   const menuMinuman2 = [
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Matah",
+      name: "Lemon Tea",
+      description: "Teh",
       price: "Rp 15.000",
       image: MMinuman2,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Bawang",
+      name: "Lemon Tea",
+      description: "Teh",
       price: "Rp 20.000",
       image: MMinuman2,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Manis",
+      name: "Lemon Tea",
+      description: "Teh",
       price: "Rp 18.000",
       image: MMinuman2,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Pedas",
+      name: "Lemon Tea",
+      description: "Teh",
       price: "Rp 25.000",
       image: MMinuman2,
     },
     {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Kemangi",
+      name: "Lemon Tea",
+      description: "Teh",
       price: "Rp 22.000",
       image: MMinuman2,
     },
@@ -270,32 +270,32 @@ function Beranda() {
 
             <div
               ref={scrollRef1}
-              className="grid grid-cols-1 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
+              className="grid grid-cols-1 mb-6 lg:mb-0 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
               {menuMakanan.map((item, index) => (
                 <CardBody
                   key={index}
-                  className="bg-[#EFF3EA] flex lg:flex-col rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
+                  className="bg-[#EFF3EA] flex lg:flex-col gap-2 p-2 lg:gap-5 rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
                     src={item.image}
                     alt={`menu-${index + 1}`}
-                    className="w-1/2 h-1/2 lg:w-full lg:h-auto rounded-lg"
+                    className="w-1/2 lg:w-full lg:h-auto rounded-lg self-center"
                   />
                   <div className="flex-col">
                     <div className="py-3 space-y-1 lg:space-y-1">
-                      <Typography className="text-lg lg:text-xl text-black">
+                      <Typography className="text-md lg:text-xl text-black">
                         {item.name}
                       </Typography>
-                      <Typography className="text-sm text-gray-600">
+                      <Typography className="text-xs text-gray-600">
                         {item.description}
                       </Typography>
                       <Typography className="text-md text-black">
                         {item.price}
                       </Typography>
                     </div>
-                    <div className="w-full mt-2 flex justify-center items-center">
-                      <Button className="py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
+                    <div className="w-full lg:mt-2 flex justify-center items-center">
+                      <Button className="p-1 lg:py-2 w-full lg:rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
                         beli
                       </Button>
                     </div>
@@ -312,7 +312,7 @@ function Beranda() {
             </Button>
           </div>
           <div className="w-full">
-            <Typography className="text-black text-start text-2xl lg:text-[36px] font-semibold mb-3 lg:mb-5 lg:ml-10">
+            <Typography className="text-black text-start text-2xl lg:text-[36px] font-semibold mb-0 ml-3 lg:mb-5 lg:ml-10">
               Minuman (Coffe)
             </Typography>
           </div>
@@ -326,12 +326,12 @@ function Beranda() {
 
             <div
               ref={scrollRef2}
-              className="grid grid-cols-2 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
+              className="grid grid-cols-2 lg:flex lg:flex-row gap-3 mb-4 lg:mb-0 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
               {menuMinuman1.map((item, index) => (
                 <CardBody
                   key={index}
-                  className="bg-[#EFF3EA] rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
+                  className="bg-[#EFF3EA] rounded-xl p-3 shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
                     src={item.image}
@@ -349,8 +349,8 @@ function Beranda() {
                       {item.price}
                     </Typography>
                   </div>
-                  <div className="w-full mt-2 flex justify-center items-center">
-                    <Button className="py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
+                  <div className="w-full lg:mt-2 flex justify-center items-center">
+                    <Button className="p-1 lg:py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
                       beli
                     </Button>
                   </div>
@@ -366,7 +366,7 @@ function Beranda() {
             </Button>
           </div>
           <div className="w-full">
-            <Typography className="text-black text-start text-2xl lg:text-[36px] font-semibold mb-3 lg:mb-5 lg:ml-10">
+            <Typography className="text-black text-start text-2xl lg:text-[36px] font-semibold ml-3 lg:mb-5 lg:ml-10">
               Minuman (non Coffe)
             </Typography>
           </div>
@@ -380,12 +380,12 @@ function Beranda() {
 
             <div
               ref={scrollRef3}
-              className="grid grid-cols-2 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
+              className="grid grid-cols-2 lg:flex lg:flex-row gap-3 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
               {menuMinuman2.map((item, index) => (
                 <CardBody
                   key={index}
-                  className="bg-[#EFF3EA] rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
+                  className="bg-[#EFF3EA] rounded-xl p-3 shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
                     src={item.image}
@@ -403,8 +403,8 @@ function Beranda() {
                       {item.price}
                     </Typography>
                   </div>
-                  <div className="w-full mt-2 flex justify-center items-center">
-                    <Button className="py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
+                  <div className="w-full lg:mt-2 flex justify-center items-center">
+                    <Button className="p-1 lg:py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
                       beli
                     </Button>
                   </div>
