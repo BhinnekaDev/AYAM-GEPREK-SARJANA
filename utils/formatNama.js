@@ -1,9 +1,23 @@
-const validNama = (nama) => {
-  const nameLength = nama.trim().length;
-  if (nameLength < 5 || nameLength > 10) {
-    return "Nama harus antara 5 hingga 10 karakter.";
-  }
-  return null;
-};
+export const formatNama = (value) => {
+  const Nama = value.replace(/[^a-zA-Z\s]/g, "");
+  const escapeHtml = (str) => {
+    return str.replace(/[&<>"']/g, (char) => {
+      switch (char) {
+        case "&":
+          return "&amp;";
+        case "<":
+          return "&lt;";
+        case ">":
+          return "&gt;";
+        case '"':
+          return "&quot;";
+        case "'":
+          return "&#39;";
+        default:
+          return char;
+      }
+    });
+  };
 
-export default validNama;
+  return escapeHtml(Nama);
+};

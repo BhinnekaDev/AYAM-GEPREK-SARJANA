@@ -1,7 +1,7 @@
 import { auth, firestore, googleProvider } from "@/lib/firebaseConfig";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
@@ -9,8 +9,33 @@ const useMasukDenganGoogle = () => {
   const router = useRouter();
   const [sedangMemuatMasukDenganGoogle, setSedangMemuatMasukDenganGoogle] =
     useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+        localStorage.setItem("ID", currentUser.uid);
+
+        try {
+          const docRef = doc(firestore, "pengguna", currentUser.uid);
+          const docSnap = await getDoc(docRef);
+        } catch (error) {
+          console.error("Gagal memeriksa koleksi pengguna:", error);
+        }
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const masukDenganGoogle = async () => {
+    if (user) {
+      return;
+    }
+
     googleProvider.setCustomParameters({
       prompt: "select_account",
     });
@@ -31,7 +56,6 @@ const useMasukDenganGoogle = () => {
         },
         { merge: true }
       );
-
       toast.success(
         `Selamat datang di Sarjana Geprek, ${pengguna.displayName}!`,
         { duration: 2000 }
@@ -54,10 +78,9 @@ const useMasukDenganGoogle = () => {
           router.push(nextRoute);
         }, 3000);
       } else {
-        router.push("/Biodata");
+        router.push("/");
       }
     } catch (error) {
-      console.error("Login dengan Google gagal:", error);
       toast.error("Gagal masuk dengan Google. Silakan coba lagi.");
     } finally {
       setSedangMemuatMasukDenganGoogle(false);
@@ -67,6 +90,7 @@ const useMasukDenganGoogle = () => {
   return {
     masukDenganGoogle,
     sedangMemuatMasukDenganGoogle,
+    user,
   };
 };
 

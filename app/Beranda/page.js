@@ -5,16 +5,27 @@ import Navbar from "@/components/navbar";
 import Beranda from "@/app/Beranda/components/konten";
 // IMAGE
 
-function Page() {
-  return (
-    <div className="min-h-screen overflow-hidden bg-[#FFE893]">
-      <div className="mb-8 lg:mb-0">
-        <Navbar />
-      </div>
+// HOOKS
+import { Toaster } from "react-hot-toast";
+import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 
-      <div>
-        <Beranda />
-      </div>
+function Page() {
+  const pengguna = useCekPengguna();
+  return (
+    <div>
+      {pengguna ? (
+        <div className="min-h-screen overflow-hidden bg-[#FFE893]">
+          <Toaster position="top-right" reverseOrder={false} />
+          <div className="mb-8 lg:mb-0">
+            <Navbar />
+          </div>
+          <div>
+            <Beranda />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

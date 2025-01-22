@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 // GAMBAR
 import logoMasuk from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
@@ -16,13 +16,8 @@ import useMasukDenganGoogle from "@/hooks/Backend/useMasukDenganGoogle";
 
 function halamanMasuk() {
   const router = useRouter();
-  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle } =
+  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle, user } =
     useMasukDenganGoogle();
-
-  useEffect(() => {
-    console.log("Komponen sudah dirender");
-  }, []);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

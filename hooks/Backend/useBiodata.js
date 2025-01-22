@@ -1,6 +1,8 @@
 import { firestore } from "@/lib/firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const handleSubmitBiodata = async (biodata, setLoading, router) => {
   const { namaDepan, namaBelakang, email, noTelepon, alamat } = biodata;
@@ -30,10 +32,7 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
       Alamat: alamat,
     });
 
-    toast.success("Data berhasil disimpan!", {
-      duration: 2000,
-    });
-
+    toast.success("Data berhasil disimpan!", { duration: 2000 });
     setTimeout(() => {
       router.push("/Beranda");
     }, 2000);
@@ -45,4 +44,33 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
   }
 };
 
-export default handleSubmitBiodata;
+const useFetchUserEmail = (setEmail) => {
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userDocRef = doc(firestore, "pengguna", user.uid);
+
+        getDoc(userDocRef)
+          .then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const userData = docSnapshot.data();
+              setEmail(userData.Email);
+              console.log("Email ditemukan:", userData.Email);
+            } else {
+              console.log("Dokumen pengguna tidak ditemukan!");
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching user data:", error);
+          });
+      } else {
+        console.log("Pengguna tidak terautentikasi");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [setEmail]);
+};
+
+export { handleSubmitBiodata, useFetchUserEmail };

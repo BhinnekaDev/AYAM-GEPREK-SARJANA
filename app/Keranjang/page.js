@@ -6,9 +6,12 @@ import Konten from "@/app/Keranjang/components/konten";
 // IMAGE
 import bgKeranjang from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";
-
+// HOOKS
+import { Toaster } from "react-hot-toast";
+import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 function Page() {
   const [isMobile, setIsMobile] = useState(false);
+  const pengguna = useCekPengguna();
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
@@ -19,21 +22,30 @@ function Page() {
   }, []);
 
   return (
-    <div
-      className="overflow-hidden min-h-screen bg-[#FFE893]"
-      style={{
-        backgroundImage: `url(${isMobile ? bgMobile.src : bgKeranjang.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div>
-        <Navbar />
-      </div>
+    <div>
+      {pengguna ? (
+        <div
+          className="overflow-hidden min-h-screen bg-[#FFE893]"
+          style={{
+            backgroundImage: `url(${
+              isMobile ? bgMobile.src : bgKeranjang.src
+            })`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <Toaster position="top-right" reverseOrder={false} />
+          <div>
+            <Navbar />
+          </div>
 
-      <div className="my-9 lg:m-0">
-        <Konten />
-      </div>
+          <div className="my-9 lg:m-0">
+            <Konten />
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

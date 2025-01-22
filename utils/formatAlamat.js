@@ -1,4 +1,4 @@
-export const formatNoTelepon = (value) => {
+export const formatAlamat = (value) => {
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
       switch (char) {
@@ -20,17 +20,7 @@ export const formatNoTelepon = (value) => {
 
   const sanitizedValue = escapeHtml(value);
 
-  const cleanedValue = sanitizedValue.replace(/\D/g, "");
+  const cleanedValue = sanitizedValue.replace(/[^a-zA-Z0-9 .]/g, "");
 
-  if (cleanedValue.length === 0) {
-    return "";
-  } else if (cleanedValue.length === 1 && cleanedValue[0] !== "0") {
-    return "";
-  }
-
-  if (!cleanedValue.startsWith("0")) {
-    return "";
-  }
-
-  return cleanedValue.substring(0, 16);
+  return cleanedValue.trim();
 };

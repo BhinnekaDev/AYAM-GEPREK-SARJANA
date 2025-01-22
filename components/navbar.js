@@ -20,10 +20,11 @@ import { FaCog, FaRegUserCircle, FaPowerOff } from "react-icons/fa";
 import { TbShoppingCartCog } from "react-icons/tb";
 //HOOKS
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
+import useKeluarAkun from "@/hooks/Backend/useKeluarAkun";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { keluarAkun } = useKeluarAkun();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -135,6 +136,7 @@ function Navbar() {
             <div
               className="flex gap-2 p-1 items-center justify-center rounded-full text-red-900 hover:underline cursor-pointer
             "
+              onClick={keluarAkun}
             >
               <FaPowerOff size={18} />
               <Typography className="font-semibold">Keluar</Typography>
@@ -240,7 +242,10 @@ function Navbar() {
                 <TbShoppingCartCog size={18} />
                 <Typography>Pesanan Saya</Typography>
               </MenuItem>
-              <MenuItem className="flex items-center px-3 py-2 gap-2">
+              <MenuItem
+                className="flex items-center px-3 py-2 gap-2"
+                onClick={keluarAkun}
+              >
                 <FaPowerOff size={15} />
                 <Typography>Keluar</Typography>
               </MenuItem>

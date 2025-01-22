@@ -12,7 +12,13 @@ import bgBiodata from "@/assets/img/masuk/bg.png";
 import bgMobile from "@/assets/img/masuk/mobile/bg.png";
 import vektorBiodata from "@/assets/img/masuk/vektor.png";
 // HOOKS
-import handleSubmitBiodata from "@/hooks/Backend/useBiodata";
+import {
+  handleSubmitBiodata,
+  useFetchUserEmail,
+} from "@/hooks/Backend/useBiodata";
+import { formatNama } from "@/utils/formatNama";
+import { formatNoTelepon } from "@/utils/formatNoTelepon";
+import { formatAlamat } from "@/utils/formatAlamat";
 
 function halamanBiodata() {
   const [namaDepan, setNamaDepan] = useState("");
@@ -35,41 +41,19 @@ function halamanBiodata() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const db = getFirestore();
-        const userDocRef = doc(db, "pengguna", user.uid);
-        getDoc(userDocRef)
-          .then((docSnapshot) => {
-            if (docSnapshot.exists()) {
-              const userData = docSnapshot.data();
-              setEmail(userData.Email);
-              console.log("Email ditemukan:", userData.Email);
-            } else {
-              console.log("Dokumen pengguna tidak ditemukan!");
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching user data:", error);
-          });
-      } else {
-        console.log("Pengguna tidak terautentikasi");
-      }
-    });
-
-    return () => unsubscribe();
-  }, []);
+  useFetchUserEmail(setEmail);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const biodata = { namaDepan, namaBelakang, email, noTelepon, alamat };
-
+    const biodata = {
+      namaDepan,
+      namaBelakang,
+      email,
+      noTelepon,
+      alamat,
+    };
     handleSubmitBiodata(biodata, setLoading, router);
   };
-
   return (
     <div
       className="flex items-center justify-center min-h-screen px-4 lg:px-8"
@@ -106,7 +90,7 @@ function halamanBiodata() {
                   className="w-full bg-white rounded-lg"
                   color="blue-gray"
                   value={namaDepan}
-                  onChange={(e) => setNamaDepan(e.target.value)}
+                  onChange={(e) => setNamaDepan(formatNama(e.target.value))}
                 />
               </div>
               <div>
@@ -118,7 +102,7 @@ function halamanBiodata() {
                   className="w-full bg-white rounded-lg"
                   color="blue-gray"
                   value={namaBelakang}
-                  onChange={(e) => setNamaBelakang(e.target.value)}
+                  onChange={(e) => setNamaBelakang(formatNama(e.target.value))}
                 />
               </div>
             </div>
@@ -138,13 +122,13 @@ function halamanBiodata() {
               <Typography className="mb-1">No Telepon</Typography>
               <Input
                 type="tel"
-                label="Masukkan No Telepon"
+                label="Masukkan No Telepon (08*****)"
                 name="No_Telepon"
                 inputMode="numeric"
                 className="w-full bg-white rounded-lg"
                 color="blue-gray"
                 value={noTelepon}
-                onChange={(e) => setNoTelepon(e.target.value)}
+                onChange={(e) => setNoTelepon(formatNoTelepon(e.target.value))}
               />
             </div>
             <div className="mb-3">
@@ -155,7 +139,7 @@ function halamanBiodata() {
                 rows="4"
                 placeholder="Masukkan alamat"
                 value={alamat}
-                onChange={(e) => setAlamat(e.target.value)}
+                onChange={(e) => setAlamat(formatAlamat(e.target.value))}
               />
             </div>
             <div className="flex justify-center">
