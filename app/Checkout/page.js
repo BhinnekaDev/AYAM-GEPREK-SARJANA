@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
-import Konten from "@/app/Profil/components/konten";
-
-import bgProfile from "@/assets/img/profil/bgProfil.png";
+import Konten from "@/app/Checkout/components/konten";
+// IMAGE
+import bgCheckout from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";
 
 function Page() {
@@ -22,7 +22,7 @@ function Page() {
     <div
       className="overflow-hidden min-h-screen bg-[#FFE893]"
       style={{
-        backgroundImage: `url(${isMobile ? bgMobile.src : bgProfile.src})`,
+        backgroundImage: `url(${isMobile ? bgMobile.src : bgCheckout.src})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
