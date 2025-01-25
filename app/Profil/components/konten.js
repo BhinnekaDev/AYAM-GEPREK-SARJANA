@@ -1,39 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Input, Typography, Button } from "@material-tailwind/react";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 // ICONS
 import { CgProfile } from "react-icons/cg";
 import { MdArrowBack, MdEdit } from "react-icons/md";
-// IMAGES
-import fotoProfile from "@/assets/img/profil/profil.png";
+
+//HOOKS
+import { useAmbilProfil } from "@/hooks/Backend/useAmbilProfil";
+import { useUpdateProfil } from "@/hooks/Backend/useUpdateProfil";
 
 const Konten = () => {
-  const [namaDepan, setNamaDepan] = useState("Hengki");
-  const [namaBelakang, setNamaBelakang] = useState("Ganteng");
-  const [email, setEmail] = useState("Hengki@example.com");
-  const [noTelepon, setNoTelepon] = useState("1234567890");
-  const [alamat, setAlamat] = useState("Lembang");
   const [isEditing, setIsEditing] = useState(false);
-  const [profileImage, setProfileImage] = useState(fotoProfile);
-  const [uploadedImage, setUploadedImage] = useState(null);
+  const { profilData } = useAmbilProfil();
+  const {
+    updateProfile,
+    formData,
+    handleChange,
+    profileImage,
+    handleImageUpload,
+  } = useUpdateProfil();
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setUploadedImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+  const handleSave = async () => {
+    if (isEditing) {
+      await updateProfile(formData);
     }
-  };
-
-  const handleSave = () => {
-    if (uploadedImage) {
-      setProfileImage(uploadedImage);
-    }
-    setIsEditing(false);
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -55,7 +47,7 @@ const Konten = () => {
             <div className="relative">
               <div className="flex items-center justify-center md:w-56 md:h-56 rounded-full border border-gray-400 shadow-md overflow-hidden">
                 <Image
-                  src={uploadedImage || profileImage}
+                  src={profileImage}
                   alt="Foto Profil"
                   width={80}
                   height={80}
@@ -85,10 +77,11 @@ const Konten = () => {
                 </Typography>
                 <Input
                   type="text"
+                  name="Nama_Depan"
                   placeholder="Masukkan Nama Depan"
                   className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                  value={namaDepan}
-                  onChange={(e) => setNamaDepan(e.target.value)}
+                  value={formData.Nama_Depan}
+                  onChange={handleChange}
                   disabled={!isEditing}
                 />
               </div>
@@ -98,10 +91,11 @@ const Konten = () => {
                 </Typography>
                 <Input
                   type="text"
+                  name="Nama_Belakang"
                   placeholder="Masukkan Nama Belakang"
                   className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                  value={namaBelakang}
-                  onChange={(e) => setNamaBelakang(e.target.value)}
+                  value={formData.Nama_Belakang}
+                  onChange={handleChange}
                   disabled={!isEditing}
                 />
               </div>
@@ -114,9 +108,8 @@ const Konten = () => {
                   placeholder="Masukkan Email"
                   className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                   color="blue-gray"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={!isEditing}
+                  value={profilData?.Email || ""}
+                  disabled
                 />
               </div>
               <div>
@@ -125,11 +118,12 @@ const Konten = () => {
                 </Typography>
                 <Input
                   type="tel"
+                  name="No_Telepon"
                   placeholder="Masukkan No Telepon"
                   className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                   color="blue-gray"
-                  value={noTelepon}
-                  onChange={(e) => setNoTelepon(e.target.value)}
+                  value={formData.No_Telepon}
+                  onChange={handleChange}
                   disabled={!isEditing}
                 />
               </div>
@@ -139,11 +133,12 @@ const Konten = () => {
                 </Typography>
                 <Input
                   type="text"
+                  name="Alamat"
                   placeholder="Masukkan Alamat Anda"
                   className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                   color="blue-gray"
-                  value={alamat}
-                  onChange={(e) => setAlamat(e.target.value)}
+                  value={formData.Alamat}
+                  onChange={handleChange}
                   disabled={!isEditing}
                 />
               </div>

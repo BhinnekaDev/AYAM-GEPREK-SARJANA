@@ -39,7 +39,7 @@ function Page() {
           </div>
         </div>
       ) : (
-        ""
+        <Toaster position="top-right" reverseOrder={false} />
       )}
     </div>
   );

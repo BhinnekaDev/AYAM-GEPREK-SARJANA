@@ -133,11 +133,12 @@ function halamanBiodata() {
             </div>
             <div className="mb-3">
               <Typography className="mb-1">Alamat</Typography>
-              <textarea
+              <Input
+                type="text"
+                label="Masukkan Alamat"
                 name="Alamat"
-                className="w-full bg-white rounded-lg border border-blue-gray-200 p-2 text-black placeholder-blue-gray-500 text-sm"
-                rows="4"
-                placeholder="Masukkan alamat"
+                className="w-full bg-white rounded-lg"
+                color="blue-gray"
                 value={alamat}
                 onChange={(e) => setAlamat(formatAlamat(e.target.value))}
               />

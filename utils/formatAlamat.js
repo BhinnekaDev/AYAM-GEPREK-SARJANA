@@ -1,4 +1,5 @@
 export const formatAlamat = (value) => {
+  const Alamat = value.replace(/[^a-zA-Z0-9\s.,/]/g, "");
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
       switch (char) {
@@ -18,9 +19,5 @@ export const formatAlamat = (value) => {
     });
   };
 
-  const sanitizedValue = escapeHtml(value);
-
-  const cleanedValue = sanitizedValue.replace(/[^a-zA-Z0-9 .]/g, "");
-
-  return cleanedValue.trim();
+  return escapeHtml(Alamat);
 };

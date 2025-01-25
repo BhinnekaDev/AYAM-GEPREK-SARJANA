@@ -1,4 +1,5 @@
 export const formatNoTelepon = (value) => {
+  const No_Telepon = value.replace(/[^0-9]/g, "");
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
       switch (char) {
@@ -18,7 +19,7 @@ export const formatNoTelepon = (value) => {
     });
   };
 
-  const sanitizedValue = escapeHtml(value);
+  const sanitizedValue = escapeHtml(No_Telepon);
 
   const cleanedValue = sanitizedValue.replace(/\D/g, "");
 

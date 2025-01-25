@@ -7,8 +7,24 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 const handleSubmitBiodata = async (biodata, setLoading, router) => {
   const { namaDepan, namaBelakang, email, noTelepon, alamat } = biodata;
 
-  if (!namaDepan || !namaBelakang || !email || !noTelepon || !alamat) {
-    toast.error("Semua data harus dilengkapi!");
+  if (!namaDepan) {
+    toast.error("Nama depan harus diisi!");
+    return;
+  }
+  if (!namaBelakang) {
+    toast.error("Nama belakang harus diisi!");
+    return;
+  }
+  if (!email) {
+    toast.error("Email harus diisi!");
+    return;
+  }
+  if (!noTelepon) {
+    toast.error("Nomor telepon harus diisi!");
+    return;
+  }
+  if (!alamat) {
+    toast.error("Alamat harus diisi!");
     return;
   }
 
