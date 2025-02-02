@@ -225,8 +225,8 @@ function Beranda() {
                       src={makanan.Gambar_Makanan}
                       alt={`menu-${index + 1}`}
                       layout="intrinsic"
-                      width={500} // Tentukan lebar gambar
-                      height={300} // Tentukan tinggi gambar
+                      width={500}
+                      height={300}
                       className="w-1/2 lg:w-full lg:h-auto rounded-lg self-center"
                     />
 
