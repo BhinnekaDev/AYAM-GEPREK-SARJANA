@@ -62,7 +62,7 @@ const Konten = () => {
                 </div>
                 <div className="space-y-1">
                   <Typography className="font-bold text-black text-sm md:text-lg ml-1">
-                    Alamat
+                    Alamat Pengiriman
                   </Typography>
                   <Textarea className="w-full bg-gray-400 bg-opacity-20 p-2 text-black border-black border rounded-lg" />
                 </div>

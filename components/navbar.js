@@ -125,9 +125,9 @@ function Navbar() {
               </div>
               <div
                 className={`flex gap-2 bg-green-100 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
-                  navbarAktif === "/Pesanan" ? "underline" : ""
+                  navbarAktif === "/Riwayat" ? "underline" : ""
                 }`}
-                onClick={() => handlenavbarAktif("/Pesanan")}
+                onClick={() => handlenavbarAktif("/Riwayat")}
               >
                 <TbShoppingCartCog size={18} />
                 <Typography>Pesanan Saya</Typography>
@@ -210,7 +210,7 @@ function Navbar() {
           <Menu>
             <MenuHandler
               className={`bg-transparent hover:bg-black hover:bg-opacity-15 hover:shadow-md shadow-none transition-all duration-300 ${
-                navbarAktif === "/Profil"
+                ["/Profil", "/Riwayat"].includes(navbarAktif)
                   ? "bg-black bg-opacity-25 rounded-full"
                   : ""
               }`}
@@ -219,6 +219,7 @@ function Navbar() {
                 <FaCog className="w-5 h-5 text-black" />
               </IconButton>
             </MenuHandler>
+
             <MenuList className="p-2 rounded-lg -ml-12">
               <MenuItem
                 className={`flex items-center px-3 py-2 gap-2  ${
@@ -233,11 +234,11 @@ function Navbar() {
               </MenuItem>
               <MenuItem
                 className={`flex items-center px-3 py-2 gap-2 ${
-                  navbarAktif === "/Pesanan"
+                  navbarAktif === "/Riwayat"
                     ? "bg-blue-200 border border-gray-300 text-black"
                     : ""
                 }`}
-                onClick={() => handlenavbarAktif("/Profil")}
+                onClick={() => handlenavbarAktif("/Riwayat")}
               >
                 <TbShoppingCartCog size={18} />
                 <Typography>Pesanan Saya</Typography>

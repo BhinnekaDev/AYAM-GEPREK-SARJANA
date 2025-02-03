@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 import { firestore } from "@/lib/firebaseConfig";
 
 const useTampilkanMakanan = () => {

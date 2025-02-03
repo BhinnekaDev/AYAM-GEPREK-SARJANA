@@ -11,12 +11,10 @@ import {
 // ICON
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GoDot, GoDotFill } from "react-icons/go";
-
 // IMAGES
 import MMinuman2 from "@/assets/img/menu/menu3.png";
 import C1 from "@/assets/img/carousel/1.png";
 import C2 from "@/assets/img/carousel/2.png";
-
 //COMPONENTS
 import Memuat from "@/components/memuat";
 // HOOKS
@@ -224,14 +222,12 @@ function Beranda() {
                     <Image
                       src={makanan.Gambar_Makanan}
                       alt={`menu-${index + 1}`}
-                      layout="intrinsic"
                       width={500}
-                      height={300}
-                      className="w-1/2 lg:w-full lg:h-auto rounded-lg self-center"
+                      height={500}
+                      className="w-1/3 lg:w-full lg:h-auto rounded-lg self-center"
                     />
-
                     <div className="flex-col">
-                      <div className="py-3 space-y-1 lg:space-y-1">
+                      <div className="py-3 space-y-1">
                         <Typography className="text-md lg:text-xl text-black">
                           {makanan.Nama_Makanan}
                         </Typography>
@@ -275,7 +271,7 @@ function Beranda() {
 
             <div
               ref={scrollRef2}
-              className="grid grid-cols-2 lg:flex lg:flex-row gap-3 mb-4 lg:mb-0 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
+              className="grid grid-cols-1 mb-6 lg:mb-0 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
               {sedangMemuatMinuman ? (
                 <Memuat />
@@ -283,7 +279,7 @@ function Beranda() {
                 daftarMinuman.map((minuman, index) => (
                   <CardBody
                     key={index}
-                    className="bg-[#EFF3EA] rounded-xl p-3 shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
+                    className="bg-[#EFF3EA] flex lg:flex-col gap-2 p-2 lg:gap-5 rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                   >
                     <Image
                       src={minuman.Gambar_Minuman}
@@ -293,22 +289,23 @@ function Beranda() {
                       height={300}
                       className="w-1/2 lg:w-full lg:h-auto rounded-lg self-center"
                     />
-
-                    <div className="py-3 space-y-2 lg:space-y-1">
-                      <Typography className="text-lg lg:text-xl text-black">
-                        {minuman.Nama_Minuman}
-                      </Typography>
-                      <Typography className="text-sm text-gray-600">
-                        {minuman.Deskripsi_Minuman}
-                      </Typography>
-                      <Typography className="text-md text-black">
-                        {minuman.Harga_Minuman}
-                      </Typography>
-                    </div>
-                    <div className="w-full lg:mt-2 flex justify-center items-center">
-                      <Button className="p-1 lg:py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
-                        beli
-                      </Button>
+                    <div className="flex-col">
+                      <div className="py-3 space-y-2 lg:space-y-1">
+                        <Typography className="text-lg lg:text-xl text-black">
+                          {minuman.Nama_Minuman}
+                        </Typography>
+                        <Typography className="text-sm text-gray-600">
+                          {minuman.Deskripsi_Minuman}
+                        </Typography>
+                        <Typography className="text-md text-black">
+                          {minuman.Harga_Minuman}
+                        </Typography>
+                      </div>
+                      <div className="w-full lg:mt-2 flex justify-center items-center">
+                        <Button className="p-1 lg:py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
+                          beli
+                        </Button>
+                      </div>
                     </div>
                   </CardBody>
                 ))

@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
 import Beranda from "@/app/Menu/components/konten";
-// IMAGE
 
 // HOOKS
 import { Toaster } from "react-hot-toast";

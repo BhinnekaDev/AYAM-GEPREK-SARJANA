@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 // COMPONENTS
 import Biodata from "@/app/Biodata/components/konten";
-// IMAGE
 
-// HOOKS
 import { Toaster } from "react-hot-toast";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 function Page() {
