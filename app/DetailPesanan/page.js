@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
-import Konten from "@/app/Riwayat/components/konten";
+import Konten from "@/app/DetailPesanan/components/konten";
 // IMAGES
 import bgRiwayat from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";

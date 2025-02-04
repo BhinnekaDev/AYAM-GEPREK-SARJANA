@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, Typography, Button, CardBody } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 import gambar1 from "@/assets/img/menu/menu1.png";
-import gambar2 from "@/assets/img/menu/menu2.png";
-import gambar3 from "@/assets/img/menu/menu3.png";
 // ICONS
 import { CgProfile } from "react-icons/cg";
 import { MdArrowBack } from "react-icons/md";
 import { FaChevronRight } from "react-icons/fa";
 
 const Konten = () => {
+  const router = useRouter();
   return (
     <div className="flex items-center justify-center px-5 md:pt-12">
       <Toaster position="top-right" reverseOrder={false} />
@@ -91,7 +91,10 @@ const Konten = () => {
             </Button>
           </div>
           <div className="mt-4 sm:mx-8 sm:max-h-96 space-y-4 sm:overflow-y-auto">
-            <div className="border-2 sm:mx-2 border-gray-600 py-4 px-2 sm:px-8 rounded-lg shadow-sm space-y-2 hover:cursor-pointer hover:shadow-md hover:rounded-3xl transition-all duration-300">
+            <div
+              onClick={() => router.push("/DetailPesanan")}
+              className="border-2 sm:mx-2 border-gray-600 py-4 px-2 sm:px-8 rounded-lg shadow-sm space-y-2 hover:cursor-pointer hover:shadow-md hover:rounded-3xl transition-all duration-300"
+            >
               <div className="flex justify-between mx-1 sm:mx-0 sm:justify-start items-center gap-4">
                 <Typography className="sm:block hidden border-2 tracking-wide text-[#AA5656] border-[#AA5656] text-sm px-2 rounded-full font-bold">
                   Sedang Dibuat
