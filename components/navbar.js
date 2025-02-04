@@ -18,6 +18,8 @@ import { GiChickenOven, GiCook } from "react-icons/gi";
 import { MdFastfood, MdContacts } from "react-icons/md";
 import { FaCog, FaRegUserCircle, FaPowerOff } from "react-icons/fa";
 import { TbShoppingCartCog } from "react-icons/tb";
+import { AiOutlineLogin } from "react-icons/ai";
+
 //HOOKS
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
 import useKeluarAkun from "@/hooks/Backend/useKeluarAkun";
@@ -45,6 +47,10 @@ function Navbar() {
       </div>
 
       <div className="md:hidden flex items-center">
+        <Button className="flex gap-1 py-2 px-3 text-xs items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 capitalize hover:text-black hover:shadow-md ">
+          <AiOutlineLogin className="w-3 h-3" />
+          Masuk
+        </Button>
         <Button
           variant="outlined"
           color="black"
@@ -197,6 +203,10 @@ function Navbar() {
           </li>
         </ul>
         <div className="flex gap-1">
+          <Button className="flex gap-1 py-1 px-4 items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 tracking-wider hover:text-black hover:shadow-md ">
+            <AiOutlineLogin className="w-4 h-4" />
+            Masuk
+          </Button>
           <Button
             className={`flex items-center justify-center p-2 bg-transparent shadow-none border-none text-black hover:bg-black hover:bg-opacity-15 hover:shadow-md transition-all duration-300 ${
               navbarAktif == "/Keranjang"
