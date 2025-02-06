@@ -16,6 +16,7 @@ import { useAmbilProfil } from "@/hooks/Backend/useAmbilProfil";
 import { useUpdateProfil } from "@/hooks/Backend/useUpdateProfil";
 
 const Konten = () => {
+  const [activeForm, setActiveForm] = useState("dataDiri");
   const [isEditing, setIsEditing] = useState(false);
   const { profilData } = useAmbilProfil();
   const {
@@ -47,8 +48,38 @@ const Konten = () => {
             Profile Saya
           </Typography>
         </div>
-        <div className="flex flex-col md:grid md:grid-cols-2">
-          <div className="relative flex w-full items-center justify-center">
+        <div className="flex justify-center mx-3 sm:mx-0 p-2 gap-2">
+          <Button
+            onClick={() => setActiveForm("dataDiri")}
+            className={`w-full sm:w-32 py-1 border-2 rounded-full shadow-md hover:shadow-md capitalize text-xs sm:text-sm tracking-wider ${
+              activeForm === "dataDiri"
+                ? "bg-[#AA5656] text-white border-[#AA5656]"
+                : "text-[#AA5656] bg-[#AA5656] bg-opacity-0 hover:bg-opacity-60 hover:text-white transition-all duration-300 border-[#AA5656]"
+            }`}
+          >
+            Data Diri
+          </Button>
+          <Button
+            onClick={() => setActiveForm("alamat")}
+            className={`w-full sm:w-32 py-1 border-2 rounded-full shadow-md hover:shadow-md capitalize text-xs sm:text-sm tracking-wider ${
+              activeForm === "alamat"
+                ? "bg-[#AA5656] text-white border-[#AA5656]"
+                : "text-[#AA5656] bg-[#AA5656] bg-opacity-0 hover:bg-opacity-60 hover:text-white transition-all duration-300 border-[#AA5656]"
+            }`}
+          >
+            Alamat
+          </Button>
+        </div>
+        <div
+          className={`flex flex-col md:grid ${
+            activeForm === "alamat" ? "md:grid-cols-1" : "md:grid-cols-2"
+          }`}
+        >
+          <div
+            className={`relative flex w-full items-center justify-center ${
+              activeForm === "alamat" ? "hidden" : ""
+            }`}
+          >
             <div className="relative">
               <div className="flex items-center justify-center md:w-56 md:h-56 rounded-full border border-gray-400 shadow-md overflow-hidden">
                 <Image
@@ -73,38 +104,36 @@ const Konten = () => {
               </div>
             </div>
           </div>
-          <div className="sm:overflow-y-auto">
-            <div className="sm:overflow-y-auto md:max-h-[400px]">
-              <form className="space-y-3">
-                <div className="sm:flex space-y-3 sm:space-y-0 gap-0 sm:gap-2">
-                  <div>
-                    <Typography className=" font-bold text-black md:text-md">
-                      Nama Depan
-                    </Typography>
-                    <Input
-                      type="text"
-                      name="Nama_Depan"
-                      label="Masukkan Nama Depan"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      value={formData.Nama_Depan}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                    />
-                  </div>
-                  <div>
-                    <Typography className=" text-black font-bold md:text-md">
-                      Nama Belakang
-                    </Typography>
-                    <Input
-                      type="text"
-                      name="Nama_Belakang"
-                      label="Masukkan Nama Belakang"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      value={formData.Nama_Belakang}
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                    />
-                  </div>
+          <div>
+            {activeForm === "dataDiri" && (
+              <div className="space-y-4">
+                <div>
+                  <Typography className=" font-bold text-black md:text-md">
+                    Nama Depan
+                  </Typography>
+                  <Input
+                    type="text"
+                    name="Nama_Depan"
+                    label="Masukkan Nama Depan"
+                    className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                    value={formData.Nama_Depan}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
+                </div>
+                <div>
+                  <Typography className=" text-black font-bold md:text-md">
+                    Nama Belakang
+                  </Typography>
+                  <Input
+                    type="text"
+                    name="Nama_Belakang"
+                    label="Masukkan Nama Belakang"
+                    className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                    value={formData.Nama_Belakang}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
                 </div>
                 <div>
                   <Typography className=" text-black font-bold md:text-md">
@@ -134,7 +163,11 @@ const Konten = () => {
                     disabled={!isEditing}
                   />
                 </div>
-                <div className="sm:flex space-y-3 sm:space-y-0 gap-0 sm:gap-2">
+              </div>
+            )}
+            {activeForm === "alamat" && (
+              <div className="w-full space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                   <div>
                     <Typography className=" text-black font-bold md:text-md">
                       Provinsi
@@ -163,22 +196,6 @@ const Konten = () => {
                       disabled={!isEditing}
                     />
                   </div>
-                </div>
-                <div className="sm:flex space-y-3 sm:space-y-0 gap-0 sm:gap-2">
-                  <div>
-                    <Typography className=" text-black font-bold md:text-md">
-                      Kecamatan
-                    </Typography>
-                    <Input
-                      type="text"
-                      name="Kecamatan"
-                      label="Masukkan Nama Kecamatan"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                    />
-                  </div>
                   <div>
                     <Typography className=" text-black font-bold md:text-md">
                       Kode Pos
@@ -194,8 +211,20 @@ const Konten = () => {
                       disabled={!isEditing}
                     />
                   </div>
-                </div>
-                <div className="sm:flex space-y-3 sm:space-y-0 gap-0 sm:gap-2">
+                  <div>
+                    <Typography className=" text-black font-bold md:text-md">
+                      Kecamatan
+                    </Typography>
+                    <Input
+                      type="text"
+                      name="Kecamatan"
+                      label="Masukkan Nama Kecamatan"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      color="blue-gray"
+                      onChange={handleChange}
+                      disabled={!isEditing}
+                    />
+                  </div>
                   <div>
                     <Typography className=" text-black  font-bold md:text-md">
                       RT
@@ -227,37 +256,41 @@ const Konten = () => {
                     />
                   </div>
                 </div>
-                <div>
-                  <Typography className=" text-black font-bold md:text-md">
-                    Alamat Jalan
-                  </Typography>
-                  <Textarea
-                    size="md"
-                    label="Nama Jalan, Gedung, No. Rumah"
-                    className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                    color="blue-gray"
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                  ></Textarea>
+                <div className="sm:flex justify-between gap-4 space-y-2 sm:space-y-0">
+                  <div className="w-full">
+                    <Typography className=" text-black font-bold md:text-md">
+                      Alamat Jalan
+                    </Typography>
+                    <Textarea
+                      size="md"
+                      label="Nama Jalan, Gedung, No. Rumah"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      color="blue-gray"
+                      onChange={handleChange}
+                      disabled={!isEditing}
+                    ></Textarea>
+                  </div>
+                  <div className="w-full">
+                    <Typography className=" text-black font-bold md:text-md">
+                      Alamat Detail
+                    </Typography>
+                    <Textarea
+                      size="lg"
+                      label="Blok / Unit No. / Patokan"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      color="blue-gray"
+                      onChange={handleChange}
+                      disabled={!isEditing}
+                    ></Textarea>
+                  </div>
                 </div>
-                <div>
-                  <Typography className=" text-black font-bold md:text-md">
-                    Alamat Detail
-                  </Typography>
-                  <Textarea
-                    size="lg"
-                    label="Blok / Unit No. / Patokan"
-                    className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                    color="blue-gray"
-                    onChange={handleChange}
-                    disabled={!isEditing}
-                  ></Textarea>
-                </div>
-              </form>
-            </div>
+              </div>
+            )}
             <div className="flex justify-center mt-4 sm:mt-6 mx-12 sm:mx-24">
               <Button
-                className="w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full sm:rounded-md hover:rounded-2xl hover:scale-95 transform transition-all ease-in-out duration-500"
+                className={`w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full sm:rounded-md hover:rounded-2xl hover:scale-95 transform transition-all ease-in-out duration-500 ${
+                  activeForm === "alamat" ? "sm:w-52 sm:rounded-full" : ""
+                }`}
                 onClick={() => {
                   if (isEditing) {
                     handleSave();

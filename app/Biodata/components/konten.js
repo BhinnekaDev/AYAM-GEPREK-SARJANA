@@ -21,6 +21,7 @@ import {
 } from "@/hooks/Backend/useBiodata";
 import { formatNama } from "@/utils/formatNama";
 import { formatNoTelepon } from "@/utils/formatNoTelepon";
+import { formatKodePos } from "@/utils/formatKodePos";
 
 function halamanBiodata() {
   const [step, setStep] = useState(1);
@@ -28,6 +29,10 @@ function halamanBiodata() {
   const [namaBelakang, setNamaBelakang] = useState("");
   const [email, setEmail] = useState("");
   const [noTelepon, setNoTelepon] = useState("");
+  const [provinsi, setProvinsi] = useState("");
+  const [kota, setKota] = useState("");
+  const [kecamatan, setKecamatan] = useState("");
+  const [kodePos, setKodePos] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -53,6 +58,10 @@ function halamanBiodata() {
       email,
       noTelepon,
       alamat,
+      provinsi,
+      kota,
+      kecamatan,
+      kodePos,
     };
     handleSubmitBiodata(biodata, setLoading, router);
   };
@@ -158,6 +167,8 @@ function halamanBiodata() {
                     name="Provinsi"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
+                    value={provinsi}
+                    onChange={(e) => setProvinsi(formatNama(e.target.value))}
                   />
                 </div>
                 <div className="mb-3">
@@ -168,6 +179,8 @@ function halamanBiodata() {
                     name="Kota"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
+                    value={kota}
+                    onChange={(e) => setKota(formatNama(e.target.value))}
                   />
                 </div>
                 <div className="mb-3">
@@ -178,17 +191,20 @@ function halamanBiodata() {
                     name="Kota"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
+                    value={kecamatan}
+                    onChange={(e) => setKecamatan(formatNama(e.target.value))}
                   />
                 </div>
                 <div className="mb-3">
                   <Typography className="mb-1">Kode Pos</Typography>
                   <Input
-                    type="tel"
+                    type="number"
                     label="Masukkan Kode Pos"
                     name="Kode_Pos"
-                    inputMode="numeric"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
+                    value={kodePos}
+                    onChange={(e) => setKodePos(formatKodePos(e.target.value))}
                   />
                 </div>
                 <div className="flex justify-between lg:pt-2">
@@ -269,156 +285,6 @@ function halamanBiodata() {
               </>
             )}
           </form>
-        </div>
-        <div className="flex sm:hidden flex-col items-center w-full overflow-y-auto">
-          <Typography
-            variant="h2"
-            className="font-bold text-black mb-2 text-center sm:text-left"
-          >
-            Biodata
-          </Typography>
-          <div className="w-full overflow-y-auto">
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <Typography className="mb-1">Nama Depan</Typography>
-                <Input
-                  type="text"
-                  label="Masukkan Nama Depan"
-                  name="Nama_Depan"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                  value={namaDepan}
-                  onChange={(e) => setNamaDepan(formatNama(e.target.value))}
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Nama Belakang</Typography>
-                <Input
-                  type="text"
-                  label="Masukkan Nama Belakang"
-                  name="Nama_Belakang"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                  value={namaBelakang}
-                  onChange={(e) => setNamaBelakang(formatNama(e.target.value))}
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Email</Typography>
-                <Input
-                  type="email"
-                  label="Masukkan Email"
-                  name="Email"
-                  className="w-full rounded-lg bg-white disabled:bg-white disabled:border-blue-gray-200 disabled:border-[1px]"
-                  color="blue-gray"
-                  value={email}
-                  disabled
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">No Telepon</Typography>
-                <Input
-                  type="tel"
-                  label="Masukkan No Telepon (08*****)"
-                  name="No_Telepon"
-                  inputMode="numeric"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                  value={noTelepon}
-                  onChange={(e) =>
-                    setNoTelepon(formatNoTelepon(e.target.value))
-                  }
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Provinsi</Typography>
-                <Input
-                  type="text"
-                  label="Masukkan Nama Provinsi"
-                  name="Provinsi"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Kota</Typography>
-                <Input
-                  type="text"
-                  label="Masukkan Nama Kota"
-                  name="Kota"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Kecamatan</Typography>
-                <Input
-                  type="text"
-                  label="Masukkan Nama Kecamatan"
-                  name="Kota"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Kode Pos</Typography>
-                <Input
-                  type="tel"
-                  label="Masukkan Kode Pos"
-                  name="Kode_Pos"
-                  inputMode="numeric"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">RT</Typography>
-                <Input
-                  type="tel"
-                  label="Masukkan Nomor RT"
-                  name="Kode_Pos"
-                  inputMode="numeric"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">RW</Typography>
-                <Input
-                  type="tel"
-                  label="Masukkan Nomor RW"
-                  name="Kode_Pos"
-                  inputMode="numeric"
-                  className="w-full bg-white rounded-lg"
-                  color="blue-gray"
-                />
-              </div>
-              <div className="mb-3">
-                <Typography className="mb-1">Alamat Jalan</Typography>
-                <Textarea
-                  size="md"
-                  label="Nama Jalan, Gedung, No. Rumah"
-                ></Textarea>
-              </div>
-              <div>
-                <Typography className="mb-1">Alamat Detail</Typography>
-                <Textarea
-                  size="lg"
-                  label="Blok / Unit No. / Patokan"
-                ></Textarea>
-              </div>
-            </form>
-          </div>
-          <div className="flex justify-center pt-4">
-            <Button
-              variant="outlined"
-              className="bg-[#CB6040] px-28 lg:px-16 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider"
-              type="submit"
-              disabled={loading}
-            >
-              {loading ? "Mengirim..." : "Simpan"}
-            </Button>
-          </div>
         </div>
       </Card>
     </div>

@@ -5,7 +5,17 @@ import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const handleSubmitBiodata = async (biodata, setLoading, router) => {
-  const { namaDepan, namaBelakang, email, noTelepon, alamat } = biodata;
+  const {
+    namaDepan,
+    namaBelakang,
+    email,
+    noTelepon,
+    alamat,
+    provinsi,
+    kota,
+    kecamatan,
+    kodePos,
+  } = biodata;
 
   if (!namaDepan) {
     toast.error("Nama depan harus diisi!");
@@ -25,6 +35,14 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
   }
   if (!alamat) {
     toast.error("Alamat harus diisi!");
+    return;
+  }
+  if (!provinsi) {
+    toast.error("Provinsi harus diisi!");
+    return;
+  }
+  if (!kota) {
+    toast.error("Kota harus diisi!");
     return;
   }
 
