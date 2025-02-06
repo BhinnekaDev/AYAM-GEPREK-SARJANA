@@ -21,7 +21,7 @@ const Konten = () => {
           <Typography className="font-bold text-black text-sm md:text-md uppercase">Pesanan Saya</Typography>
         </div>
         <CardBody className="bg-[#EFF3EA] rounded-lg sm:p-6 p-3">
-          <div className="flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 gap-2 items-center bg-black sm:flex-wrap sm:justify-center sm:bg-orange-500 p-2">
+          <div className="flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200 gap-2 items-center  sm:flex-wrap sm:justify-center  p-2">
             <Button variant="outlined" className="py-1 px-4 capitalize text-sm text-[#AA5656] border-[#AA5656] rounded-full whitespace-nowrap min-w-[120px]">
               Semua
             </Button>
