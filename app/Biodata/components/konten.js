@@ -21,7 +21,10 @@ import {
 } from "@/hooks/Backend/useBiodata";
 import { formatNama } from "@/utils/formatNama";
 import { formatNoTelepon } from "@/utils/formatNoTelepon";
+import { formatAlamat } from "@/utils/formatAlamat";
 import { formatKodePos } from "@/utils/formatKodePos";
+import { formatRT } from "@/utils/formatRT";
+import { formatRW } from "@/utils/formatRW";
 
 function halamanBiodata() {
   const [step, setStep] = useState(1);
@@ -33,6 +36,10 @@ function halamanBiodata() {
   const [kota, setKota] = useState("");
   const [kecamatan, setKecamatan] = useState("");
   const [kodePos, setKodePos] = useState("");
+  const [RT, setRT] = useState("");
+  const [RW, setRW] = useState("");
+  const [alamatJalan, setAlamatJalan] = useState("");
+  const [alamatDetail, setAlamatDetail] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -57,14 +64,18 @@ function halamanBiodata() {
       namaBelakang,
       email,
       noTelepon,
-      alamat,
       provinsi,
       kota,
       kecamatan,
       kodePos,
+      RT,
+      RW,
+      alamatJalan,
+      alamatDetail,
     };
     handleSubmitBiodata(biodata, setLoading, router);
   };
+
   return (
     <div
       className="flex items-center justify-center min-h-screen px-4 lg:px-8"
@@ -231,23 +242,25 @@ function halamanBiodata() {
                   <div className="w-full">
                     <Typography className="mb-1">RT</Typography>
                     <Input
-                      type="tel"
+                      type="number"
                       label="Masukkan Nomor RT"
-                      name="Kode_Pos"
-                      inputMode="numeric"
+                      name="RT"
                       className="w-full bg-white rounded-lg"
                       color="blue-gray"
+                      value={RT}
+                      onChange={(e) => setRT(formatRT(e.target.value))}
                     />
                   </div>
                   <div className="w-full">
                     <Typography className="mb-1">RW</Typography>
                     <Input
-                      type="tel"
+                      type="number"
                       label="Masukkan Nomor RW"
-                      name="Kode_Pos"
-                      inputMode="numeric"
+                      name="RW"
                       className="w-full bg-white rounded-lg"
                       color="blue-gray"
+                      value={RW}
+                      onChange={(e) => setRW(formatRW(e.target.value))}
                     />
                   </div>
                 </div>
@@ -256,6 +269,13 @@ function halamanBiodata() {
                   <Textarea
                     size="md"
                     label="Nama Jalan, Gedung, No. Rumah"
+                    name="Alamat_Jalan"
+                    className="w-full bg-white rounded-lg"
+                    color="blue-gray"
+                    value={alamatJalan}
+                    onChange={(e) =>
+                      setAlamatJalan(formatAlamat(e.target.value))
+                    }
                   ></Textarea>
                 </div>
                 <div>
@@ -263,6 +283,13 @@ function halamanBiodata() {
                   <Textarea
                     size="lg"
                     label="Blok / Unit No. / Patokan"
+                    name="Alamat_Detail"
+                    className="w-full bg-white rounded-lg"
+                    color="blue-gray"
+                    value={alamatDetail}
+                    onChange={(e) =>
+                      setAlamatDetail(formatAlamat(e.target.value))
+                    }
                   ></Textarea>
                 </div>
                 <div className="flex justify-between">

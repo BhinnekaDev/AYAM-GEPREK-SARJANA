@@ -12,13 +12,11 @@ import { Toaster } from "react-hot-toast";
 import { CgProfile } from "react-icons/cg";
 import { MdArrowBack, MdEdit } from "react-icons/md";
 //HOOKS
-import { useAmbilProfil } from "@/hooks/Backend/useAmbilProfil";
 import { useUpdateProfil } from "@/hooks/Backend/useUpdateProfil";
 
 const Konten = () => {
   const [activeForm, setActiveForm] = useState("dataDiri");
   const [isEditing, setIsEditing] = useState(false);
-  const { profilData } = useAmbilProfil();
   const {
     updateProfile,
     formData,
@@ -114,7 +112,6 @@ const Konten = () => {
                   <Input
                     type="text"
                     name="Nama_Depan"
-                    label="Masukkan Nama Depan"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     value={formData.Nama_Depan}
                     onChange={handleChange}
@@ -128,7 +125,6 @@ const Konten = () => {
                   <Input
                     type="text"
                     name="Nama_Belakang"
-                    label="Masukkan Nama Belakang"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     value={formData.Nama_Belakang}
                     onChange={handleChange}
@@ -141,10 +137,9 @@ const Konten = () => {
                   </Typography>
                   <Input
                     type="email"
-                    label="Masukkan Email"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     color="blue-gray"
-                    value={profilData?.Email || ""}
+                    value={formData.Email}
                     disabled
                   />
                 </div>
@@ -155,7 +150,6 @@ const Konten = () => {
                   <Input
                     type="tel"
                     name="No_Telepon"
-                    label="Masukkan No Telepon"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     color="blue-gray"
                     value={formData.No_Telepon}
@@ -175,11 +169,11 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Provinsi"
-                      label="Masukkan Nama Provinsi"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Provinsi}
                     />
                   </div>
                   <div>
@@ -189,11 +183,11 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Kota"
-                      label="Masukkan Nama Kota"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Kota}
                     />
                   </div>
                   <div>
@@ -201,14 +195,13 @@ const Konten = () => {
                       Kode Pos
                     </Typography>
                     <Input
-                      type="tel"
+                      type="number"
                       name="Kode_Pos"
-                      label="Masukkan Nomor Kode Pos"
-                      inputMode="numeric"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Kode_Pos}
                     />
                   </div>
                   <div>
@@ -218,11 +211,11 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Kecamatan"
-                      label="Masukkan Nama Kecamatan"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Kecamatan}
                     />
                   </div>
                   <div>
@@ -230,14 +223,13 @@ const Konten = () => {
                       RT
                     </Typography>
                     <Input
-                      type="tel"
+                      type="number"
                       name="RT"
-                      label="Masukkan Nomor RT"
-                      inputMode="numeric"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.RT}
                     />
                   </div>
                   <div>
@@ -245,42 +237,43 @@ const Konten = () => {
                       RW
                     </Typography>
                     <Input
-                      type="tel"
+                      type="number"
                       name="RW"
-                      label="Masukkan Nomor RW"
-                      inputMode="numeric"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.RW}
                     />
                   </div>
                 </div>
                 <div className="sm:flex justify-between gap-4 space-y-2 sm:space-y-0">
                   <div className="w-full">
                     <Typography className=" text-black font-bold md:text-md">
-                      Alamat Jalan
+                      Alamat Jalan (Nama Jalan, Gedung, No. Rumah)
                     </Typography>
                     <Textarea
                       size="md"
-                      label="Nama Jalan, Gedung, No. Rumah"
+                      name="Alamat_Jalan"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Alamat_Jalan}
                     ></Textarea>
                   </div>
                   <div className="w-full">
                     <Typography className=" text-black font-bold md:text-md">
-                      Alamat Detail
+                      Alamat Detail (Blok / Unit No. / Patokan)
                     </Typography>
                     <Textarea
                       size="lg"
-                      label="Blok / Unit No. / Patokan"
+                      name="Alamat_Detail"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
                       disabled={!isEditing}
+                      value={formData.Alamat_Detail}
                     ></Textarea>
                   </div>
                 </div>

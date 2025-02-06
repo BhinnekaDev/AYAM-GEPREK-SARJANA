@@ -10,11 +10,14 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
     namaBelakang,
     email,
     noTelepon,
-    alamat,
     provinsi,
     kota,
     kecamatan,
     kodePos,
+    RT,
+    RW,
+    alamatJalan,
+    alamatDetail,
   } = biodata;
 
   if (!namaDepan) {
@@ -33,16 +36,36 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
     toast.error("Nomor telepon harus diisi!");
     return;
   }
-  if (!alamat) {
-    toast.error("Alamat harus diisi!");
-    return;
-  }
   if (!provinsi) {
     toast.error("Provinsi harus diisi!");
     return;
   }
   if (!kota) {
     toast.error("Kota harus diisi!");
+    return;
+  }
+  if (!kecamatan) {
+    toast.error("Kecamatan harus diisi!");
+    return;
+  }
+  if (!kodePos) {
+    toast.error("Kode pos harus diisi!");
+    return;
+  }
+  if (!RT) {
+    toast.error("RT harus diisi!");
+    return;
+  }
+  if (!RW) {
+    toast.error("RW harus diisi!");
+    return;
+  }
+  if (!alamatJalan) {
+    toast.error("Alamat jalan harus diisi!");
+    return;
+  }
+  if (!alamatDetail) {
+    toast.error("Alamat detail harus diisi!");
     return;
   }
 
@@ -63,7 +86,16 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
       Nama_Belakang: namaBelakang,
       Email: email,
       No_Telepon: noTelepon,
-      Alamat: alamat,
+      Alamat: {
+        Provinsi: provinsi,
+        Kota: kota,
+        Kecamatan: kecamatan,
+        Kode_Pos: kodePos,
+        RT: RT,
+        RW: RW,
+        Alamat_Jalan: alamatJalan,
+        Alamat_Detail: alamatDetail,
+      },
     });
 
     toast.success("Data berhasil disimpan!", { duration: 2000 });

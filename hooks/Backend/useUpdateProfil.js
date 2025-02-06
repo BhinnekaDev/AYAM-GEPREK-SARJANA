@@ -13,6 +13,9 @@ import { useAmbilProfil } from "@/hooks/Backend/useAmbilProfil";
 import { formatNama } from "@/utils/formatNama";
 import { formatNoTelepon } from "@/utils/formatNoTelepon";
 import { formatAlamat } from "@/utils/formatAlamat";
+import { formatKodePos } from "@/utils/formatKodePos";
+import { formatRT } from "@/utils/formatRT";
+import { formatRW } from "@/utils/formatRW";
 // IMAGES
 import fotoProfile from "@/assets/img/profil/profil.png";
 
@@ -27,7 +30,14 @@ export const useUpdateProfil = () => {
     Nama_Belakang: "",
     Email: "",
     No_Telepon: "",
-    Alamat: "",
+    Provinsi: "",
+    Kota: "",
+    Kecamatan: "",
+    Kode_Pos: "",
+    RT: "",
+    RW: "",
+    Alamat_Jalan: "",
+    Alamat_Detail: "",
   });
 
   useEffect(() => {
@@ -37,7 +47,14 @@ export const useUpdateProfil = () => {
         Nama_Belakang: profilData.Nama_Belakang || "",
         Email: profilData.Email || "",
         No_Telepon: profilData.No_Telepon || "",
-        Alamat: profilData.Alamat || "",
+        Provinsi: profilData.Alamat?.Provinsi || "",
+        Kota: profilData.Alamat?.Kota || "",
+        Kecamatan: profilData.Alamat?.Kecamatan || "",
+        Kode_Pos: profilData.Alamat?.Kode_Pos || "",
+        RT: profilData.Alamat?.RT || "",
+        RW: profilData.Alamat?.RW || "",
+        Alamat_Jalan: profilData.Alamat?.Alamat_Jalan || "",
+        Alamat_Detail: profilData.Alamat?.Alamat_Detail || "",
       });
       setProfileImage(profilData.profileImage || fotoProfile);
     }
@@ -45,7 +62,11 @@ export const useUpdateProfil = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (["Nama_Depan", "Nama_Belakang"].includes(name)) {
+    if (
+      ["Nama_Depan", "Nama_Belakang", "Provinsi", "Kota", "Kecamatan"].includes(
+        name
+      )
+    ) {
       const formattedInput = formatNama(value);
       setFormData((prev) => ({
         ...prev,
@@ -61,8 +82,32 @@ export const useUpdateProfil = () => {
       }));
       return;
     }
-    if (["Alamat"].includes(name)) {
+    if (["Alamat_Jalan", "Alamat_Detail"].includes(name)) {
       const formattedInput = formatAlamat(value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formattedInput,
+      }));
+      return;
+    }
+    if (["Kode_Pos"].includes(name)) {
+      const formattedInput = formatKodePos(value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formattedInput,
+      }));
+      return;
+    }
+    if (["RT"].includes(name)) {
+      const formattedInput = formatRT(value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formattedInput,
+      }));
+      return;
+    }
+    if (["RW"].includes(name)) {
+      const formattedInput = formatRW(value);
       setFormData((prev) => ({
         ...prev,
         [name]: formattedInput,
@@ -108,7 +153,6 @@ export const useUpdateProfil = () => {
 
       let imageUrl = profileImage;
 
-      // Menghapus gambar lama jika ada
       if (profileImage && profileImage !== fotoProfile) {
         const oldFileName = profileImage
           .split("Foto_Pengguna/")[1]
@@ -123,7 +167,6 @@ export const useUpdateProfil = () => {
         }
       }
 
-      // Mengupload gambar baru jika ada
       if (uploadedImage) {
         const storageRef = ref(
           storage,
@@ -131,27 +174,36 @@ export const useUpdateProfil = () => {
         );
         const uploadTask = uploadBytesResumable(storageRef, uploadedImage);
 
-        // Menunggu hingga upload selesai
         await uploadTask;
 
-        // Mengambil snapshot dan mendownload URL gambar
         const snapshot = await uploadTask;
         const downloadURL = await getDownloadURL(snapshot.ref);
         console.log("Download URL after upload:", downloadURL);
 
-        // Menetapkan URL gambar yang baru
         imageUrl = downloadURL;
       }
+      const updatedData = {
+        Nama_Depan: newData.Nama_Depan,
+        Nama_Belakang: newData.Nama_Belakang,
+        Email: newData.Email,
+        No_Telepon: newData.No_Telepon,
+        profileImage: imageUrl,
+        Alamat: {
+          Provinsi: newData.Provinsi,
+          Kota: newData.Kota,
+          Kecamatan: newData.Kecamatan,
+          Kode_Pos: newData.Kode_Pos,
+          RT: newData.RT,
+          RW: newData.RW,
+          Alamat_Jalan: newData.Alamat_Jalan,
+          Alamat_Detail: newData.Alamat_Detail,
+        },
+      };
 
-      // Memperbarui data pengguna dengan URL gambar baru
-      const updatedData = { ...newData, profileImage: imageUrl };
-
-      // Mengupdate dokumen pengguna di Firestore
       const docRef = doc(firestore, "pengguna", penggunaSaatIni);
       await updateDoc(docRef, updatedData);
 
-      // Memberikan notifikasi sukses
-      toast.success("Profile updated successfully!");
+      toast.success("Update Profil Berhasil!");
     } catch (err) {
       setError(err.message);
       toast.error(`Error: ${err.message}`);

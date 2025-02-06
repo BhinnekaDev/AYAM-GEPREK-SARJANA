@@ -23,9 +23,11 @@ import { AiOutlineLogin } from "react-icons/ai";
 //HOOKS
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
 import useKeluarAkun from "@/hooks/Backend/useKeluarAkun";
+import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pengguna = useCekPengguna();
   const { keluarAkun } = useKeluarAkun();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -45,24 +47,29 @@ function Navbar() {
           Sarjana Geprek
         </span>
       </div>
-
       <div className="md:hidden flex items-center">
-        <Button className="flex gap-1 py-2 px-3 text-xs items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 capitalize hover:text-black hover:shadow-md ">
-          <AiOutlineLogin className="w-3 h-3" />
-          Masuk
-        </Button>
-        <Button
-          variant="outlined"
-          color="black"
-          onClick={() => handlenavbarAktif("/Keranjang")}
-          className={`flex items-center justify-center border-none px-3 py-2 rounded-full text-black hover:bg-black hover:text-white transition-all duration-300 ${
-            navbarAktif === "/Keranjang"
-              ? "bg-black bg-opacity-25 rounded-full"
-              : ""
-          }`}
-        >
-          <FiShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-        </Button>
+        {pengguna ? (
+          <Button
+            variant="text"
+            color="black"
+            onClick={() => handlenavbarAktif("/Keranjang")}
+            className={`flex items-center justify-center border-none px-3 py-2 rounded-full text-black hover:bg-black hover:text-white transition-all duration-300 ${
+              navbarAktif === "/Keranjang"
+                ? "bg-black bg-opacity-25 rounded-full"
+                : ""
+            }`}
+          >
+            <FiShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
+          </Button>
+        ) : (
+          <Button
+            className="flex gap-1 py-2 px-3 text-xs items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 capitalize hover:text-black hover:shadow-md "
+            onClick={() => handlenavbarAktif("/")}
+          >
+            <AiOutlineLogin className="w-3 h-3" />
+            Masuk
+          </Button>
+        )}
 
         <Button
           variant="outlined"
@@ -73,7 +80,6 @@ function Navbar() {
           <FiMenu className="w-6 h-6" />
         </Button>
       </div>
-
       <div
         className={`${
           menuOpen ? "flex" : "hidden"
@@ -118,36 +124,40 @@ function Navbar() {
             <GiCook size={20} />
             Tentang kita
           </li>
-          <div className="flex-col justify-center items-center space-y-2">
-            <div className="flex justify-center items-center gap-3">
-              <div
-                className={`flex gap-2 bg-green-100 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
-                  navbarAktif === "/Profil" ? "underline" : ""
-                }`}
-                onClick={() => handlenavbarAktif("/Profil")}
-              >
-                <FaRegUserCircle size={18} />
-                <Typography>Profile Saya</Typography>
+          {pengguna ? (
+            <div className="flex-col justify-center items-center space-y-2">
+              <div className="flex justify-center items-center gap-3">
+                <div
+                  className={`flex gap-2 bg-green-100 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
+                    navbarAktif === "/Profil" ? "underline" : ""
+                  }`}
+                  onClick={() => handlenavbarAktif("/Profil")}
+                >
+                  <FaRegUserCircle size={18} />
+                  <Typography>Profile Saya</Typography>
+                </div>
+                <div
+                  className={`flex gap-2 bg-green-100 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
+                    navbarAktif === "/PesananSaya" ? "underline" : ""
+                  }`}
+                  onClick={() => handlenavbarAktif("/PesananSaya")}
+                >
+                  <TbShoppingCartCog size={18} />
+                  <Typography>Pesanan Saya</Typography>
+                </div>
               </div>
               <div
-                className={`flex gap-2 bg-green-100 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
-                  navbarAktif === "/PesananSaya" ? "underline" : ""
-                }`}
-                onClick={() => handlenavbarAktif("/PesananSaya")}
-              >
-                <TbShoppingCartCog size={18} />
-                <Typography>Pesanan Saya</Typography>
-              </div>
-            </div>
-            <div
-              className="flex gap-2 p-1 items-center justify-center rounded-full text-red-900 hover:underline cursor-pointer
+                className="flex gap-2 p-1 items-center justify-center rounded-full text-red-900 hover:underline cursor-pointer
             "
-              onClick={keluarAkun}
-            >
-              <FaPowerOff size={18} />
-              <Typography className="font-semibold">Keluar</Typography>
+                onClick={keluarAkun}
+              >
+                <FaPowerOff size={18} />
+                <Typography className="font-semibold">Keluar</Typography>
+              </div>
             </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
 
@@ -203,65 +213,73 @@ function Navbar() {
           </li>
         </ul>
         <div className="flex gap-1">
-          <Button className="flex gap-1 py-1 px-4 items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 tracking-wider hover:text-black hover:shadow-md ">
-            <AiOutlineLogin className="w-4 h-4" />
-            Masuk
-          </Button>
-          <Button
-            className={`flex items-center justify-center p-2 bg-transparent shadow-none border-none text-black hover:bg-black hover:bg-opacity-15 hover:shadow-md transition-all duration-300 ${
-              navbarAktif == "/Keranjang"
-                ? " bg-black bg-opacity-25 rounded-full"
-                : ""
-            }`}
-            onClick={() => handlenavbarAktif("/Keranjang")}
-          >
-            <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
-          </Button>
-          <Menu>
-            <MenuHandler
-              className={`bg-transparent hover:bg-black hover:bg-opacity-15 hover:shadow-md shadow-none transition-all duration-300 ${
-                ["/Profil", "/PesananSaya"].includes(navbarAktif)
-                  ? "bg-black bg-opacity-25 rounded-full"
-                  : ""
-              }`}
-            >
-              <IconButton>
-                <FaCog className="w-5 h-5 text-black" />
-              </IconButton>
-            </MenuHandler>
+          {pengguna ? (
+            <>
+              <Button
+                className={`flex items-center justify-center p-2 bg-transparent shadow-none border-none text-black hover:bg-black hover:bg-opacity-15 hover:shadow-md transition-all duration-300 ${
+                  navbarAktif == "/Keranjang"
+                    ? " bg-black bg-opacity-25 rounded-full"
+                    : ""
+                }`}
+                onClick={() => handlenavbarAktif("/Keranjang")}
+              >
+                <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
+              </Button>
+              <Menu>
+                <MenuHandler
+                  className={`bg-transparent hover:bg-black hover:bg-opacity-15 hover:shadow-md shadow-none transition-all duration-300 ${
+                    ["/Profil", "/PesananSaya"].includes(navbarAktif)
+                      ? "bg-black bg-opacity-25 rounded-full"
+                      : ""
+                  }`}
+                >
+                  <IconButton>
+                    <FaCog className="w-5 h-5 text-black" />
+                  </IconButton>
+                </MenuHandler>
 
-            <MenuList className="p-2 rounded-lg -ml-12">
-              <MenuItem
-                className={`flex items-center px-3 py-2 gap-2  ${
-                  navbarAktif === "/Profil"
-                    ? "bg-blue-200 border border-gray-300 text-black"
-                    : ""
-                }`}
-                onClick={() => handlenavbarAktif("/Profil")}
-              >
-                <FaRegUserCircle size={18} />
-                <Typography>Profile Saya</Typography>
-              </MenuItem>
-              <MenuItem
-                className={`flex items-center px-3 py-2 gap-2 ${
-                  navbarAktif === "/PesananSaya"
-                    ? "bg-blue-200 border border-gray-300 text-black"
-                    : ""
-                }`}
-                onClick={() => handlenavbarAktif("/PesananSaya")}
-              >
-                <TbShoppingCartCog size={18} />
-                <Typography>Pesanan Saya</Typography>
-              </MenuItem>
-              <MenuItem
-                className="flex items-center px-3 py-2 gap-2"
-                onClick={keluarAkun}
-              >
-                <FaPowerOff size={15} />
-                <Typography>Keluar</Typography>
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                <MenuList className="p-2 rounded-lg -ml-12">
+                  <MenuItem
+                    className={`flex items-center px-3 py-2 gap-2  ${
+                      navbarAktif === "/Profil"
+                        ? "bg-blue-200 border border-gray-300 text-black"
+                        : ""
+                    }`}
+                    onClick={() => handlenavbarAktif("/Profil")}
+                  >
+                    <FaRegUserCircle size={18} />
+                    <Typography>Profile Saya</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    className={`flex items-center px-3 py-2 gap-2 ${
+                      navbarAktif === "/PesananSaya"
+                        ? "bg-blue-200 border border-gray-300 text-black"
+                        : ""
+                    }`}
+                    onClick={() => handlenavbarAktif("/PesananSaya")}
+                  >
+                    <TbShoppingCartCog size={18} />
+                    <Typography>Pesanan Saya</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    className="flex items-center px-3 py-2 gap-2"
+                    onClick={keluarAkun}
+                  >
+                    <FaPowerOff size={15} />
+                    <Typography>Keluar</Typography>
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            </>
+          ) : (
+            <Button className="flex gap-1 py-1 px-4 items-center justify-center rounded-full hover:bg-transparent hover:border-black hover:border border transition-all duration-500 tracking-wider hover:text-black hover:shadow-md ">
+              <AiOutlineLogin
+                className="w-7 h-7"
+                onClick={() => handlenavbarAktif("/")}
+              />
+              Masuk
+            </Button>
+          )}
         </div>
       </div>
     </nav>

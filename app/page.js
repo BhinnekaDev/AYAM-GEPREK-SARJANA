@@ -94,6 +94,16 @@ function halamanMasuk() {
                 Lanjutkan dengan Google
               </Button>
             </div>
+            <div className="flex items-center text-center justify-center mt-7">
+              <Button
+                onClick={() => router.push("/Beranda")}
+                className={`flex items-center justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  ${
+                  sedangMemuatMasukDenganGoogle ? "cursor-not-allowed" : ""
+                }`}
+              >
+                Lanjutkan tanpa Google
+              </Button>
+            </div>
             {sedangMemuatMasukDenganGoogle && (
               <Typography className="mt-2 text-lg text-gray-600">
                 Sedang memuat, harap tunggu...

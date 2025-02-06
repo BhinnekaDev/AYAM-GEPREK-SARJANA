@@ -1,6 +1,5 @@
-export const formatKodePos = (value) => {
-  const kodePos = value.replace(/\D/g, "");
-
+export const formatRT = (value) => {
+  const nomorRT = value.replace(/\D/g, "");
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
       switch (char) {
@@ -19,6 +18,6 @@ export const formatKodePos = (value) => {
       }
     });
   };
-
-  return escapeHtml(kodePos.slice(0, 5));
+  const RT = nomorRT.slice(0, 3);
+  return escapeHtml(RT);
 };

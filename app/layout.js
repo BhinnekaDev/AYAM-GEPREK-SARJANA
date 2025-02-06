@@ -1,27 +1,25 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata = {
   title: "Sarjana Geprek",
-  description: "Create by Bhinneka Dev.",
+  description: "Created by Bhinneka Dev.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${robotoMono.variable} antialiased`}>
         {children}
       </body>
     </html>
