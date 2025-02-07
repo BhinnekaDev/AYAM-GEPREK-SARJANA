@@ -35,7 +35,7 @@ function Page() {
           }}
         >
           <Toaster position="top-right" reverseOrder={false} />
-          <div>
+          <div className="pt-28 -mb-24">
             <Navbar />
           </div>
 

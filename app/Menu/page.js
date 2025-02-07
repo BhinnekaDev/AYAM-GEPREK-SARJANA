@@ -11,7 +11,7 @@ function Page() {
   return (
     <div>
       <div className="min-h-screen overflow-hidden bg-[#FFE893]">
-        <div className="mb-8 lg:mb-0">
+        <div className="pt-28 -mb-14 lg:mb-0">
           <Navbar />
         </div>
 

@@ -11,6 +11,7 @@ import bgMobile from "@/assets/img/masuk/mobile/bg.png";
 import vektorMasuk from "@/assets/img/masuk/vektor.png";
 // IKON
 import { FcGoogle } from "react-icons/fc";
+import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 // HOOK
 import useMasukDenganGoogle from "@/hooks/Backend/useMasukDenganGoogle";
 
@@ -82,33 +83,44 @@ function halamanMasuk() {
               Di Ayam Geprek Sarjana, Silahkan ketuk tombol dibawah untuk
               melanjutkan!
             </Typography>
-            <div className="flex items-center text-center justify-center mt-7">
+            <div className="flex items-center text-center justify-center my-6 sm:mt-8">
               <Button
                 onClick={masukDenganGoogle}
                 disabled={sedangMemuatMasukDenganGoogle}
-                className={`flex items-center justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  ${
-                  sedangMemuatMasukDenganGoogle ? "cursor-not-allowed" : ""
-                }`}
+                className={`flex items-center py-1 px-3 text-xs sm:p-3 justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none 
+                            hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  
+                            ${
+                              sedangMemuatMasukDenganGoogle
+                                ? "cursor-not-allowed opacity-80"
+                                : ""
+                            }`}
               >
-                <FcGoogle size={30} className="bg-white rounded-full" />
-                Lanjutkan dengan Google
+                {sedangMemuatMasukDenganGoogle ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <>
+                    <FcGoogle className="bg-white rounded-full w-5 h-5" />
+                    Lanjutkan dengan Google
+                  </>
+                )}
               </Button>
             </div>
-            <div className="flex items-center text-center justify-center mt-7">
+
+            <div className="flex items-center text-center justify-center mt-4">
               <Button
                 onClick={() => router.push("/Beranda")}
-                className={`flex items-center justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  ${
-                  sedangMemuatMasukDenganGoogle ? "cursor-not-allowed" : ""
-                }`}
+                className={`relative flex items-center p-0 gap-1 hover:gap-0 justify-center bg-transparent text-gray-700 shadow-none hover:shadow-none 
+                transition-all ease-in-out duration-300
+                after:content-[''] after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:rounded-full after:w-0 after:bg-gray-700 
+                after:transition-all after:duration-500
+                hover:after:w-full
+                ${sedangMemuatMasukDenganGoogle ? "cursor-not-allowed" : ""}`}
               >
+                <TiChevronRightOutline className="w-4 h-4" />
                 Lanjutkan tanpa Google
+                <TiChevronLeftOutline className="w-4 h-4" />
               </Button>
             </div>
-            {sedangMemuatMasukDenganGoogle && (
-              <Typography className="mt-2 text-lg text-gray-600">
-                Sedang memuat, harap tunggu...
-              </Typography>
-            )}
           </div>
         </div>
       </Card>

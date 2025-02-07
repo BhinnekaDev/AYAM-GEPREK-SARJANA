@@ -69,7 +69,10 @@ const Konten = () => {
             >
               Tambah Menu
             </Button>
-            <Button className="py-1 px-4 bg-[#AA5656] shadow-md rounded-full hover:shadow-md capitalize tracking-wider">
+            <Button
+              onClick={handleCheckout}
+              className="py-1 px-4 bg-[#AA5656] shadow-md rounded-full hover:shadow-md capitalize tracking-wider"
+            >
               Checkout
             </Button>
           </div>

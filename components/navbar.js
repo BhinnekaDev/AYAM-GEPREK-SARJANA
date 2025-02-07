@@ -1,8 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-// IMAGE
-import logo from "@/assets/img/logo.png";
+import { motion } from "framer-motion";
 import {
   Button,
   Menu,
@@ -12,6 +11,8 @@ import {
   IconButton,
   Typography,
 } from "@material-tailwind/react";
+// IMAGE
+import logo from "@/assets/img/logo.png";
 // ICON
 import { FiShoppingCart, FiMenu } from "react-icons/fi";
 import { GiChickenOven, GiCook } from "react-icons/gi";
@@ -19,29 +20,56 @@ import { MdFastfood, MdContacts } from "react-icons/md";
 import { FaCog, FaRegUserCircle, FaPowerOff } from "react-icons/fa";
 import { TbShoppingCartCog } from "react-icons/tb";
 import { AiOutlineLogin } from "react-icons/ai";
-
 //HOOKS
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
 import useKeluarAkun from "@/hooks/Backend/useKeluarAkun";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 
 function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const pengguna = useCekPengguna();
   const { keluarAkun } = useKeluarAkun();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
+  const { navbarAktif, handlenavbarAktif } = useNavbarAktif();
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-  const { navbarAktif, handlenavbarAktif } = useNavbarAktif();
+
+  const handleScroll = () => {
+    if (window.scrollY > 400) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="flex flex-wrap justify-between items-center px-4 md:px-8 py-2 bg-transparent">
+    <motion.nav
+      className={`flex flex-wrap justify-between items-center px-4 md:px-8 w-full ${
+        isFixed
+          ? "fixed top-0 left-0 right-0 z-50 bg-[#FFE893] shadow-md sm:py-1"
+          : "bg-transparent"
+      }`}
+      initial={{ y: 0 }}
+      animate={{ y: isFixed ? 0 : -100 }}
+      transition={{
+        type: "spring",
+        stiffness: 200,
+        damping: 30,
+      }}
+    >
       <div className="flex items-center">
         <Image
           src={logo}
           alt="Sarjana Geprek Logo"
-          width={60}
-          height={60}
-          className="md:w-50 md:h-50"
+          className="w-16 h-16 sm:w-50 sm:h-50 "
         />
         <span className="text-lg md:text-xl font-bold ml-2 md:ml-3 text-black">
           Sarjana Geprek
@@ -83,7 +111,7 @@ function Navbar() {
       <div
         className={`${
           menuOpen ? "flex" : "hidden"
-        } flex-col w-full bg-white rounded-lg md:hidden -mb-10 mt-2 gap-4 p-4 transition-all duration-500 transform ease-out ${
+        } flex-col w-full bg-white rounded-lg md:hidden shadow-md -mb-10 mt-2 gap-4 p-4 transition-all duration-500 transform ease-out ${
           menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
@@ -282,7 +310,7 @@ function Navbar() {
           )}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
 

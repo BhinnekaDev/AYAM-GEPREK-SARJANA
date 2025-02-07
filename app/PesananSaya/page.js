@@ -25,7 +25,7 @@ function Page() {
           backgroundPosition: "center",
         }}
       >
-        <div>
+        <div className="pt-28 -mb-20">
           <Navbar />
         </div>
 
