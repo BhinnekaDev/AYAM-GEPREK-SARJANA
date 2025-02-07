@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import {
   Typography,
@@ -8,6 +8,7 @@ import {
   Carousel,
   IconButton,
 } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 // ICON
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GoDot, GoDotFill } from "react-icons/go";
@@ -18,6 +19,7 @@ import C2 from "@/assets/img/carousel/2.png";
 
 function Beranda() {
   const scrollRef = React.useRef(null);
+  const router = useRouter();
 
   const menuItems = [
     {
@@ -145,7 +147,8 @@ function Beranda() {
               {menuItems.map((item, index) => (
                 <CardBody
                   key={index}
-                  className="bg-[#EFF3EA] rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
+                  onClick={() => router.push("/DetailMenu")}
+                  className="bg-[#EFF3EA] rounded-xl border-2 border-white shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0 hover:cursor-pointer hover:border-2 hover:border-[#AA5656] transition-all duration-300 hover:scale-95"
                 >
                   <Image
                     src={item.image}
