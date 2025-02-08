@@ -29,16 +29,15 @@ function Page() {
             backgroundPosition: "center",
           }}
         >
-          <div className="pt-28 -mb-20">
+          <Toaster position="top-right" reverseOrder={false} />
+          <div className="pt-28 -mb-28 lg:mb-0 z-50">
             <Navbar />
           </div>
-          <div className="my-9 lg:m-0">
+          <div className="-z-50">
             <Konten />
           </div>
         </div>
-      ) : (
-        <Toaster position="top-right" reverseOrder={false} />
-      )}
+      ) : null}
     </div>
   );
 }
