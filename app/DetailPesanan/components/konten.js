@@ -13,12 +13,16 @@ import { MdArrowBack } from "react-icons/md";
 import { RiFileList3Line } from "react-icons/ri";
 import { FaShippingFast } from "react-icons/fa";
 import { LuPackageCheck } from "react-icons/lu";
+// MODAL
+import ModalRating from "@/components/modalRating";
 
 const Konten = () => {
   const router = useRouter();
   const [isHidden, setIsHidden] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
 
   useEffect(() => {
     let progressInterval;
@@ -229,7 +233,10 @@ const Konten = () => {
           >
             {showButtons && (
               <>
-                <Button className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300">
+                <Button
+                  onClick={handleOpen}
+                  className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+                >
                   Beri Penilaian
                 </Button>
                 <Button className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300">
@@ -268,6 +275,7 @@ const Konten = () => {
               </button>
             )}
           </div>
+          <ModalRating open={open} handleOpen={handleOpen} />
         </CardBody>
       </Card>
     </div>
