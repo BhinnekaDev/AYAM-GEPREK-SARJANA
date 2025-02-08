@@ -112,7 +112,7 @@ const Konten = () => {
                   <Input
                     type="text"
                     name="Nama_Depan"
-                    label="Masukan Nama Depan"
+                    placeholder="Masukan Nama Depan"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     value={formData.Nama_Depan}
                     onChange={handleChange}
@@ -126,7 +126,7 @@ const Konten = () => {
                   <Input
                     type="text"
                     name="Nama_Belakang"
-                    label="Masukan Nama Belakang"
+                    placeholder="Masukan Nama Belakang"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     value={formData.Nama_Belakang}
                     onChange={handleChange}
@@ -139,7 +139,7 @@ const Konten = () => {
                   </Typography>
                   <Input
                     type="email"
-                    label="Masukan Alamat Email"
+                    placeholder="Masukan Alamat Email"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     color="blue-gray"
                     value={formData.Email}
@@ -153,7 +153,7 @@ const Konten = () => {
                   <Input
                     type="tel"
                     name="No_Telepon"
-                    label="contoh 08********"
+                    placeholder="contoh 08********"
                     className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                     color="blue-gray"
                     value={formData.No_Telepon}
@@ -173,7 +173,7 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Provinsi"
-                      label="Masukan Nama Provinsi"
+                      placeholder="Masukan Nama Provinsi"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -188,7 +188,7 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Kota"
-                      label="Masukan Nama Kota"
+                      placeholder="Masukan Nama Kota"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -203,7 +203,7 @@ const Konten = () => {
                     <Input
                       type="number"
                       name="Kode_Pos"
-                      label="Masukan Nomor Kode Pos"
+                      placeholder="Masukan Nomor Kode Pos"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -218,7 +218,7 @@ const Konten = () => {
                     <Input
                       type="text"
                       name="Kecamatan"
-                      label="Masukan Nama Kecamatan"
+                      placeholder="Masukan Nama Kecamatan"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -233,7 +233,7 @@ const Konten = () => {
                     <Input
                       type="number"
                       name="RT"
-                      label="Masukan Nomor RT"
+                      placeholder="Masukan Nomor RT"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -248,7 +248,7 @@ const Konten = () => {
                     <Input
                       type="number"
                       name="RW"
-                      label="Masukan Nomor RW"
+                      placeholder="Masukan Nomor RW"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -265,7 +265,7 @@ const Konten = () => {
                     <Textarea
                       size="md"
                       name="Alamat_Jalan"
-                      label="Nama Jalan, Gedung, No. Rumah"
+                      placeholder="Nama Jalan, Gedung, No. Rumah"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}
@@ -280,7 +280,7 @@ const Konten = () => {
                     <Textarea
                       size="lg"
                       name="Alamat_Detail"
-                      label="Blok / Unit No. / Patokan"
+                      placeholder="Blok / Unit No. / Patokan"
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
                       color="blue-gray"
                       onChange={handleChange}

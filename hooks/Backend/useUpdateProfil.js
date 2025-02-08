@@ -56,7 +56,12 @@ export const useUpdateProfil = () => {
         Alamat_Jalan: profilData.Alamat?.Alamat_Jalan || "",
         Alamat_Detail: profilData.Alamat?.Alamat_Detail || "",
       });
-      setProfileImage(profilData.profileImage || fotoProfile);
+
+      setProfileImage(
+        typeof profilData.profileImage === "string"
+          ? profilData.profileImage
+          : fotoProfile
+      );
     }
   }, [profilData]);
 
@@ -67,57 +72,30 @@ export const useUpdateProfil = () => {
         name
       )
     ) {
-      const formattedInput = formatNama(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatNama(value) }));
       return;
     }
     if (["No_Telepon"].includes(name)) {
-      const formattedInput = formatNoTelepon(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatNoTelepon(value) }));
       return;
     }
     if (["Alamat_Jalan", "Alamat_Detail"].includes(name)) {
-      const formattedInput = formatAlamat(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatAlamat(value) }));
       return;
     }
     if (["Kode_Pos"].includes(name)) {
-      const formattedInput = formatKodePos(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatKodePos(value) }));
       return;
     }
     if (["RT"].includes(name)) {
-      const formattedInput = formatRT(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatRT(value) }));
       return;
     }
     if (["RW"].includes(name)) {
-      const formattedInput = formatRW(value);
-      setFormData((prev) => ({
-        ...prev,
-        [name]: formattedInput,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: formatRW(value) }));
       return;
     }
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleImageUpload = (e) => {
@@ -153,7 +131,10 @@ export const useUpdateProfil = () => {
 
       let imageUrl = profileImage;
 
-      if (profileImage && profileImage !== fotoProfile) {
+      if (
+        typeof profileImage === "string" &&
+        profileImage.includes("Foto_Pengguna/")
+      ) {
         const oldFileName = profileImage
           .split("Foto_Pengguna/")[1]
           ?.split("?")[0];
@@ -175,13 +156,13 @@ export const useUpdateProfil = () => {
         const uploadTask = uploadBytesResumable(storageRef, uploadedImage);
 
         await uploadTask;
-
         const snapshot = await uploadTask;
         const downloadURL = await getDownloadURL(snapshot.ref);
         console.log("Download URL after upload:", downloadURL);
 
         imageUrl = downloadURL;
       }
+
       const updatedData = {
         Nama_Depan: newData.Nama_Depan,
         Nama_Belakang: newData.Nama_Belakang,
