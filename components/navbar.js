@@ -136,9 +136,9 @@ function Navbar() {
           </li>
           <li
             className={`flex items-center gap-2 hover:underline cursor-pointer ${
-              navbarAktif === "/Kontak" ? "underline font-semibold" : ""
+              navbarAktif === "/KontakKami" ? "underline font-semibold" : ""
             }`}
-            onClick={() => handlenavbarAktif("/Kontak")}
+            onClick={() => handlenavbarAktif("/KontakKami")}
           >
             <MdContacts size={20} />
             Kontak Kami
@@ -218,12 +218,12 @@ function Navbar() {
           <li
             className={`relative cursor-pointer transition-all ease-in-out duration-700 
       ${
-        navbarAktif === "/Kontak"
+        navbarAktif === "/KontakKami"
           ? "after:w-full after:left-0 after:!transition-none font-semibold"
           : "after:w-0 hover:after:w-full hover:after:left-0"
       } 
       after:content-[''] after:absolute after:-bottom-0 after:right-0 after:h-[2px] after:bg-black after:transition-all after:duration-500`}
-            onClick={() => handlenavbarAktif("/Kontak")}
+            onClick={() => handlenavbarAktif("/KontakKami")}
           >
             Kontak Kami
           </li>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
 import Konten from "@/app/Profil/components/konten";
-
+// IMAGES
 import bgProfile from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";
 // HOOKS
