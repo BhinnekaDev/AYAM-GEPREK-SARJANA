@@ -11,116 +11,24 @@ import {
 // ICON
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GoDot, GoDotFill } from "react-icons/go";
+//UTILS
+import { formatRupiah } from "@/utils/formatRupiah";
 // IMAGES
-import MMakanan from "@/assets/img/menu/menu1.png";
-import MMinuman1 from "@/assets/img/menu/menu2.png";
-import MMinuman2 from "@/assets/img/menu/menu3.png";
 import C1 from "@/assets/img/carousel/1.png";
 import C2 from "@/assets/img/carousel/2.png";
+const fotoMakanan = require("@/assets/img/menu/menu1.png");
+const fotoMinuman = require("@/assets/img/menu/menu2.png");
+// HOOKS
+import useTampilkanMakanan from "@/hooks/Backend/useTampilkanMakanan";
+import useTampilkanMinuman from "@/hooks/Backend/useTampilkanMinuman";
 
 function Beranda() {
   const scrollRef1 = React.useRef(null);
   const scrollRef2 = React.useRef(null);
   const scrollRef3 = React.useRef(null);
 
-  const menuMakanan = [
-    {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Matah",
-      price: "Rp 15.000",
-      image: MMakanan,
-    },
-    {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Bawang",
-      price: "Rp 20.000",
-      image: MMakanan,
-    },
-    {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Manis",
-      price: "Rp 18.000",
-      image: MMakanan,
-    },
-    {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Rica Pedas",
-      price: "Rp 25.000",
-      image: MMakanan,
-    },
-    {
-      name: "Nasi Ayam Geprek",
-      description: "Sambal Kemangi",
-      price: "Rp 22.000",
-      image: MMakanan,
-    },
-  ];
-
-  const menuMinuman1 = [
-    {
-      name: "Kapal Api",
-      description: "Kopi",
-      price: "Rp 15.000",
-      image: MMinuman1,
-    },
-    {
-      name: "Kapal Api",
-      description: "Kopi",
-      price: "Rp 20.000",
-      image: MMinuman1,
-    },
-    {
-      name: "Kapal Api",
-      description: "Kopi",
-      price: "Rp 18.000",
-      image: MMinuman1,
-    },
-    {
-      name: "Kapal Api",
-      description: "Kopi",
-      price: "Rp 25.000",
-      image: MMinuman1,
-    },
-    {
-      name: "Kopi Kapal",
-      description: "Kopi",
-      price: "Rp 22.000",
-      image: MMinuman1,
-    },
-  ];
-
-  const menuMinuman2 = [
-    {
-      name: "Lemon Tea",
-      description: "Teh",
-      price: "Rp 15.000",
-      image: MMinuman2,
-    },
-    {
-      name: "Lemon Tea",
-      description: "Teh",
-      price: "Rp 20.000",
-      image: MMinuman2,
-    },
-    {
-      name: "Lemon Tea",
-      description: "Teh",
-      price: "Rp 18.000",
-      image: MMinuman2,
-    },
-    {
-      name: "Lemon Tea",
-      description: "Teh",
-      price: "Rp 25.000",
-      image: MMinuman2,
-    },
-    {
-      name: "Lemon Tea",
-      description: "Teh",
-      price: "Rp 22.000",
-      image: MMinuman2,
-    },
-  ];
+  const { daftarMakanan } = useTampilkanMakanan();
+  const { daftarMinuman } = useTampilkanMinuman();
 
   const scrollLeft1 = () => {
     if (scrollRef1.current) {
@@ -272,26 +180,28 @@ function Beranda() {
               ref={scrollRef1}
               className="grid grid-cols-1 mb-6 lg:mb-0 lg:flex lg:flex-row gap-5 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
-              {menuMakanan.map((item, index) => (
+              {daftarMakanan.map((makanan) => (
                 <CardBody
-                  key={index}
+                  key={makanan.id}
                   className="bg-[#EFF3EA] flex lg:flex-col gap-2 p-2 lg:gap-5 rounded-xl shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
-                    src={item.image}
-                    alt={`menu-${index + 1}`}
+                    src={makanan.Gambar_Makanan || fotoMakanan}
+                    alt={`menu-${makanan.id + 1}`}
+                    width={200}
+                    height={200}
                     className="w-1/2 lg:w-full lg:h-auto rounded-lg self-center"
                   />
                   <div className="flex-col ">
                     <div className="py-3 space-y-1 lg:space-y-1">
                       <Typography className="text-md lg:text-xl text-black">
-                        {item.name}
+                        {makanan.Nama_Makanan}
                       </Typography>
                       <Typography className="text-xs text-gray-600">
-                        {item.description}
+                        {makanan.Deskripsi_Makanan}
                       </Typography>
                       <Typography className="text-md text-black">
-                        {item.price}
+                        {formatRupiah(makanan.Harga_Makanan)}
                       </Typography>
                     </div>
                     <div className="w-full lg:mt-2 flex justify-center items-center">
@@ -328,25 +238,27 @@ function Beranda() {
               ref={scrollRef2}
               className="grid grid-cols-2 lg:flex lg:flex-row gap-3 mb-4 lg:mb-0 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
-              {menuMinuman1.map((item, index) => (
+              {daftarMinuman.map((minuman) => (
                 <CardBody
-                  key={index}
+                  key={minuman.id}
                   className="bg-[#EFF3EA] rounded-xl p-3 shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
-                    src={item.image}
-                    alt={`menu-${index + 1}`}
+                    src={minuman.Gambar_Minuman || fotoMinuman}
+                    alt={`menu-${minuman.id + 1}`}
+                    width={200}
+                    height={200}
                     className="w-full h-auto rounded-lg"
                   />
                   <div className="py-3 space-y-2 lg:space-y-1">
                     <Typography className="text-lg lg:text-xl text-black">
-                      {item.name}
+                      {minuman.Nama_Minuman}
                     </Typography>
                     <Typography className="text-sm text-gray-600">
-                      {item.description}
+                      {minuman.Deskripsi_Minuman}
                     </Typography>
                     <Typography className="text-md text-black">
-                      {item.price}
+                      {formatRupiah(minuman.Harga_Minuman)}
                     </Typography>
                   </div>
                   <div className="w-full lg:mt-2 flex justify-center items-center">
@@ -382,25 +294,27 @@ function Beranda() {
               ref={scrollRef3}
               className="grid grid-cols-2 lg:flex lg:flex-row gap-3 lg:gap-12 py-4 lg:overflow-x-scroll lg:scrollbar-none lg:scroll-smooth mx-4 max-w-full lg:max-w-[90%]"
             >
-              {menuMinuman2.map((item, index) => (
+              {daftarMinuman.map((minuman) => (
                 <CardBody
-                  key={index}
+                  key={minuman.id}
                   className="bg-[#EFF3EA] rounded-xl p-3 shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
-                    src={item.image}
-                    alt={`menu-${index + 1}`}
+                    src={minuman.Gambar_Minuman || fotoMinuman}
+                    alt={`menu-${minuman.id + 1}`}
+                    width={200}
+                    height={200}
                     className="w-full h-auto rounded-lg"
                   />
                   <div className="py-3 space-y-2 lg:space-y-1">
                     <Typography className="text-lg lg:text-xl text-black">
-                      {item.name}
+                      {minuman.Nama_Minuman}
                     </Typography>
                     <Typography className="text-sm text-gray-600">
-                      {item.description}
+                      {minuman.Deskripsi_Minuman}
                     </Typography>
                     <Typography className="text-md text-black">
-                      {item.price}
+                      {formatRupiah(minuman.Harga_Minuman)}
                     </Typography>
                   </div>
                   <div className="w-full lg:mt-2 flex justify-center items-center">
