@@ -10,7 +10,6 @@ import { Toaster } from "react-hot-toast";
 
 function Page() {
   return (
-    // a
     <div>
       <div className="min-h-screen overflow-hidden bg-[#FFE893]">
         <Toaster position="top-right" reverseOrder={false} />
