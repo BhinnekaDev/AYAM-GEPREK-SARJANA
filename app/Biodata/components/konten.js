@@ -108,7 +108,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Nama Depan</Typography>
                   <Input
                     type="text"
-                    label="Masukkan Nama Depan"
+                    placeholder="Masukkan Nama Depan"
                     name="Nama_Depan"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -120,7 +120,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Nama Belakang</Typography>
                   <Input
                     type="text"
-                    label="Masukkan Nama Belakang"
+                    placeholder="Masukkan Nama Belakang"
                     name="Nama_Belakang"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -134,7 +134,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Email</Typography>
                   <Input
                     type="email"
-                    label="Masukkan Email"
+                    placeholder="Masukkan Email"
                     name="Email"
                     className="w-full rounded-lg bg-white disabled:bg-white disabled:border-blue-gray-200 disabled:border-[1px]"
                     color="blue-gray"
@@ -146,7 +146,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">No Telepon</Typography>
                   <Input
                     type="tel"
-                    label="Masukkan No Telepon (08*****)"
+                    placeholder="Masukkan No Telepon (08*****)"
                     name="No_Telepon"
                     inputMode="numeric"
                     className="w-full bg-white rounded-lg"
@@ -174,7 +174,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Provinsi</Typography>
                   <Input
                     type="text"
-                    label="Masukkan Nama Provinsi"
+                    placeholder="Masukkan Nama Provinsi"
                     name="Provinsi"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -186,7 +186,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Kota</Typography>
                   <Input
                     type="text"
-                    label="Masukkan Nama Kota"
+                    placeholder="Masukkan Nama Kota"
                     name="Kota"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -198,7 +198,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Kecamatan</Typography>
                   <Input
                     type="text"
-                    label="Masukkan Nama Kecamatan"
+                    placeholder="Masukkan Nama Kecamatan"
                     name="Kota"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -210,7 +210,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Kode Pos</Typography>
                   <Input
                     type="number"
-                    label="Masukkan Kode Pos"
+                    placeholder="Masukkan Kode Pos"
                     name="Kode_Pos"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -243,7 +243,7 @@ function halamanBiodata() {
                     <Typography className="mb-1">RT</Typography>
                     <Input
                       type="number"
-                      label="Masukkan Nomor RT"
+                      placeholder="Masukkan Nomor RT"
                       name="RT"
                       className="w-full bg-white rounded-lg"
                       color="blue-gray"
@@ -255,7 +255,7 @@ function halamanBiodata() {
                     <Typography className="mb-1">RW</Typography>
                     <Input
                       type="number"
-                      label="Masukkan Nomor RW"
+                      placeholder="Masukkan Nomor RW"
                       name="RW"
                       className="w-full bg-white rounded-lg"
                       color="blue-gray"
@@ -268,7 +268,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Alamat Jalan</Typography>
                   <Textarea
                     size="md"
-                    label="Nama Jalan, Gedung, No. Rumah"
+                    placeholder="Nama Jalan, Gedung, No. Rumah"
                     name="Alamat_Jalan"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
@@ -282,7 +282,7 @@ function halamanBiodata() {
                   <Typography className="mb-1">Alamat Detail</Typography>
                   <Textarea
                     size="lg"
-                    label="Blok / Unit No. / Patokan"
+                    placeholder="Blok / Unit No. / Patokan"
                     name="Alamat_Detail"
                     className="w-full bg-white rounded-lg"
                     color="blue-gray"
