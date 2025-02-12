@@ -168,7 +168,7 @@ function Beranda() {
               Makanan
             </Typography>
           </div>
-          
+          {/* 1 */}
           <div className="flex items-center w-full max-w-full lg:max-w-[90rem] mb-6 lg:mb-9">
             <Button
               className="bg-black bg-opacity-25 p-2 hidden lg:flex justify-center items-center rounded-full hover:bg-opacity-15 hover:shadow-md hover:scale-105 transform transition-all ease-in-out duration-300"
