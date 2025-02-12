@@ -13,7 +13,7 @@ function Page() {
     <div>
       <div className="min-h-screen overflow-hidden bg-[#FFE893]">
         <Toaster position="top-right" reverseOrder={false} />
-        <div className="pt-28 -mb-14 lg:mb-0">
+        <div className="py-2 -mb-14 lg:mb-0">
           <Navbar />
         </div>
         <div>
