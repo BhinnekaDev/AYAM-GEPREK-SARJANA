@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Card, Typography } from "@material-tailwind/react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 // ICONS
 import { MdArrowBack } from "react-icons/md";
 import { HiMiniShoppingCart } from "react-icons/hi2";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { FaTrashCan } from "react-icons/fa6";
 
 const Konten = () => {
   const router = useRouter();
+  const [kuantitas, setKuantitas] = useState(1);
+
+  const tambahKuantitas = () => {
+    setKuantitas((prev) => prev + 1);
+  };
+
+  const kurangKuantitas = () => {
+    if (kuantitas > 1) {
+      setKuantitas((prev) => prev - 1);
+    } else {
+      setKuantitas(0);
+      toast.success("Item dihapus dari keranjang!");
+    }
+  };
 
   const handleTambahMenu = () => {
     router.push("/Menu");
@@ -22,7 +37,7 @@ const Konten = () => {
     <div className="flex items-center justify-center px-5 py-8 md:py-12">
       <Toaster position="top-right" reverseOrder={false} />
       <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex h-[50%] w-full max-w-4xl md:max-w-6xl shadow-md md:shadow-lg md:p-6 p-4">
-        <div className="flex w-full items-center justify-start mb-4 md:mb-6">
+        <div className="flex w-full items-center justify-start md:mb-6">
           <HiMiniShoppingCart
             size={24}
             className="mr-3 hidden md:block text-black cursor-pointer"
@@ -36,10 +51,11 @@ const Konten = () => {
           </Typography>
         </div>
         <div className="flex flex-col md:flex-row md:gap-6 space-y-4 md:space-y-0">
-          <div className="w-full bg-gray-200 p-2 md:p-4 rounded-lg shadow-md overflow-hidden">
+          {/* DESKTOP */}
+          <div className="w-full bg-gray-200 p-2 md:p-4 rounded-lg shadow-md overflow-hidden hidden sm:block">
             <table className="min-w-full border">
               <thead className="border-b-2 border-black text-black">
-                <tr className="text-sm md:text-lg">
+                <tr className="text-lg">
                   <th className="text-start p-2">Menu</th>
                   <th className="p-2">Kuantitas</th>
                   <th className="p-2">Harga</th>
@@ -47,13 +63,32 @@ const Konten = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr className="text-black font-bold border-b text-sm md:text-lg">
-                  <td className="p-2">Nasi Ayam Sambal Hengki</td>
+                <tr className="text-black font-bold border-b text-lg">
                   <td className="p-2">
-                    <div className="bg-gray-300 rounded-full flex justify-between items-center py-0 px-2 gap-3 md:gap-0 md:px-3 md:py-1">
-                      <FaMinus className="w-3 h-3 md:w-4 md:h-4 cursor-pointer" />
-                      <Typography className="text-sm">2</Typography>
-                      <FaPlus className="w-3 h-3 md:w-4 md:h-4 cursor-pointer" />
+                    Nasi Ayam Geprek
+                    <div className="text-xs text-gray-600">
+                      Sambal Matah - Level Pedas: 2
+                    </div>
+                  </td>
+                  <td className="p-2">
+                    <Toaster position="top-right" reverseOrder={false} />
+                    <div className="bg-gray-300 rounded-full flex justify-between items-center gap-0 px-3 py-1">
+                      {kuantitas > 1 ? (
+                        <FaMinus
+                          className="w-4 h-4 cursor-pointer"
+                          onClick={kurangKuantitas}
+                        />
+                      ) : (
+                        <FaTrashCan
+                          className="w-4 h-4 cursor-pointer text-red-500"
+                          onClick={kurangKuantitas}
+                        />
+                      )}
+                      <Typography className="text-sm">{kuantitas}</Typography>
+                      <FaPlus
+                        className="w-4 h-4 cursor-pointer"
+                        onClick={tambahKuantitas}
+                      />
                     </div>
                   </td>
                   <td className="p-2 text-center">Rp 15.000</td>
@@ -61,6 +96,59 @@ const Konten = () => {
                 </tr>
               </tbody>
             </table>
+          </div>
+          {/* MOBILE */}
+          <div className="w-full bg-gray-200 p-2 md:p-4 rounded-lg shadow-md overflow-hidden sm:hidden">
+            <div className="flex justify-between mx-2 border-b-2 border-black py-1">
+              <Typography className="font-bold text-black text-lg">
+                Menu
+              </Typography>
+              <Typography className="font-bold text-black text-lg">
+                2 Item
+              </Typography>
+            </div>
+            <div className="p-2 space-y-4">
+              <div className="space-y-1">
+                <Typography className="font-bold text-black text-md">
+                  Nasi Ayam Geprek
+                </Typography>
+                <Typography className="text-sm text-gray-600">
+                  Sambal Matah - Level Pedas: 2
+                </Typography>
+              </div>
+              <div className="flex justify-between items-center">
+                <Typography className="font-bold text-black text-md">
+                  Rp 15.000
+                </Typography>
+                <div className="bg-gray-300 border border-gray-400 rounded-full flex justify-between items-center gap-6 px-2 py-0">
+                  {kuantitas > 1 ? (
+                    <FaMinus
+                      className="w-4 h-4 cursor-pointer"
+                      onClick={kurangKuantitas}
+                    />
+                  ) : (
+                    <FaTrashCan
+                      className="w-4 h-4 cursor-pointer text-red-500"
+                      onClick={kurangKuantitas}
+                    />
+                  )}
+                  <Typography className="text-md">{kuantitas}</Typography>
+                  <FaPlus
+                    className="w-4 h-4 cursor-pointer"
+                    onClick={tambahKuantitas}
+                  />
+                </div>
+              </div>
+              <div className="h-px bg-gray-500"></div>
+            </div>
+            <div className="flex justify-between mx-2">
+              <Typography className="font-bold text-black text-md">
+                Total:
+              </Typography>
+              <Typography className="font-bold text-black text-md">
+                Rp 30.000
+              </Typography>
+            </div>
           </div>
           <div className="w-full flex md:hidden justify-between px-3">
             <Button
