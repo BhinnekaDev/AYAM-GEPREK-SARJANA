@@ -33,11 +33,11 @@ function Page() {
             backgroundPosition: "center",
           }}
         >
-          <div className="pt-28 -mb-28">
+          <div>
             <Navbar />
           </div>
 
-          <div className="my-9 lg:m-0">
+          <div className="my-6 lg:m-0">
             <Konten />
           </div>
         </div>

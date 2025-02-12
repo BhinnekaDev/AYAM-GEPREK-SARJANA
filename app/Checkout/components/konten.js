@@ -19,7 +19,7 @@ const Konten = () => {
   const router = useRouter();
 
   return (
-    <div className="flex items-center justify-center px-5 py-8 md:py-12">
+    <div className="flex items-center justify-center px-5 md:py-12">
       <Toaster position="top-right" reverseOrder={false} />
       <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex h-auto w-full max-w-4xl md:max-w-6xl shadow-md md:shadow-lg md:p-6 p-4">
         <div className="flex w-full items-center justify-start mb-4 md:mb-6">
