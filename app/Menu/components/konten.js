@@ -253,6 +253,7 @@ function Beranda() {
                       height={200}
                       className="w-full h-full object-cover rounded-lg"
                     />
+
                   </div>
                   <div className="flex flex-col w-full flex-1">
                     <div className="py-3 space-y-2 lg:space-y-1">
@@ -303,6 +304,7 @@ function Beranda() {
               {daftarMinuman.map((minuman) => (
                 <CardBody
                   key={minuman.id}
+
                   className="bg-[#EFF3EA] grid grid-cols-2 sm:flex sm:flex-col p-3 items-center sm:gap-0 gap-3 rounded-lg border-2 border-gray-300 shadow-md lg:shadow-lg w-full"
                 >
                   <div className="w-full">
@@ -313,6 +315,7 @@ function Beranda() {
                       height={200}
                       className="w-full h-full object-cover rounded-lg"
                     />
+
                   </div>
                   <div className="flex flex-col w-full flex-1">
                     <div className="py-3 space-y-2 lg:space-y-1">
