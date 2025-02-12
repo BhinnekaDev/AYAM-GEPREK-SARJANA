@@ -51,20 +51,7 @@ function Navbar() {
   }, []);
 
   return (
-    <motion.nav
-      className={`flex flex-wrap justify-between items-center px-4 md:px-8 w-full ${
-        isFixed
-          ? "fixed top-0 left-0 right-0 z-50 bg-[#FFE893] shadow-md sm:py-1"
-          : "bg-transparent"
-      }`}
-      initial={{ y: 0 }}
-      animate={{ y: isFixed ? 0 : -100 }}
-      transition={{
-        type: "spring",
-        stiffness: 200,
-        damping: 30,
-      }}
-    >
+    <nav className="flex justify-between items-center px-4 md:px-8 w-full">
       <div className="flex items-center">
         <Image
           src={logo}
@@ -188,7 +175,6 @@ function Navbar() {
           )}
         </ul>
       </div>
-
       <div className="md:flex hidden flex-row items-center gap-12">
         <ul className="flex flex-row gap-8 text-black font-medium transition-all duration-300">
           <li
@@ -244,7 +230,7 @@ function Navbar() {
           {pengguna ? (
             <>
               <Button
-                className={`flex items-center justify-center p-2 bg-transparent shadow-none border-none text-black hover:bg-black hover:bg-opacity-15 hover:shadow-md transition-all duration-300 ${
+                className={`relative flex items-center justify-center p-2 bg-transparent shadow-none border-none text-black hover:bg-black hover:bg-opacity-15 hover:shadow-md transition-all duration-300 ${
                   navbarAktif == "/Keranjang"
                     ? " bg-black bg-opacity-25 rounded-full"
                     : ""
@@ -252,6 +238,9 @@ function Navbar() {
                 onClick={() => handlenavbarAktif("/Keranjang")}
               >
                 <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
+                <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  1
+                </span>
               </Button>
               <Menu>
                 <MenuHandler
@@ -310,7 +299,7 @@ function Navbar() {
           )}
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 }
 
