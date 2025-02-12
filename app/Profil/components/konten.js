@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 // ICONS
 import { CgProfile } from "react-icons/cg";
 import { MdArrowBack, MdEdit } from "react-icons/md";
@@ -15,6 +16,7 @@ import { MdArrowBack, MdEdit } from "react-icons/md";
 import { useUpdateProfil } from "@/hooks/Backend/useUpdateProfil";
 
 const Konten = () => {
+  const router = useRouter();
   const [activeForm, setActiveForm] = useState("dataDiri");
   const [isEditing, setIsEditing] = useState(false);
   const {
@@ -41,7 +43,10 @@ const Konten = () => {
             size={20}
             className="mr-2 hidden md:block text-black cursor-pointer"
           />
-          <MdArrowBack className="mr-2 text-black md:hidden cursor-pointer" />
+          <MdArrowBack
+            className="mr-2 text-black md:hidden cursor-pointer"
+            onClick={() => router.back()}
+          />
           <Typography className="font-bold text-black text-sm md:text-md uppercase">
             Profile Saya
           </Typography>
@@ -198,21 +203,6 @@ const Konten = () => {
                   </div>
                   <div>
                     <Typography className=" text-black font-bold md:text-md">
-                      Kode Pos
-                    </Typography>
-                    <Input
-                      type="number"
-                      name="Kode_Pos"
-                      placeholder="Masukan Nomor Kode Pos"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
-                      onChange={handleChange}
-                      disabled={!isEditing}
-                      value={formData.Kode_Pos}
-                    />
-                  </div>
-                  <div>
-                    <Typography className=" text-black font-bold md:text-md">
                       Kecamatan
                     </Typography>
                     <Input
@@ -226,6 +216,22 @@ const Konten = () => {
                       value={formData.Kecamatan}
                     />
                   </div>
+                  <div>
+                    <Typography className=" text-black font-bold md:text-md">
+                      Kode Pos
+                    </Typography>
+                    <Input
+                      type="number"
+                      name="Kode_Pos"
+                      placeholder="Masukan Nomor Kode Pos"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      color="blue-gray"
+                      onChange={handleChange}
+                      disabled={!isEditing}
+                      value={formData.Kode_Pos}
+                    />
+                  </div>
+
                   <div>
                     <Typography className=" text-black  font-bold md:text-md">
                       RT

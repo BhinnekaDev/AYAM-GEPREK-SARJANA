@@ -1,22 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Button,
   Card,
-  Input,
-  Textarea,
   Typography,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
 import { Toaster } from "react-hot-toast";
 // ICONS
-import { MdArrowBack, MdAddShoppingCart } from "react-icons/md";
-import { FaPencilAlt, FaQrcode } from "react-icons/fa";
-import { LiaShippingFastSolid } from "react-icons/lia";
-import { FiPackage } from "react-icons/fi";
-import { IoCash } from "react-icons/io5";
+import {
+  MdArrowBack,
+  MdAddShoppingCart,
+  MdFastfood,
+  MdDeliveryDining,
+  MdLocalShipping,
+} from "react-icons/md";
+import { FaLocationDot } from "react-icons/fa6";
+import { FaPencilAlt, FaChevronDown } from "react-icons/fa";
+import { PiHandCoinsFill, PiHandArrowDownBold } from "react-icons/pi";
+import { BsQrCode, BsCash } from "react-icons/bs";
 
 const Konten = () => {
   const router = useRouter();
+  const [openMenuPembayaran, setOpenMenuPembayaran] = React.useState(false);
+  const [openMenuPengiriman, setOpenMenuPengiriman] = React.useState(false);
+  const alamat = `Jalan Desa Batujajar, RT.2/RW.1, Kp Batujajar, Batujajar, Batujajar, KAB. Bandung Jalan Desa Batujajar, RT.2/RW.1, Kp Batujajar, Batujajar, Batujajar, KAB. Bandung`;
+  const maxLength = 100;
+  const alamatTerbatas =
+    alamat.length > maxLength ? alamat.substring(0, maxLength) + "..." : alamat;
+  const [pembayaranTerpilih, setPembayaranTerpilih] =
+    useState("Metode Pembayaran");
+  const [pengirimanTerpilih, setPengirmanTerpilih] =
+    useState("Metode Pengiriman");
 
   return (
     <div className="flex items-center justify-center px-5 py-8 md:py-12">
@@ -35,134 +53,178 @@ const Konten = () => {
             Checkout
           </Typography>
         </div>
-        <div className="flex flex-col w-full h-full md:flex-row gap-4 md:gap-6">
-          <div className="w-full md:flex bg-gray-200 p-4 rounded-lg shadow-md overflow-hidden">
-            <div className="w-full">
-              <div className="w-full flex items-center justify-between md:py-1">
-                <Typography className="text-black text-lg md:text-2xl font-semibold tracking-wide">
-                  Informasi Pengguna
-                </Typography>
-                <FaPencilAlt
-                  onClick={() => router.push("/Profil")}
-                  className="text-black cursor-pointer w-4 h-4"
-                />
-              </div>
-              <div className="w-full p-2 space-y-2 md:space-y-4">
-                <div className="space-y-1">
-                  <Typography className="font-bold text-black text-sm md:text-lg ml-1">
-                    Nama Lengkap
-                  </Typography>
-                  <Input className="w-full bg-gray-400 bg-opacity-20 md:p-2 text-black border-black border rounded-lg" />
-                </div>
-                <div className="space-y-1">
-                  <Typography className="font-bold text-black text-sm md:text-lg ml-1">
-                    No Telepon
-                  </Typography>
-                  <Input className="w-full bg-gray-400 bg-opacity-20 p-2 text-black border-black border rounded-lg" />
-                </div>
-                <div className="space-y-1">
-                  <Typography className="font-bold text-black text-sm md:text-lg ml-1">
-                    Alamat Pengiriman
-                  </Typography>
-                  <Textarea className="w-full bg-gray-400 bg-opacity-20 p-2 text-black border-black border rounded-lg" />
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden md:block mx-6 my-4">
-              <div className="w-[3px] rounded-full h-full bg-gray-600"></div>
-            </div>
-
-            <div className="w-full md:w-[50%] md:px-1 md:space-y-6 gap-8 md:gap-0 md:flex-col md:flex grid grid-cols-2 justify-center">
-              <div className="space-y-2">
-                <Typography className="font-bold text-md md:text-lg text-black text-center">
-                  Metode Pengiriman
-                </Typography>
-                <div className="grid grid-cols-2 md:flex justify-between items-center gap-2 md:px-2">
-                  <Button className="flex-col flex justify-center w-full md:py-6 gap-4 md:gap-2 hover:shadow-md shadow-md rounded-lg text-green-400 items-center bg-white border border-green-400">
-                    <LiaShippingFastSolid className="text-green-400 w-7 h-7 md:w-10 md:h-10" />
-                    Delivery
-                  </Button>
-                  <Button className="flex-col flex justify-center w-full  md:py-6 gap-4 md:gap-2 hover:shadow-md shadow-md rounded-lg text-gray-600 items-center bg-white border border-gray-600">
-                    <FiPackage className="text-gray-600 w-7 h-7 md:w-10 md:h-10" />
-                    PickUp
-                  </Button>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Typography className="font-bold text-md md:text-lg text-black text-center">
-                  Metode Pembayaran
-                </Typography>
-                <div className="grid grid-cols-2 md:flex justify-between items-center gap-4 md:px-2">
-                  <Button className="flex-col w-full flex justify-center gap-4 md:gap-2 hover:shadow-md shadow-md  md:py-6 rounded-lg text-green-400 items-center bg-white border border-green-400">
-                    <IoCash className="text-green-400 w-7 h-7 md:w-10 md:h-10" />
-                    Cash
-                  </Button>
-                  <Button className="flex-col w-full flex justify-center gap-4 md:gap-2 hover:shadow-md shadow-md  md:py-6 rounded-lg text-gray-600 items-center bg-white border border-gray-600">
-                    <FaQrcode className="text-gray-600 w-7 h-7 md:w-10 md:h-10" />
-                    Qris
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-[50%] bg-gray-200 rounded-lg shadow-md p-6 flex-row">
-            <div className="w-full flex justify-center items-center mb-4">
-              <Typography className="text-black font-bold text-xl">
-                informasi Produk
+        <div className="bg-gray-200 w-full p-5 shadow-md border-gray-400 border rounded-lg space-y-1 mb-4">
+          <div className="flex justify-between">
+            <div className="flex items-center gap-2">
+              <FaLocationDot className="w-5 h-5" />
+              <Typography className="font-bold text-lg">
+                Informasi Pengguna
               </Typography>
             </div>
-            <div className="flex flex-col mb-4">
-              <ul className="px-4 space-y-3 font-medium text-sm">
-                <div className="flex justify-between">
-                  <li className="list-disc">Nasi Ayam Sambal Matah</li>
-                  <li>1</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Nasi Ayam Sambal Matah</li>
-                  <li>2</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Nasi Ayam Sambal Matah</li>
-                  <li>3</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Nasi Ayam Sambal Matah</li>
-                  <li>4</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Nasi Ayam Sambal Matah</li>
-                  <li>5</li>
-                </div>
-              </ul>
-              <div className="h-[3px] rounded-full bg-gray-600 my-4"></div>
-              <ul className="px-4 space-y-3 font-medium text-sm">
-                <div className="flex justify-between">
-                  <li className="list-disc">Total Barang (5)</li>
-                  <li>1</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Biaya Layanan</li>
-                  <li>Rp 5.000</li>
-                </div>
-                <div className="flex justify-between">
-                  <li className="list-disc">Biaya Pengiriman</li>
-                  <li>Rp 5.000</li>
-                </div>
-              </ul>
-              <ul className="px-4 mt-3 font-medium text-sm ">
-                <div className="flex justify-between font-bold text-black text-lg">
-                  <li>Total</li>
-                  <li>Rp 30.000</li>
-                </div>
-              </ul>
-            </div>
-            <div className="flex w-full md:hidden justify-end items-center mt-4">
-              <Button className=" bg-[#AA5656] px-12 py-2  rounded-full shadow-md hover:shadow-md tracking-widest">
-                Checkout
+            <div className="items-center sm:hidden">
+              <Button
+                onClick={() => router.push("/Profil")}
+                className="rounded-full p-1 bg-transparent shadow-none"
+              >
+                <FaPencilAlt className="text-black w-4 h-4" />
               </Button>
             </div>
           </div>
+          <div className="h-[2px] rounded-full bg-gray-300"></div>
+          <div className="flex w-full sm:gap-2 sm:px-3 py-1">
+            <div className="sm:w-56 w-full">
+              <Typography className="font-bold text-md">
+                Sandro Anugrah
+              </Typography>
+              <Typography className="font-bold text-md">08123456789</Typography>
+            </div>
+            <div className="w-full">
+              <Typography className="text-md">{alamatTerbatas}</Typography>
+            </div>
+            <div className="items-center px-1 hidden sm:flex">
+              <Button
+                onClick={() => router.push("/Profil")}
+                className="rounded-full p-2 bg-black/15 hover:shadow-md border border-black/15 hover:border-black transition-all duration-300"
+              >
+                <FaPencilAlt className="text-black" />
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col w-full md:flex-row gap-4 md:gap-3">
+          <div className="w-full space-y-2 flex flex-col">
+            <div className="bg-gray-200 w-full h-full shadow-md p-5 border-gray-400 border rounded-lg space-y-1 flex flex-col">
+              <div className="flex items-center gap-2">
+                <MdFastfood className="w-5 h-5" />
+                <Typography className="font-bold text-lg">
+                  Informasi Produk
+                </Typography>
+              </div>
+              <div className="h-[2px] rounded-full bg-gray-300"></div>
+              <div className="space-y-3 py-2 sm:max-h-32 overflow-auto">
+                <div className="flex flex-col sm:flex-row justify-between ml-6 mr-3">
+                  <div>
+                    <Typography className="font-bold text-md sm:text-lg">
+                      Nasi Ayam Geprek
+                    </Typography>
+                    <div className="sm:hidden text-sm text-gray-700">
+                      <Typography>Sambal Matah • Level Pedas 1</Typography>
+                    </div>
+                  </div>
+                  <Typography className="text-lg hidden sm:block">
+                    Sambal Matah
+                  </Typography>
+                  <Typography className="text-lg hidden sm:block">
+                    Level Pedas 1
+                  </Typography>
+                  <Typography className="font-bold text-md sm:text-lg text-end">
+                    Rp 15.000
+                  </Typography>
+                </div>
+              </div>
+              <div className="h-[2px] rounded-full bg-gray-300"></div>
+              <div className="flex justify-end items-center gap-1">
+                <Typography className="text-black font-bold text-lg">
+                  Total:
+                </Typography>
+                <Typography className="text-black font-bold text-lg">
+                  Rp 15.000
+                </Typography>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-200 w-full md:w-2/6 shadow-md px-5 py-3 sm:p-5 border-gray-400 border rounded-lg">
+            <div className="flex flex-col h-full py-2 sm:py-0 sm:space-y-2">
+              <div className="mb-3 sm:mb-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <PiHandCoinsFill className="w-5 h-5" />
+                  <Typography className="font-bold text-lg">
+                    Metode Pembayaran
+                  </Typography>
+                </div>
+                <Menu open={openMenuPembayaran} handler={setOpenMenuPembayaran}>
+                  <MenuHandler className="bg-gray-300 w-full flex justify-between border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
+                    <Button
+                      variant="text"
+                      className="flex items-center sm:gap-3 text-base font-normal tracking-normal"
+                    >
+                      {pembayaranTerpilih}
+                      <FaChevronDown
+                        strokeWidth={2.5}
+                        className={`h-3.5 w-3.5 transition-transform ${
+                          openMenuPembayaran ? "rotate-180" : ""
+                        }`}
+                      />
+                    </Button>
+                  </MenuHandler>
+                  <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
+                    <MenuItem
+                      className="flex items-center gap-2 font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
+                      onClick={() => setPembayaranTerpilih("QRIS")}
+                    >
+                      <BsQrCode className="w-4 h-4" />
+                      QRIS
+                    </MenuItem>
+                    <MenuItem
+                      className="flex items-center gap-2 font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
+                      onClick={() => setPembayaranTerpilih("Cash")}
+                    >
+                      <BsCash className="w-4 h-4" />
+                      Cash
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
+              <div className="mt-auto sm:mb-5">
+                <div className="flex items-center gap-2 mb-2">
+                  <MdLocalShipping className="w-5 h-5" />
+                  <Typography className="font-bold text-lg">
+                    Metode Pengiriman
+                  </Typography>
+                </div>
+                <Menu open={openMenuPengiriman} handler={setOpenMenuPengiriman}>
+                  <MenuHandler className="bg-gray-300 w-full flex justify-between border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
+                    <Button
+                      variant="text"
+                      className="flex items-center gap-3 text-base font-normal tracking-normal"
+                    >
+                      {pengirimanTerpilih}
+                      <FaChevronDown
+                        strokeWidth={2.5}
+                        className={`h-3.5 w-3.5 transition-transform ${
+                          openMenuPengiriman ? "rotate-180" : ""
+                        }`}
+                      />
+                    </Button>
+                  </MenuHandler>
+                  <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
+                    <MenuItem
+                      className="flex items-center gap-2 text-md font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
+                      onClick={() => setPengirmanTerpilih("QRIS")}
+                    >
+                      <PiHandArrowDownBold className="w-5 h-5" />
+                      Pick Up
+                    </MenuItem>
+                    <MenuItem
+                      className="flex items-center gap-2 text-md font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
+                      onClick={() => setPengirmanTerpilih("Cash")}
+                    >
+                      <MdDeliveryDining className="w-5 h-5" />
+                      Delivery
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full md:hidden justify-end items-center mt-4">
+          <Button
+            onClick={() => router.push("/DetailPesanan")}
+            className="bg-[#AA5656] px-12 py-2  rounded-full shadow-md hover:shadow-md tracking-widest"
+          >
+            Checkout
+          </Button>
         </div>
         <div className="md:flex hidden w-full justify-center md:justify-between items-center mt-4 px-4">
           <Button
