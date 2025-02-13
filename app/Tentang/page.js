@@ -29,7 +29,7 @@ function Page() {
               priority
             />
           </motion.div>
-          <div className="pt-28 -mb-24">
+          <div>
             <Navbar />
           </div>
           <div>

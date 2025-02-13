@@ -29,14 +29,13 @@ function Page() {
         }}
       >
         <Toaster position="top-right" reverseOrder={false} />
-        <div className="pt-28 -mb-28 lg:mb-0 z-50">
+        <div className="z-50">
           <Navbar />
         </div>
         <div className="-z-50">
           <Beranda />
         </div>
       </div>
-      <Toaster position="top-right" reverseOrder={false} />
     </div>
   );
 }
