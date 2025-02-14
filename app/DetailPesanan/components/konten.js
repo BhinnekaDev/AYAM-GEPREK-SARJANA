@@ -173,50 +173,44 @@ const Konten = () => {
                 <Typography className="font-bold p-1 text-sm sm:text-lg text-black">
                   Informasi Pesanan
                 </Typography>
-                <div className="bg-white mx-1 space-y-1 sm:space-y-0 sm:mx-0 p-2 sm:p-3 rounded-lg border-gray-700 border-2 flex flex-col flex-grow">
-                  <div className="flex gap-2 sm:gap-5 overflow-x-auto whitespace-nowrap scrollbar-none flex-grow">
-                    <div className="text-center space-y-1 sm:space-y-0">
-                      <div className="flex items-center justify-center">
-                        <Image
-                          src={MMakanan}
-                          alt="menu"
-                          className="sm:w-24 sm:h-24 w-20 h-20"
-                        />
+                <div className="bg-white h-full mx-1 space-y-1 sm:space-y-0 sm:mx-0 rounded-lg border-gray-700 border-2 flex flex-col">
+                  <div className="h-32 overflow-y-auto p-3 space-y-3">
+                    <div className="flex gap-2 sm:gap-5 justify-between">
+                      <div className="flex items-center justify-start gap-3">
+                        <div className="bg-gray-300 hidden sm:block border border-gray-400 rounded-lg">
+                          <Image
+                            className="w-24 h-24 p-1"
+                            src={MMakanan}
+                            alt="gambarMakanan"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <Typography className="text-sm lg:text-md font-bold text-gray-600">
+                            Makanan
+                          </Typography>
+                          <Typography className="font-bold text-black text-md lg:text-lg">
+                            Nasi Ayam Geprek
+                          </Typography>
+                          <Typography className="text-sm sm:text-md ">
+                            Sambal Matah - Pedas 3
+                          </Typography>
+                        </div>
                       </div>
-                      <Typography className="text-xs sm:text-sm">
-                        Nasi Ayam Geprek
-                      </Typography>
-                    </div>
-                    <div className="text-center space-y-1 sm:space-y-0">
-                      <div className="flex items-center justify-center">
-                        <Image
-                          src={MMinuman1}
-                          alt="menu"
-                          className="sm:w-24 sm:h-24 w-20 h-20"
-                        />
+                      <div className="flex justify-center items-center gap-3">
+                        <Typography className="font-bold text-gray-600 text-md">
+                          x1
+                        </Typography>
+                        <Typography className="font-bold text-black text-md">
+                          Rp 15.000
+                        </Typography>
                       </div>
-                      <Typography className="text-xs sm:text-sm">
-                        Good Day
-                      </Typography>
-                    </div>
-                    <div className="text-center space-y-1 sm:space-y-0">
-                      <div className="flex items-center justify-center">
-                        <Image
-                          src={MMinuman2}
-                          alt="menu"
-                          className="sm:w-24 sm:h-24 w-20 h-20"
-                        />
-                      </div>
-                      <Typography className="text-xs sm:text-sm">
-                        Lemon Tea
-                      </Typography>
                     </div>
                   </div>
-                  <div className="flex pt-2 w-full justify-end mt-auto">
-                    <Typography className="text-sm sm:text-lg text-black w-full">
+                  <div className="flex w-full p-2 flex-grow items-end justify-between mt-auto">
+                    <Typography className="text-md font-bold sm:text-lg text-black">
                       Total Pesanan:
                     </Typography>
-                    <Typography className="font-bold text-sm sm:text-lg text-black w-full text-right">
+                    <Typography className="font-bold text-md sm:text-lg text-black">
                       Rp 250.000
                     </Typography>
                   </div>
