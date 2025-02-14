@@ -299,7 +299,7 @@ const Konten = () => {
             )}
             <div className="flex justify-center mt-4 sm:mt-6 mx-12 sm:mx-24">
               <Button
-                className={`w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full sm:rounded-md hover:rounded-2xl hover:scale-95 transform transition-all ease-in-out duration-500 ${
+                className={`w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 ${
                   activeForm === "alamat" ? "sm:w-52 sm:rounded-full" : ""
                 }`}
                 onClick={() => {

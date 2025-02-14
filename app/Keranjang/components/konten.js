@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button, Card, Typography } from "@material-tailwind/react";
+import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
 // ICONS
 import { MdArrowBack } from "react-icons/md";
@@ -196,7 +196,10 @@ const Konten = () => {
           </div>
         </div>
         <div className="w-full ml-3 mt-4 hidden md:block">
-          <Button className="py-2 px-5 bg-[#AA5656] hover:shadow-md hover:rounded-2xl transition-all ease-in-out duration-500 capitalize tracking-wider">
+          <Button
+            onClick={handleTambahMenu}
+            className="py-2 px-5 bg-[#AA5656] hover:shadow-md hover:rounded-2xl transition-all ease-in-out duration-500 capitalize tracking-wider"
+          >
             Tambah Menu
           </Button>
         </div>

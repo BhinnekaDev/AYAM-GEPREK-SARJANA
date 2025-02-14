@@ -31,7 +31,7 @@ function Page() {
           }}
         >
           <Nav />
-          <div className="my-6 sm:my-0">
+          <div className="py-6 sm:py-0">
             <Konten />
           </div>
         </div>

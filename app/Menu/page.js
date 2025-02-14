@@ -12,9 +12,9 @@ function Page() {
     <div className="relative min-h-screen bg-[#FFE893]">
       <Toaster position="top-right" reverseOrder={false} />
       <Nav />
-      <main>
+      <div>
         <Beranda />
-      </main>
+      </div>
     </div>
   );
 }

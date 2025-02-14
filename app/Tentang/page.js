@@ -32,7 +32,7 @@ function Page() {
           <div>
             <Navbar />
           </div>
-          <div>
+          <div className="py-2 sm:py-0">
             <Tentang />
           </div>
         </div>

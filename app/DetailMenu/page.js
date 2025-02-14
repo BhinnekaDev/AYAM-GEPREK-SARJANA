@@ -30,10 +30,10 @@ function Page() {
           }}
         >
           <Toaster position="top-right" reverseOrder={false} />
-          <div className="pt-28 -mb-28 lg:mb-0 z-50">
+          <div>
             <Navbar />
           </div>
-          <div className="-z-50">
+          <div className="my-6 lg:m-0">
             <Konten />
           </div>
         </div>

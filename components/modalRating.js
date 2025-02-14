@@ -34,7 +34,7 @@ const ModalRating = ({ open, handleOpen }) => {
             {[...Array(5)].map((_, index) => (
               <FaStar
                 key={index}
-                className={`w-10 h-10 ${
+                className={`w-7 h-7 sm:w-10 sm:h-10 ${
                   index < rating ? "text-yellow-800" : "text-gray-400"
                 }`}
                 onClick={() => handleStarClick(index)}
@@ -42,7 +42,7 @@ const ModalRating = ({ open, handleOpen }) => {
             ))}
           </div>
           <div className="text-center text-black">
-            <Typography className="text-lg font-bold tracking-wider">
+            <Typography className="text-md sm:text-lg font-bold tracking-wider">
               {rating === 5 && "Sangat Puas! 🤩🌟"}
               {rating === 4 && "Puas! 😊✨"}
               {rating === 3 && "Cukup Puas! 🙂"}
@@ -66,10 +66,7 @@ const ModalRating = ({ open, handleOpen }) => {
         >
           Batal
         </Button>
-        <Button
-          className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-14 sm:px-10 py-2 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
-          onClick={handleOpen}
-        >
+        <Button className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-14 sm:px-10 py-2 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300">
           Kirim
         </Button>
       </DialogFooter>

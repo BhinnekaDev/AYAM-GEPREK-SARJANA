@@ -47,10 +47,10 @@ function Nav() {
           <Image
             src={logo}
             alt="Sarjana Geprek Logo"
-            className="w-16 h-16 sm:w-50 sm:h-50 "
+            className="w-14 h-14 sm:w-50 sm:h-50 "
           />
-          <span className="text-lg md:text-xl font-bold ml-2 md:ml-3 text-black">
-            Sarjana Geprek
+          <span className="text-md md:text-xl font-bold ml-2 md:ml-3 text-black">
+            Ayam Sarjana Geprek
           </span>
         </div>
         {/* MOBILE */}
@@ -259,10 +259,10 @@ function Nav() {
               <div className="flex-col justify-center items-center space-y-2">
                 <div className="flex justify-center items-center gap-3">
                   <div
-                    className={`flex gap-2 bg-[#AA5656]/40 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
+                    className={`flex gap-2 w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
                       navbarAktif === "/Profil"
-                        ? "bg-[#AA5656]/100 text-white"
-                        : ""
+                        ? "bg-[#AA5656] text-white border-[#AA5656]/30"
+                        : "bg-[#AA5656]/15 border-2 border-[#AA5656]/30 text-[#AA5656]"
                     }`}
                     onClick={() => handlenavbarAktif("/Profil")}
                   >
@@ -270,10 +270,10 @@ function Nav() {
                     <Typography>Profile Saya</Typography>
                   </div>
                   <div
-                    className={`flex gap-2 bg-[#AA5656]/40 text-black w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
+                    className={`flex gap-2 w-full p-1 items-center justify-center rounded-full hover:underline cursor-pointer ${
                       navbarAktif === "/PesananSaya"
-                        ? "bg-[#AA5656]/100 text-white"
-                        : ""
+                        ? "bg-[#AA5656] text-white border-[#AA5656]/30"
+                        : "bg-[#AA5656]/15 border-2 border-[#AA5656]/30 text-[#AA5656]"
                     }`}
                     onClick={() => handlenavbarAktif("/PesananSaya")}
                   >

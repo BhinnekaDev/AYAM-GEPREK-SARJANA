@@ -22,7 +22,7 @@ function Beranda() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center px-10 lg:px-20 lg:py-5 gap-16">
+    <div className="flex flex-col items-center px-10 lg:px-20 lg:py-1 gap-16">
       <div className="relative flex px-12 justify-end items-end w-full h-[300px] sm:h-[400px]">
         <AnimatePresence mode="wait">
           <motion.div
@@ -46,16 +46,18 @@ function Beranda() {
           variant="h1"
           className="text-3xl lg:text-5xl font-bold text-black mb-6"
         >
-          About Us
+          Tentang Kita
         </Typography>
         <Typography
           variant="paragraph"
           className="text-base lg:text-lg text-black leading-relaxed"
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industrys standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Ayam Geprek Sarjana adalah restoran yang menyajikan ayam geprek dengan
+          cita rasa khas yang sudah terkenal di kawasan Cimahi. Terletak di Jl.
+          Ibu Ganirah No.115, Cibeber, Kec. Cimahi Sel., Kota Cimahi, Jawa
+          Barat, kami menyajikan hidangan ayam geprek yang lezat dan pedas, siap
+          memanjakan lidah Anda. Nikmati pengalaman makan yang tak terlupakan
+          hanya di Ayam Geprek Sarjana!
         </Typography>
       </div>
     </div>

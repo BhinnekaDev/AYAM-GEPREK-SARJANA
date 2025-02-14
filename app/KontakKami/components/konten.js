@@ -205,13 +205,14 @@ function Beranda() {
               </Typography>
               <div className="flex gap-1 items-center">
                 <GrRestaurant className="w-5 h-5   sm:w-6 sm:h-6 text-black" />
-                <Typography
-                  className="w-44 text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
-    after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:rounded-full after:w-0 after:bg-black 
-    after:transition-all after:duration-500 hover:after:w-full"
+                <a
+                  href="tel:+6285659558935"
+                  className="w-48 text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
+            after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:rounded-full after:w-0 after:bg-black 
+            after:transition-all after:duration-500 hover:after:w-full"
                 >
-                  +62-881122334567
-                </Typography>
+                  +62-85659558935
+                </a>
               </div>
             </div>
           </div>
@@ -232,13 +233,15 @@ function Beranda() {
               </Typography>
               <div className="flex gap-1 items-center">
                 <IoRestaurantOutline className="w-5 h-5  sm:w-6 sm:h-6 text-black" />
-                <Typography
-                  className="w-[200px] text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
-    after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:rounded-full after:w-0 after:bg-black 
-    after:transition-all after:duration-500 hover:after:w-full"
+                <a
+                  href="https://maps.app.goo.gl/2i2fCzCMeXmwSavr5"
+                  target="_blank"
+                  className="w-[210px] text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
+  after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:rounded-full after:w-0 after:bg-black 
+  after:transition-all after:duration-500 hover:after:w-full"
                 >
                   View on Google Maps
-                </Typography>
+                </a>
               </div>
             </div>
           </div>
@@ -263,7 +266,10 @@ function Beranda() {
                   className="w-5 h-5   sm:w-6 sm:h-6 text-black"
                 />
                 <Typography
-                  className="w-32 text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
+                  onClick={() =>
+                    window.open("https://wa.me/6281217044800", "_blank")
+                  }
+                  className="w-36 text-black cursor-pointer text-lg sm:text-xl font-bold relative transition-all ease-in-out duration-300 underline decoration-2 hover:no-underline
     after:content-[''] after:absolute after:bottom-0 after:left-0 after:h-[4px] after:rounded-full after:w-0 after:bg-black 
     after:transition-all after:duration-500 hover:after:w-full"
                 >

@@ -147,8 +147,7 @@ function Beranda() {
               {menuItems.map((item, index) => (
                 <CardBody
                   key={index}
-                  onClick={() => router.push("/DetailMenu")}
-                  className="bg-[#EFF3EA] rounded-xl border-2 border-white shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0 hover:cursor-pointer hover:border-2 hover:border-[#AA5656] transition-all duration-300 hover:scale-95"
+                  className="bg-[#EFF3EA] rounded-xl border-2 border-white shadow-md lg:shadow-lg w-full lg:w-[250px] lg:flex-shrink-0"
                 >
                   <Image
                     src={item.image}
@@ -167,7 +166,10 @@ function Beranda() {
                     </Typography>
                   </div>
                   <div className="w-full mt-2 flex justify-center items-center">
-                    <Button className="py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md">
+                    <Button
+                      onClick={() => router.push("/DetailMenu")}
+                      className="py-2 border-2 border-gray-400 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md hover:bg-[#AA5656]/80 hover:border-2 hover:border-gray-300 transition-all duration-300"
+                    >
                       beli
                     </Button>
                   </div>

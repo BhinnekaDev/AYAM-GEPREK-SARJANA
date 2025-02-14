@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
-import Beranda from "@/app/KontakKami/components/konten";
+import Konten from "@/app/KontakKami/components/konten";
 // IMAGES
 import bgKontak from "@/assets/img/kontak/bg.png";
 import bgMobile from "@/assets/img/kontak/bgmobile1.png";
@@ -29,11 +29,11 @@ function Page() {
         }}
       >
         <Toaster position="top-right" reverseOrder={false} />
-        <div className="z-50">
+        <div className="z-50 sm:mb-20">
           <Navbar />
         </div>
-        <div className="-z-50">
-          <Beranda />
+        <div className="-z-50 mb-4 sm:mb-0">
+          <Konten />
         </div>
       </div>
     </div>

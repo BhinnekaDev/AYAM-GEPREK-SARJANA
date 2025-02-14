@@ -36,7 +36,6 @@ function Page() {
           <div>
             <Navbar />
           </div>
-
           <div className="my-6 lg:m-0">
             <Konten />
           </div>

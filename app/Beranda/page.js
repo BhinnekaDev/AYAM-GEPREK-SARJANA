@@ -10,12 +10,10 @@ function Page() {
   return (
     <div className="relative min-h-screen bg-[#FFE893]">
       <Toaster position="top-right" reverseOrder={false} />
-      <div className="py-2 -mb-14 lg:mb-0">
-        <Nav />
-      </div>
-      <main>
+      <Nav />
+      <div>
         <Beranda />
-      </main>
+      </div>
     </div>
   );
 }

@@ -29,7 +29,7 @@ function Page() {
           <Navbar />
         </div>
 
-        <div className="my-6 lg:m-0">
+        <div className="py-6 lg:py-0">
           <Konten />
         </div>
       </div>
