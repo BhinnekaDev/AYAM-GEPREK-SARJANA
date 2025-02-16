@@ -18,23 +18,15 @@ const useKeranjangPesanan = () => {
   }, [keranjang]);
 
   const tambahKeKeranjang = (item) => {
-    // Cek apakah item sudah ada di keranjang
-    const itemSudahAda = keranjang.find(
-      (keranjangItem) => keranjangItem.id === item.id
-    );
+    // Buat ID unik baru menggunakan timestamp dan angka acak
+    const newItem = {
+      ...item,
+      id: Date.now().toString() + Math.random().toString(36).substring(2, 15),
+      jumlah: item.jumlah || 1,
+    };
 
-    if (itemSudahAda) {
-      // Jika item sudah ada, tambahkan jumlahnya
-      const keranjangBaru = keranjang.map((keranjangItem) =>
-        keranjangItem.id === item.id
-          ? { ...keranjangItem, jumlah: keranjangItem.jumlah + item.jumlah }
-          : keranjangItem
-      );
-      setKeranjang(keranjangBaru);
-    } else {
-      // Jika item belum ada, tambahkan ke keranjang
-      setKeranjang([...keranjang, item]);
-    }
+    // Tambahkan item baru ke keranjang
+    setKeranjang([...keranjang, newItem]);
   };
 
   const hapusDariKeranjang = (itemId) => {
