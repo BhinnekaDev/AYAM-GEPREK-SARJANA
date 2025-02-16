@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
 import toast, { Toaster } from "react-hot-toast";
@@ -11,6 +11,20 @@ import { FaTrashCan } from "react-icons/fa6";
 const Konten = () => {
   const router = useRouter();
   const [kuantitas, setKuantitas] = useState(1);
+  const [maxLengthName, setMaxLengthName] = useState(24);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMaxLengthName(window.innerWidth <= 768 ? 75 : 24);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const tambahKuantitas = () => {
     setKuantitas((prev) => prev + 1);
@@ -67,7 +81,9 @@ const Konten = () => {
                   <td className="p-2">
                     Nasi Ayam Geprek
                     <div className="text-xs text-gray-600">
-                      Sambal Matah - Level Pedas: 2
+                      {item.nama.length > maxLengthName
+                        ? item.nama.slice(0, maxLengthName) + " ..."
+                        : item.nama}
                     </div>
                   </td>
                   <td className="p-2">
@@ -110,7 +126,9 @@ const Konten = () => {
             <div className="p-2 space-y-4">
               <div className="space-y-1">
                 <Typography className="font-bold text-black text-md">
-                  Nasi Ayam Geprek
+                  {item.nama.length > maxLengthName
+                    ? item.nama.slice(0, maxLengthName) + " ..."
+                    : item.nama}
                 </Typography>
                 <Typography className="text-sm text-gray-600">
                   Sambal Matah - Level Pedas: 2
