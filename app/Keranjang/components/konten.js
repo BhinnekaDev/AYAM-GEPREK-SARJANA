@@ -16,15 +16,13 @@ const Konten = () => {
   const router = useRouter();
   const { keranjang, hapusDariKeranjang, updateJumlahItem } =
     useKeranjangPesanan();
-
-  const [kuantitas, setKuantitas] = useState(1);
-  const [maxLengthName, setMaxLengthName] = useState(24);
   const [totalHarga, setTotalHarga] = useState(0);
   const biayaLayanan = 5000;
+  const [maxLengthName, setMaxLengthName] = useState(24);
 
   useEffect(() => {
     const handleResize = () => {
-      setMaxLengthName(window.innerWidth <= 768 ? 75 : 24);
+      setMaxLengthName(window.innerWidth <= 768 ? 33 : 24);
     };
 
     handleResize();
@@ -69,7 +67,6 @@ const Konten = () => {
   const handleCheckout = () => {
     router.push("/Checkout");
   };
-};
 
   return (
     <div className="flex items-center justify-center px-5 md:py-12">
@@ -113,7 +110,7 @@ const Konten = () => {
                       <div className="text-xs text-gray-600">
                         {item.rasaSambal && `Sambal: ${item.rasaSambal} - `}
                         {item.kategori === "makanan" &&
-                          item.levelPedas !== undefined && // Tambahkan kondisi ini
+                          item.levelPedas !== undefined &&
                           `Level Pedas: ${item.levelPedas}`}
                         {item.tipeMinuman && `Tipe: ${item.tipeMinuman}`}
                       </div>
@@ -167,13 +164,13 @@ const Konten = () => {
                 <div key={item.id} className="space-y-1">
                   <Typography className="font-bold text-black text-md">
                     {item.nama.length > maxLengthName
-                    ? item.nama.slice(0, maxLengthName) + " ..."
-                    : item.nama}
+                      ? item.nama.slice(0, maxLengthName) + " ..."
+                      : item.nama}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
                     {item.rasaSambal && `Sambal: ${item.rasaSambal} - `}
                     {item.kategori === "makanan" &&
-                      item.levelPedas !== undefined && // Tambahkan kondisi ini
+                      item.levelPedas !== undefined &&
                       `Level Pedas: ${item.levelPedas}`}
                     {item.tipeMinuman && `Tipe: ${item.tipeMinuman}`}
                   </Typography>
