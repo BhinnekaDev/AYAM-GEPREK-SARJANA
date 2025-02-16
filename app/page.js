@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 // GAMBAR
 import logoMasuk from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
@@ -14,22 +14,29 @@ import { FcGoogle } from "react-icons/fc";
 import { TiChevronRightOutline, TiChevronLeftOutline } from "react-icons/ti";
 // HOOK
 import useMasukDenganGoogle from "@/hooks/Backend/useMasukDenganGoogle";
+// COMPONENTS
+import Loader from "@/components/loader";
 
 function halamanMasuk() {
   const router = useRouter();
-  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle, user } =
+  const { masukDenganGoogle, sedangMemuatMasukDenganGoogle } =
     useMasukDenganGoogle();
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 640);
-
     checkMobile();
-
     window.addEventListener("resize", checkMobile);
+
+    setTimeout(() => setIsLoading(false), 1500);
 
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div
