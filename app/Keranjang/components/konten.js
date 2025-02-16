@@ -16,11 +16,26 @@ const Konten = () => {
   const router = useRouter();
   const { keranjang, hapusDariKeranjang, updateJumlahItem } =
     useKeranjangPesanan();
+
+  const [kuantitas, setKuantitas] = useState(1);
+  const [maxLengthName, setMaxLengthName] = useState(24);
   const [totalHarga, setTotalHarga] = useState(0);
   const biayaLayanan = 5000;
 
   useEffect(() => {
-    // Hitung total harga setiap kali keranjang berubah
+    const handleResize = () => {
+      setMaxLengthName(window.innerWidth <= 768 ? 75 : 24);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     const hitungTotal = () => {
       let total = 0;
       keranjang.forEach((item) => {
@@ -54,6 +69,7 @@ const Konten = () => {
   const handleCheckout = () => {
     router.push("/Checkout");
   };
+};
 
   return (
     <div className="flex items-center justify-center px-5 md:py-12">
@@ -91,7 +107,9 @@ const Konten = () => {
                     className="text-black font-bold border-b text-lg"
                   >
                     <td className="p-2">
-                      {item.nama}
+                      {item.nama.length > maxLengthName
+                        ? item.nama.slice(0, maxLengthName) + " ..."
+                        : item.nama}
                       <div className="text-xs text-gray-600">
                         {item.rasaSambal && `Sambal: ${item.rasaSambal} - `}
                         {item.kategori === "makanan" &&
@@ -148,7 +166,9 @@ const Konten = () => {
               {keranjang.map((item) => (
                 <div key={item.id} className="space-y-1">
                   <Typography className="font-bold text-black text-md">
-                    {item.nama}
+                    {item.nama.length > maxLengthName
+                    ? item.nama.slice(0, maxLengthName) + " ..."
+                    : item.nama}
                   </Typography>
                   <Typography className="text-sm text-gray-600">
                     {item.rasaSambal && `Sambal: ${item.rasaSambal} - `}
