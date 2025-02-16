@@ -65,8 +65,8 @@ const Konten = ({ item, onBack }) => {
   const isMinuman = item?.kategori === "minuman";
 
   return (
-    <div className="flex items-center justify-center px-5 md:pt-12">
-      <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex w-full max-w-3xl md:max-w-4xl shadow-md md:shadow-lg p-6">
+    <div className="flex items-center w-full justify-center px-5 py-6 sm:pt-16">
+      <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex justify-center items-center w-full max-w-xl sm:max-w-4xl shadow-md md:shadow-lg p-6">
         <div className="flex w-full items-center justify-start mb-3">
           <MdArrowBack
             className="mr-2 text-black cursor-pointer"
@@ -76,27 +76,27 @@ const Konten = ({ item, onBack }) => {
             Detail Menu
           </Typography>
         </div>
-        <div className="flex flex-col sm:flex-row w-full justify-start items-center sm:p-4 sm:gap-6">
-          <div className="sm:bg-[#EFF3EA] sm:border-2 sm:border-gray-400 sm:-ml-28 rounded-xl sm:shadow-md sm:py-8 sm:px-4 overflow-hidden w-full h-40 sm:w-96 sm:h-96 flex items-center justify-center relative">
+        <div className="flex flex-col sm:flex-row w-full h-full justify-center items-center sm:p-4 sm:gap-6">
+          <div className="sm:bg-[#EFF3EA]/60 sm:border-8 sm:border-gray-400 border-double rounded p-3 sm:shadow-md overflow-hidden w-full h-auto sm:h-full flex items-center justify-center">
             <Image
               src={item?.Gambar_Makanan || item?.Gambar_Minuman || GambarMenu1}
               alt={item?.Nama_Makanan || item?.Nama_Minuman || "Menu"}
-              className="w-32 h-32 sm:w-72 sm:h-72 object-cover"
+              className="w-40 sm:w-full sm:h-auto object-cover rounded shadow-md border-2 border-gray-400"
               width={300}
               height={300}
             />
           </div>
-          <div>
-            <Typography className="text-xl sm:text-2xl font-bold text-black">
+          <div className="w-full h-full flex flex-col">
+            <Typography className="text-xl font-bold text-black break-words">
               {item?.Nama_Makanan || item?.Nama_Minuman || "Nama Menu"}
             </Typography>
-            <div className="flex items-center gap-1">
-              <Typography className="text-black ml-2 text-sm sm:text-md">
-                (123 reviewers)
+            <div className="flex items-center gap-1 mb-2">
+              <Typography className="text-black text-sm sm:text-md">
+                (123 reviewers) - Terjual 120
               </Typography>
             </div>
-            <div className="my-3 sm:my-8 space-y-3">
-              <Typography className="text-md sm:text-lg text-black">
+            <div className="py-3 space-y-3">
+              <Typography className="text-md text-black">
                 {item?.Deskripsi_Makanan ||
                   item?.Deskripsi_Minuman ||
                   "Deskripsi Menu"}
@@ -105,9 +105,9 @@ const Konten = ({ item, onBack }) => {
                 {formatRupiah(item?.Harga_Makanan || item?.Harga_Minuman || 0)}
               </Typography>
             </div>
-            <div className="space-y-5">
+            <div className="space-y-3 sm:space-y-5">
               {isMakanan && (
-                <div className="flex items-center justify-between sm:justify-normal sm:gap-[151px]">
+                <div className="flex items-center justify-between">
                   <Typography className="text-md sm:text-lg text-black font-bold sm:tracking-wide">
                     Level Pedas
                   </Typography>
@@ -134,7 +134,7 @@ const Konten = ({ item, onBack }) => {
               )}
 
               {isMakanan && (
-                <div className="flex justify-between sm:justify-normal sm:gap-36 items-center">
+                <div className="flex justify-between items-center">
                   <Typography className="text-md sm:text-lg text-black font-bold tracking-wide">
                     Rasa Sambal
                   </Typography>
@@ -178,7 +178,7 @@ const Konten = ({ item, onBack }) => {
               )}
 
               {isMinuman && (
-                <div className="flex justify-between sm:justify-normal sm:gap-36 items-center">
+                <div className="flex justify-between items-center">
                   <Typography className="text-md sm:text-lg text-black font-bold tracking-wide">
                     Tipe Minuman
                   </Typography>
@@ -221,7 +221,7 @@ const Konten = ({ item, onBack }) => {
                 </div>
               )}
             </div>
-            <div className="w-full flex justify-center items-center mt-8">
+            <div className="mt-12 w-full flex flex-col sm:flex-row justify-center items-center gap-2">
               <Button
                 className="sm:flex hidden justify-center text-sm items-center w-full py-2 gap-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-wider hover:bg-opacity-90 hover:shadow-md border-2 border-gray-300 rounded-lg transition-all duration-500"
                 onClick={handleTambahKeKeranjang}
