@@ -69,7 +69,7 @@ const Konten = () => {
   };
 
   return (
-    <div className="flex items-center justify-center px-5 md:py-12">
+    <div className="flex items-center justify-center px-5">
       <Toaster position="top-right" reverseOrder={false} />
       <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex h-[50%] w-full max-w-4xl md:max-w-6xl shadow-md md:shadow-lg md:p-6 p-4">
         <div className="flex w-full items-center justify-start md:mb-6">
@@ -101,7 +101,7 @@ const Konten = () => {
                 {keranjang.map((item) => (
                   <tr
                     key={item.id}
-                    className="text-black font-bold border-b text-lg"
+                    className="text-black font-bold border-b text-sm lg:text-lg"
                   >
                     <td className="p-2">
                       {item.nama.length > maxLengthName
@@ -159,9 +159,9 @@ const Konten = () => {
                 {keranjang.length} Item
               </Typography>
             </div>
-            <div className="p-2 space-y-4">
+            <div className="p-2">
               {keranjang.map((item) => (
-                <div key={item.id} className="space-y-1">
+                <div key={item.id} className="space-y-3">
                   <Typography className="font-bold text-black text-md">
                     {item.nama.length > maxLengthName
                       ? item.nama.slice(0, maxLengthName) + " ..."
@@ -232,25 +232,25 @@ const Konten = () => {
             </div>
             <div className="flex flex-col mb-4">
               <ul className="px-4 space-y-3 font-medium">
-                <div className="flex justify-between">
+                <div className="flex justify-between md:text-sm">
                   <li className="list-disc">
                     Total Barang ({keranjang.length})
                   </li>
                   <li>{formatRupiah(totalHarga)}</li>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between md:text-sm">
                   <li className="list-disc">Biaya Layanan</li>
                   <li>{formatRupiah(biayaLayanan)}</li>
                 </div>
               </ul>
             </div>
             <div className="w-full flex flex-col justify-between items-center gap-3 mt-auto">
-              <Typography className="text-black text-center text-3xl font-bold">
+              <Typography className="text-black text-center md:text-xl lg:text-3xl font-bold">
                 {formatRupiah(totalHarga + biayaLayanan)}
               </Typography>
               <Button
                 onClick={handleCheckout}
-                className="w-full bg-[#AA5656] shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest"
+                className="w-full md:p-2 bg-[#AA5656] shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest"
               >
                 Checkout
               </Button>

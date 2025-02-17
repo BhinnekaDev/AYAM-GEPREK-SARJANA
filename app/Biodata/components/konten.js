@@ -12,7 +12,8 @@ import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 // IMAGES
 import bgBiodata from "@/assets/img/masuk/bg.png";
-import bgMobile from "@/assets/img/masuk/mobile/bg.png";
+import bgMobile from "@/assets/img/masuk/responsive/bgMobile.png";
+import bgIpad from "@/assets/img/masuk/responsive/bgIpad.png";
 import vektorBiodata from "@/assets/img/masuk/vektor.png";
 // HOOKS
 import {
@@ -25,6 +26,8 @@ import { formatAlamat } from "@/utils/formatAlamat";
 import { formatKodePos } from "@/utils/formatKodePos";
 import { formatRT } from "@/utils/formatRT";
 import { formatRW } from "@/utils/formatRW";
+// COMPONENTS
+import Loader from "@/components/loader";
 
 function halamanBiodata() {
   const [step, setStep] = useState(1);
@@ -40,22 +43,25 @@ function halamanBiodata() {
   const [RW, setRW] = useState("");
   const [alamatJalan, setAlamatJalan] = useState("");
   const [alamatDetail, setAlamatDetail] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
-
   const [isMobile, setIsMobile] = useState(false);
+  const [isIpad, setIsIpad] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsIpad(width >= 640 && width <= 1024);
+    };
 
-    checkMobile();
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
 
-    window.addEventListener("resize", checkMobile);
+    setTimeout(() => setIsLoading(false), 1000);
 
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
-
-  useFetchUserEmail(setEmail);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,28 +79,34 @@ function halamanBiodata() {
       alamatJalan,
       alamatDetail,
     };
-    handleSubmitBiodata(biodata, setLoading, router);
+    handleSubmitBiodata(biodata, router);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div
       className="flex items-center justify-center min-h-screen px-4 lg:px-8"
       style={{
-        backgroundImage: `url(${isMobile ? bgMobile.src : bgBiodata.src})`,
+        backgroundImage: `url(${
+          isMobile ? bgMobile.src : isIpad ? bgIpad.src : bgBiodata.src
+        })`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <Card className="bg-white flex flex-col sm:flex-row w-full max-w-xs h-[600px] sm:max-w-5xl sm:h-[550px] shadow-lg p-4">
-        <div className="bg-[#AA5656] sm:flex justify-center items-center rounded-xl w-full h-3/5 sm:h-full sm:w-1/2 hidden">
+      <Card className="bg-white flex flex-col w-full max-w-xs border border-gray-400 h-auto shadow-lg p-4 md:max-w-2xl md:flex-row lg:flex-row lg:max-w-5xl lg:h-[550px] lg:gap-6">
+        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 md:w-full md:h-auto lg:h-full lg:w-1/2">
           <Image
             src={vektorBiodata}
             alt="Sarjana Geprek Logo"
-            className="w-60 h-60 sm:w-80 sm:h-80"
+            className="w-60 h-60 lg:w-80 lg:h-80"
           />
         </div>
-        <div className="hidden sm:flex flex-col items-center p-4 ml-6 w-1/2 space-y-2">
+        <div className="flex flex-col w-full items-center p-4 space-y-2 lg:w-1/2">
           <Typography
             variant="h2"
             className="font-bold text-black mb-2 text-center"
@@ -157,10 +169,10 @@ function halamanBiodata() {
                     }
                   />
                 </div>
-                <div className="flex justify-end pt-2">
+                <div className="flex w-full justify-center pt-2 lg:justify-end">
                   <Button
                     variant="outlined"
-                    className="bg-[#CB6040] px-16 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                    className="bg-[#CB6040] w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     onClick={() => setStep(2)}
                   >
                     Next
@@ -218,17 +230,17 @@ function halamanBiodata() {
                     onChange={(e) => setKodePos(formatKodePos(e.target.value))}
                   />
                 </div>
-                <div className="flex justify-between lg:pt-2">
+                <div className="flex w-full justify-center gap-4 pt-2 lg:gap-0 lg:justify-between">
                   <Button
                     variant="outlined"
-                    className="bg-gray-500 px-16 border-none rounded-full text-white hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                    className="bg-gray-500 w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-white hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     onClick={() => setStep(1)}
                   >
                     Back
                   </Button>
                   <Button
                     variant="outlined"
-                    className="bg-[#CB6040] px-16 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                    className="bg-[#CB6040] w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     onClick={() => setStep(3)}
                   >
                     Next
@@ -238,7 +250,7 @@ function halamanBiodata() {
             )}
             {step === 3 && (
               <>
-                <div className="flex justify-center gap-4">
+                <div className="flex flex-col justify-center gap-4 lg:flex-row">
                   <div className="w-full">
                     <Typography className="mb-1">RT</Typography>
                     <Input
@@ -292,17 +304,17 @@ function halamanBiodata() {
                     }
                   ></Textarea>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex w-full justify-center gap-4 pt-2 lg:gap-0 lg:justify-between">
                   <Button
                     variant="outlined"
-                    className="bg-gray-500 px-16 border-none rounded-full text-white hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                    className="bg-gray-500 w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-white hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     onClick={() => setStep(2)}
                   >
                     Back
                   </Button>
                   <Button
                     variant="outlined"
-                    className="bg-[#CB6040] px-16 border-none rounded-full hover:bg-[#CB6040] text-white hover:shadow-md transform duration-300 ease-in-out tracking-wider"
+                    className="bg-[#CB6040] w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     type="submit"
                     disabled={loading}
                   >

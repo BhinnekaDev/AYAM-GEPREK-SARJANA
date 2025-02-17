@@ -104,20 +104,20 @@ const Konten = () => {
               <div className="space-y-3 py-2 sm:max-h-32 overflow-auto">
                 <div className="flex flex-col sm:flex-row justify-between ml-6 mr-3">
                   <div>
-                    <Typography className="font-bold text-md sm:text-lg">
+                    <Typography className="font-bold text-md lg:text-lg">
                       Nasi Ayam Geprek
                     </Typography>
                     <div className="sm:hidden text-sm text-gray-700">
                       <Typography>Sambal Matah • Level Pedas 1</Typography>
                     </div>
                   </div>
-                  <Typography className="text-lg hidden sm:block">
+                  <Typography className="text-md lg:text-lg hidden sm:block">
                     Sambal Matah
                   </Typography>
-                  <Typography className="text-lg hidden sm:block">
+                  <Typography className="text-md lg:text-lg hidden sm:block">
                     Level Pedas 1
                   </Typography>
-                  <Typography className="font-bold text-md sm:text-lg text-end">
+                  <Typography className="font-bold text-md lg:text-lg text-end">
                     Rp 15.000
                   </Typography>
                 </div>
@@ -133,17 +133,17 @@ const Konten = () => {
               </div>
             </div>
           </div>
-          <div className="bg-gray-200 w-full md:w-2/6 shadow-md px-5 py-3 sm:p-5 border-gray-400 border rounded-lg">
+          <div className="bg-gray-200 w-full md:w-2/5 lg:w-2/6 shadow-md px-5 py-3 sm:p-5 border-gray-400 border rounded-lg">
             <div className="flex flex-col h-full py-2 sm:py-0 sm:space-y-2">
               <div className="mb-3 sm:mb-0">
                 <div className="flex items-center gap-2 mb-2">
-                  <PiHandCoinsFill className="w-5 h-5" />
-                  <Typography className="font-bold text-lg">
+                  <PiHandCoinsFill className="w-5 h-5 md:hidden lg:block" />
+                  <Typography className="font-bold md:text-md lg:text-lg">
                     Metode Pembayaran
                   </Typography>
                 </div>
                 <Menu open={openMenuPembayaran} handler={setOpenMenuPembayaran}>
-                  <MenuHandler className="bg-gray-300 w-full flex justify-between border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
+                  <MenuHandler className="bg-gray-300 w-full flex justify-between items-center border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
                     <Button
                       variant="text"
                       className="flex items-center sm:gap-3 text-base font-normal tracking-normal"
@@ -151,13 +151,13 @@ const Konten = () => {
                       {pembayaranTerpilih}
                       <FaChevronDown
                         strokeWidth={2.5}
-                        className={`h-3.5 w-3.5 transition-transform ${
+                        className={`h-3.5 w-3.5 md:w-3 md:h-3 transition-transform ${
                           openMenuPembayaran ? "rotate-180" : ""
                         }`}
                       />
                     </Button>
                   </MenuHandler>
-                  <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
+                  <MenuList className="bg-white w-80 md:w-40 lg:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
                     <MenuItem
                       className="flex items-center gap-2 font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
                       onClick={() => setPembayaranTerpilih("QRIS")}
@@ -177,13 +177,13 @@ const Konten = () => {
               </div>
               <div className="mt-auto sm:mb-5">
                 <div className="flex items-center gap-2 mb-2">
-                  <MdLocalShipping className="w-5 h-5" />
-                  <Typography className="font-bold text-lg">
+                  <MdLocalShipping className="w-5 h-5 md:hidden lg:block" />
+                  <Typography className="font-bold md:text-md lg:text-lg">
                     Metode Pengiriman
                   </Typography>
                 </div>
                 <Menu open={openMenuPengiriman} handler={setOpenMenuPengiriman}>
-                  <MenuHandler className="bg-gray-300 w-full flex justify-between border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
+                  <MenuHandler className="bg-gray-300 w-full flex justify-between items-center border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide md:text-md">
                     <Button
                       variant="text"
                       className="flex items-center gap-3 text-base font-normal tracking-normal"
@@ -191,13 +191,13 @@ const Konten = () => {
                       {pengirimanTerpilih}
                       <FaChevronDown
                         strokeWidth={2.5}
-                        className={`h-3.5 w-3.5 transition-transform ${
+                        className={`h-3.5 w-3.5 md:w-3 md:h-3 transition-transform ${
                           openMenuPengiriman ? "rotate-180" : ""
                         }`}
                       />
                     </Button>
                   </MenuHandler>
-                  <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
+                  <MenuList className="bg-white w-80 md:w-40 lg:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0 md:text-md lg:text-lg">
                     <MenuItem
                       className="flex items-center gap-2 text-md font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
                       onClick={() => setPengirmanTerpilih("QRIS")}
