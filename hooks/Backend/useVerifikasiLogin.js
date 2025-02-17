@@ -17,7 +17,12 @@ const useCekPengguna = () => {
           setPengguna(penggunaData);
         } else {
           // Daftar halaman yang dikecualikan
-          const halamanDikecualikan = ["/Beranda", "/Menu"];
+          const halamanDikecualikan = [
+            "/Beranda",
+            "/Menu",
+            "/Tentang",
+            "/KontakKami",
+          ];
 
           if (!halamanDikecualikan.includes(pathname)) {
             toast.error("Silahkan masuk terlebih dahulu", { duration: 3000 });

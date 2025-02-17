@@ -29,7 +29,7 @@ function Page() {
 
       {isLoading ? (
         <Loader />
-      ) : pengguna ? (
+      ) : (
         <>
           <motion.div
             initial={{ opacity: 0 }}
@@ -50,7 +50,7 @@ function Page() {
             <Tentang />
           </div>
         </>
-      ) : null}
+      )}
     </div>
   );
 }
