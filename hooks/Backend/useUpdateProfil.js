@@ -185,6 +185,7 @@ export const useUpdateProfil = () => {
       await updateDoc(docRef, updatedData);
 
       toast.success("Update Profil Berhasil!");
+      window.location.reload();
     } catch (err) {
       setError(err.message);
       toast.error(`Error: ${err.message}`);

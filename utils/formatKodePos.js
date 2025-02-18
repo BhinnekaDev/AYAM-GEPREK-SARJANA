@@ -1,5 +1,11 @@
 export const formatKodePos = (value) => {
-  const kodePos = value.replace(/\D/g, "");
+  if (typeof value !== "string") value = String(value);
+
+  let kodePos = value.replace(/\D/g, "").slice(0, 5);
+
+  if (kodePos.includes("e") || kodePos.includes("E")) {
+    kodePos = kodePos.replace(/[eE]/g, "");
+  }
 
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
@@ -20,5 +26,5 @@ export const formatKodePos = (value) => {
     });
   };
 
-  return escapeHtml(kodePos.slice(0, 5));
+  return escapeHtml(kodePos);
 };
