@@ -69,20 +69,20 @@ const Konten = () => {
         </div>
         <CardBody className="rounded-lg p-0">
           <div className="flex justify-center items-center">
-            <div className="flex flex-col">
+            <div className="flex flex-col md:space-y-1">
               <div className="flex justify-center items-center m-auto p-3 rounded-full bg-[#F48888] border-black border-2">
                 <RiFileList3Line className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm sm:text-lg">
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
                   Pesanan Dibuat
                 </Typography>
-                <Typography className="text-sm sm:text-lg">
+                <Typography className="text-sm md:text-[16px] lg:text-lg">
                   09.00 - 10.00
                 </Typography>
               </div>
             </div>
-            <div className="relative w-20 sm:w-64 h-1 bg-gray-400 overflow-hidden rounded-lg sm:-mt-14 sm:-mx-8 -mt-16 -mx-5">
+            <div className="relative w-20 md:w-52 lg:w-64 h-1 bg-gray-400 overflow-hidden rounded-lg md:-mt-12 md:-mx-6 lg:-mt-14 lg:-mx-8 -mt-16 -mx-5">
               <motion.div
                 className="absolute h-full bg-[#d87474] w-full"
                 initial={{ x: "-100%" }}
@@ -94,29 +94,29 @@ const Konten = () => {
                 }}
               />
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col md:space-y-1">
               <div className="flex justify-center items-center m-auto p-3 rounded-full bg-gray-400">
                 <FaShippingFast className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm sm:text-lg">
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
                   Pesanan Diantar
                 </Typography>
-                <Typography className="text-sm sm:text-lg">
+                <Typography className="text-sm md:text-[16px] lg:text-lg">
                   09.00 - 10.00
                 </Typography>
               </div>
             </div>
-            <div className="flex justify-center w-20 sm:w-64 h-1 rounded-lg bg-gray-400 sm:-mt-14 sm:-mx-8 -mt-16 -mx-5"></div>
-            <div className="flex flex-col">
+            <div className="flex justify-center w-20 md:w-52 lg:w-64 h-1 bg-gray-400 overflow-hidden rounded-lg md:-mt-12 md:-mx-6 lg:-mt-14 lg:-mx-8 -mt-16 -mx-5"></div>
+            <div className="flex flex-col md:space-y-1">
               <div className="flex justify-center items-center m-auto p-3 rounded-full bg-gray-400">
                 <LuPackageCheck className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm sm:text-lg">
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
                   Pesanan Selesai
                 </Typography>
-                <Typography className="text-sm sm:text-lg">
+                <Typography className="text-sm md:text-[16px] lg:text-lg">
                   09.00 - 10.00
                 </Typography>
               </div>
@@ -179,7 +179,7 @@ const Konten = () => {
                       <div className="flex items-center justify-start gap-3">
                         <div className="bg-gray-300 hidden sm:block border border-gray-400 rounded-lg">
                           <Image
-                            className="w-24 h-24 p-1"
+                            className="w-full h-24 p-1"
                             src={MMakanan}
                             alt="gambarMakanan"
                           />
@@ -188,19 +188,19 @@ const Konten = () => {
                           <Typography className="text-sm lg:text-md font-bold text-gray-600">
                             Makanan
                           </Typography>
-                          <Typography className="font-bold text-black text-md lg:text-lg">
+                          <Typography className="font-bold text-black text-md md:text-sm lg:text-lg">
                             Nasi Ayam Geprek
                           </Typography>
-                          <Typography className="text-sm sm:text-md ">
+                          <Typography className="text-sm md:text-xs lg:text-md ">
                             Sambal Matah - Pedas 3
                           </Typography>
                         </div>
                       </div>
                       <div className="flex justify-center items-center gap-3">
-                        <Typography className="font-bold text-gray-600 text-md">
+                        <Typography className="font-bold text-gray-600 text-md md:text-sm lg:text-md">
                           x1
                         </Typography>
-                        <Typography className="font-bold text-black text-md">
+                        <Typography className="font-bold text-black text-md md:text-sm lg:text-md">
                           Rp 15.000
                         </Typography>
                       </div>

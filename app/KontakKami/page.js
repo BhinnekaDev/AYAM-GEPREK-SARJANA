@@ -6,12 +6,14 @@ import Konten from "@/app/KontakKami/components/konten";
 import Loader from "@/components/loader";
 // IMAGES
 import bgKontak from "@/assets/img/kontak/bg.png";
-import bgMobile from "@/assets/img/kontak/bgmobile1.png";
+import bgMobile from "@/assets/img/kontak/bgmobile.png";
+import bgIpad from "@/assets/img/kontak/bgipad.png";
 // HOOKS
 import { Toaster } from "react-hot-toast";
 
 function Page() {
   const [isMobile, setIsMobile] = useState(false);
+  const [isIpad, setIsIpad] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,17 +25,27 @@ function Page() {
   }, []);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsIpad(width >= 640 && width <= 1024);
+    };
 
-    return () => window.removeEventListener("resize", checkMobile);
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    setTimeout(() => setIsLoading(false), 1000);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
   return (
     <div
       className="min-h-screen overflow-hidden bg-[#FFE893]"
       style={{
-        backgroundImage: `url(${isMobile ? bgMobile.src : bgKontak.src})`,
+        backgroundImage: `url(${
+          isMobile ? bgMobile.src : isIpad ? bgIpad.src : bgKontak.src
+        })`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
@@ -43,10 +55,10 @@ function Page() {
         <Loader />
       ) : (
         <>
-          <div className="z-50 sm:mb-20">
+          <div className="z-50">
             <Navbar />
           </div>
-          <div className="-z-50 mb-4 sm:mb-0">
+          <div className="-z-50 lg:pb-4">
             <Konten />
           </div>
         </>

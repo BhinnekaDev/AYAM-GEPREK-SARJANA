@@ -32,7 +32,7 @@ const useMasukDenganGoogle = () => {
   }, []);
 
   const masukDenganGoogle = async () => {
-    if (user) {
+    if (sedangMemuatMasukDenganGoogle) {
       return;
     }
 
@@ -76,7 +76,7 @@ const useMasukDenganGoogle = () => {
 
         setTimeout(() => {
           router.push(nextRoute);
-        }, 3000);
+        }, 0);
       } else {
         router.push("/");
       }

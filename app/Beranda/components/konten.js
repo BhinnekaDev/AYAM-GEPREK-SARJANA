@@ -24,7 +24,6 @@ import useKeranjangPesanan from "@/hooks/Backend/useKeranjangPesanan";
 // COMPONENT
 import Konten from "@/app/DetailMenu/components/konten";
 function Beranda() {
-  // Hooks State
   const [menuItems, setMenuItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [maxLengthName, setMaxLengthName] = useState(24);
@@ -139,38 +138,38 @@ function Beranda() {
             />
           </Carousel>
 
-          <div className="w-full flex justify-center items-center mt-6 lg:mt-12 px-4 sm:px-3">
-            <div className="bg-[#FFF2C2] px-2 py-4 sm:px-10 w-full lg:py-10 rounded-lg flex flex-col justify-center items-center shadow-lg mb-9">
+          <div className="w-full flex justify-center items-center mt-6 px-4 md:px-3 md:mt-12 lg:px-3 lg:mt-12">
+            <div className="bg-[#FFF2C2] px-2 py-4 w-full rounded-lg flex flex-col justify-center items-center shadow-lg mb-9 md:p-5 lg:p-10">
               <div className="w-full flex justify-center items-center">
-                <Typography className="text-black text-2xl lg:text-4xl font-bold mb-2 lg:mb-8">
+                <Typography className="text-black text-2xl font-bold mb-2 md:text-3xl md:mb-4 lg:mb-8 lg:text-4xl">
                   Menu Terlaris!
                 </Typography>
               </div>
-              <div className="flex flex-row sm:gap-5 items-center w-full mb-5">
+              <div className="flex flex-row items-center w-full mb-5 md:gap-2 lg:gap-5">
                 <Button
-                  className="bg-black bg-opacity-25 p-2 hidden lg:flex justify-center items-center rounded-full 
-                      hover:bg-opacity-15 hover:shadow-md hover:scale-105 transform transition-all ease-in-out duration-300"
+                  className="bg-black bg-opacity-25 p-2 hidden justify-center items-center rounded-full 
+                      hover:bg-opacity-15 hover:shadow-md hover:scale-105 transform transition-all ease-in-out duration-300 md:flex lg:flex"
                   onClick={scrollMenuL}
                 >
                   <FaChevronLeft className="h-5 w-5 text-black" />
                 </Button>
                 <div
                   ref={menuRef}
-                  className="sm:overflow-x-auto flex flex-col sm:flex-row sm:space-x-6 px-2 space-y-4 sm:space-y-0 sm:p-3 scroll-smooth scrollbar-none w-full"
+                  className="flex flex-col px-2 space-y-4 scroll-smooth scrollbar-none w-full md:overflow-x-auto md:flex-row md:space-x-4 md:space-y-0 md:p-2 lg:flex-row lg:overflow-x-auto lg:space-x-6 lg:space-y-0 lg:p-3"
                 >
                   {sedangMemuatMakanan || sedangMemuatMinuman
                     ? [...Array(5)].map((_, index) => (
                         <div
                           key={index}
-                          className="flex flex-row sm:flex-col gap-4 sm:gap-0 bg-white p-4 w-full sm:w-56 animate-pulse h-32 sm:h-auto rounded-lg shadow-lg"
+                          className="flex flex-row gap-4 bg-white p-4 w-full animate-pulse h-32 rounded-lg shadow-lg md:h-auto md:flex-col md:w-56 md:gap-0 lg:h-auto lg:flex-col lg:w-56 lg:gap-0"
                         >
-                          <div className="flex justify-center items-center bg-gray-300 w-full h-full sm:h-32 rounded-lg mb-3"></div>
-                          <div className="bg-gray-300 h-4 w-full mb-2 rounded-full hidden sm:block"></div>
-                          <div className="bg-gray-300 h-4 w-3/4  mb-1 rounded-full hidden sm:block"></div>
-                          <div className="bg-gray-300 h-4 w-1/2  mb-1 rounded-full hidden sm:block"></div>
-                          <div className="bg-gray-300 h-4 w-1/4 rounded-full hidden sm:block"></div>
-                          <div className="w-full flex sm:hidden flex-col justify-center items-start space-y-2">
-                            <div className="bg-gray-300 h-4 w-full sm:w-3/4 rounded-full"></div>
+                          <div className="flex justify-center items-center bg-gray-300 w-full h-full rounded-lg mb-3 md:h-32 lg:h-32"></div>
+                          <div className="bg-gray-300 h-4 w-full mb-2 rounded-full hidden md:block lg:block"></div>
+                          <div className="bg-gray-300 h-4 w-3/4  mb-1 rounded-full hidden md:block lg:block"></div>
+                          <div className="bg-gray-300 h-4 w-1/2  mb-1 rounded-full hidden md:block lg:block"></div>
+                          <div className="bg-gray-300 h-4 w-1/4 rounded-full hidden md:block lg:block"></div>
+                          <div className="w-full flex md:hidden lg:hidden flex-col justify-center items-start space-y-2">
+                            <div className="bg-gray-300 h-4 w-full rounded-full"></div>
                             <div className="bg-gray-300 h-4 w-3/4 rounded-full"></div>
                             <div className="bg-gray-300 h-4 w-1/2 rounded-full"></div>
                             <div className="bg-gray-300 h-4 w-full rounded-full"></div>
@@ -180,9 +179,9 @@ function Beranda() {
                     : menuItems.map((item, index) => (
                         <div
                           key={index}
-                          className="w-full sm:w-56 flex flex-col items-center shadow-lg border border-gray-300 sm:flex-shrink-0"
+                          className="w-full flex flex-col items-center shadow-lg border border-gray-300 md:w-44 md:flex-shrink-0 lg:w-56 lg:flex-shrink-0"
                         >
-                          <Card className="flex flex-row sm:flex-col bg-[#EFF3EA] gap-4 sm:gap-0 p-4 rounded-lg w-full sm:h-full">
+                          <Card className="flex flex-row bg-[#EFF3EA] gap-4 p-4 rounded-lg w-full md:gap-0 md:flex-col md:h-full lg:gap-0 lg:flex-col lg:h-full">
                             <div className="flex justify-center items-center">
                               <Image
                                 src={
@@ -197,12 +196,12 @@ function Beranda() {
                                 }`}
                                 width={200}
                                 height={200}
-                                className="w-44 sm:w-full h-auto object-cover rounded-lg"
+                                className="w-44 h-auto object-cover rounded-lg md:w-full lg:w-full"
                               />
                             </div>
-                            <div className="flex flex-col w-full sm:flex-1">
-                              <div className="py-3 space-y-2 sm:space-y-1">
-                                <Typography className="text-lg sm:text-xl font-bold text-black line-clamp-2">
+                            <div className="flex flex-col w-full md:flex-1 lg:flex-1">
+                              <div className="py-3 space-y-2 md:space-y-1 lg:space-y-1">
+                                <Typography className="text-lg font-bold text-black line-clamp-2 md:text-lg lg:text-xl">
                                   {item.Nama_Makanan
                                     ? item.Nama_Makanan.length > maxLengthName
                                       ? item.Nama_Makanan.slice(
@@ -220,7 +219,7 @@ function Beranda() {
                                     : "Menu Tidak Diketahui"}
                                 </Typography>
                               </div>
-                              <div className="w-full flex-col space-y-1 sm:space-y-2 justify-center items-center mt-auto">
+                              <div className="w-full flex-col space-y-1 justify-center items-center mt-auto md:space-y-2 lg:space-y-2">
                                 <Typography className="text-md text-gray-600">
                                   {item.Deskripsi_Makanan ||
                                     item.Deskripsi_Minuman ||
@@ -234,7 +233,7 @@ function Beranda() {
                                     : "Harga tidak tersedia"}
                                 </Typography>
                                 <Button
-                                  className="p-1 sm:py-2 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md"
+                                  className="p-1 w-full rounded-full tracking-widest bg-[#AA5656] shadow-md hover:shadow-md md:px-2 lg:py-2"
                                   onClick={() => handleBeliClick(item)}
                                 >
                                   Beli
@@ -246,8 +245,8 @@ function Beranda() {
                       ))}
                 </div>
                 <Button
-                  className="bg-black bg-opacity-25 p-2 hidden lg:flex justify-center items-center rounded-full 
-                      hover:bg-opacity-15 hover:shadow-md hover:scale-105 transform transition-all ease-in-out duration-300"
+                  className="bg-black bg-opacity-25 p-2 hidden justify-center items-center rounded-full 
+                      hover:bg-opacity-15 hover:shadow-md hover:scale-105 transform transition-all ease-in-out duration-300 md:flex lg:flex"
                   onClick={scrollMenuR}
                 >
                   <FaChevronRight className="h-5 w-5 text-black" />

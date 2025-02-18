@@ -7,7 +7,8 @@ import { Toaster } from "react-hot-toast";
 // GAMBAR
 import logoMasuk from "@/assets/img/logo.png";
 import bgMasuk from "@/assets/img/masuk/bg.png";
-import bgMobile from "@/assets/img/masuk/mobile/bg.png";
+import bgMobile from "@/assets/img/masuk/responsive/bgMobile.png";
+import bgIpad from "@/assets/img/masuk/responsive/bgIpad.png";
 import vektorMasuk from "@/assets/img/masuk/vektor.png";
 // IKON
 import { FcGoogle } from "react-icons/fc";
@@ -22,16 +23,22 @@ function halamanMasuk() {
   const { masukDenganGoogle, sedangMemuatMasukDenganGoogle } =
     useMasukDenganGoogle();
   const [isMobile, setIsMobile] = useState(false);
+  const [isIpad, setIsIpad] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsIpad(width >= 640 && width <= 1024);
+    };
 
-    setTimeout(() => setIsLoading(false), 1500);
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
 
-    return () => window.removeEventListener("resize", checkMobile);
+    setTimeout(() => setIsLoading(false), 1000);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   if (isLoading) {
@@ -42,36 +49,38 @@ function halamanMasuk() {
     <div
       className="flex items-center justify-center min-h-screen px-4 lg:px-8"
       style={{
-        backgroundImage: `url(${isMobile ? bgMobile.src : bgMasuk.src})`,
+        backgroundImage: `url(${
+          isMobile ? bgMobile.src : isIpad ? bgIpad.src : bgMasuk.src
+        })`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <Toaster position="top-right" reverseOrder={false} />
-      <Card className="bg-white flex flex-col sm:flex-row w-full max-w-xs h-[600px] lg:max-w-5xl lg:h-[500px] shadow-lg p-4">
-        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 lg:h-full lg:w-1/2">
+      <Card className="bg-white flex flex-col w-full max-w-xs h-[600px] shadow-lg p-4 md:flex-row md:max-w-2xl md:h-[400px] lg:flex-row lg:max-w-5xl lg:h-[500px]">
+        <div className="bg-[#AA5656] flex justify-center items-center rounded-xl w-full h-3/5 md:w-full md:h-auto lg:h-full lg:w-1/2">
           <Image
             src={vektorMasuk}
             alt="Sarjana Geprek Logo"
             className="w-60 h-60 lg:w-80 lg:h-80"
           />
         </div>
-        <div className="flex flex-col items-center lg:p-10 mt-6 lg:mt-0 lg:ml-6 w-full lg:w-1/2 lg:space-y-2">
+        <div className="flex flex-col items-center w-full lg:p-10 mt-6 lg:mt-0 lg:ml-6 lg:w-1/2 lg:space-y-2">
           <Image
             src={logoMasuk}
             alt="Sarjana Geprek Logo"
-            className="w-20 h-20 lg:w-32 lg:h-32 lg:block hidden"
+            className="w-20 h-20 hidden md:block lg:w-32 lg:h-32 lg:block "
           />
           <Typography
             variant="h3"
-            className="font-bold text-black md:text-2xl mb-2 hidden lg:block"
+            className="font-bold text-black hidden mb-2 md:text-2xl lg:text-3xl lg:block"
           >
             Ayam Geprek Sarjana
           </Typography>
           <Typography
             variant="h3"
             color="gray"
-            className="text-center text-black hidden lg:block lg:text-3xl"
+            className="text-center text-black hidden lg:block lg:text-2xl"
           >
             Masuk
           </Typography>
@@ -90,12 +99,12 @@ function halamanMasuk() {
               Di Ayam Geprek Sarjana, Silahkan ketuk tombol dibawah untuk
               melanjutkan!
             </Typography>
-            <div className="flex items-center text-center justify-center my-6 sm:mt-8">
+            <div className="flex items-center text-center justify-center my-6 md:mt-12 lg:mt-8">
               <Button
                 onClick={masukDenganGoogle}
                 disabled={sedangMemuatMasukDenganGoogle}
-                className={`flex items-center py-1 px-3 text-xs sm:p-3 justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none 
-                            hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full  
+                className={`flex items-center py-1 px-3 text-xs justify-center gap-2 shadow-lg bg-[#FF0000] bg-opacity-50 border-none 
+                            hover:bg-[#FF0000] hover:bg-opacity-60 hover:shadow-md hover:scale-110 transform duration-300 ease-in-out rounded-full md:p-2 lg:p-3   
                             ${
                               sedangMemuatMasukDenganGoogle
                                 ? "cursor-not-allowed opacity-80"

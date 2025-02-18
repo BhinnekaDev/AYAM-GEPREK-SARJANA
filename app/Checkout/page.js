@@ -7,6 +7,7 @@ import Loader from "@/components/loader";
 // IMAGE
 import bgCheckout from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";
+import bgIpad from "@/assets/img/masuk/responsive/bgIpad.png";
 // HOOKS
 import { Toaster } from "react-hot-toast";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
@@ -15,6 +16,7 @@ function Page() {
   const [isMobile, setIsMobile] = useState(false);
   const pengguna = useCekPengguna();
   const [isLoading, setIsLoading] = useState(true);
+  const [isIpad, setIsIpad] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,11 +27,16 @@ function Page() {
   }, []);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsIpad(width >= 640 && width <= 1024);
+    };
 
-    return () => window.removeEventListener("resize", checkMobile);
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return (
@@ -37,7 +44,7 @@ function Page() {
       className="overflow-hidden min-h-screen bg-[#FFE893]"
       style={{
         backgroundImage: `url(${
-          isMobile ? String(bgMobile) : String(bgCheckout)
+          isMobile ? bgMobile.src : isIpad ? bgIpad.src : bgCheckout.src
         })`,
         backgroundSize: "cover",
         backgroundPosition: "center",
