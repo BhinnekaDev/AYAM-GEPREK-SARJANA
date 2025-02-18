@@ -7,7 +7,7 @@ import {
   Textarea,
 } from "@material-tailwind/react";
 import Image from "next/image";
-import { Toaster } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 // ICONS
 import { CgProfile } from "react-icons/cg";
@@ -29,14 +29,21 @@ const Konten = () => {
 
   const handleSave = async () => {
     if (isEditing) {
-      await updateProfile(formData);
+      try {
+        await updateProfile(formData);
+        setIsEditing(false);
+      } catch (error) {
+        console.error("Gagal menyimpan profil:", error);
+        toast.error("Gagal menyimpan profil. Periksa kembali data Anda.");
+        setIsEditing(false);
+      }
+    } else {
+      setIsEditing(true);
     }
-    setIsEditing(!isEditing);
   };
 
   return (
     <div className="flex items-center justify-center px-5 md:pt-12">
-      <Toaster position="top-right" reverseOrder={false} />
       <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex w-full max-w-3xl md:max-w-4xl shadow-md md:shadow-lg p-6">
         <div className="flex w-full items-center justify-start mb-3">
           <CgProfile
@@ -91,6 +98,7 @@ const Konten = () => {
                   width={80}
                   height={80}
                   className="object-cover w-36 h-36 md:w-full md:h-full"
+                  priority
                 />
                 {isEditing && (
                   <div className="flex items-center justify-center bg-black bg-opacity-15 rounded-full w-full h-full absolute inset-0 cursor-pointer">
@@ -302,16 +310,27 @@ const Konten = () => {
                 className={`w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 ${
                   activeForm === "alamat" ? "sm:w-52 sm:rounded-full" : ""
                 }`}
-                onClick={() => {
-                  if (isEditing) {
-                    handleSave();
-                  } else {
-                    setIsEditing(!isEditing);
-                  }
-                }}
+                onClick={() => setIsEditing(true)}
+                hidden={isEditing}
               >
-                {isEditing ? "Simpan" : "Edit"}
+                Edit
               </Button>
+              {isEditing && (
+                <div className="flex flex-col w-full md:flex-row md:justify-between gap-4">
+                  <Button
+                    className="w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 sm:w-52 sm:rounded-full"
+                    onClick={handleSave}
+                  >
+                    Simpan
+                  </Button>
+                  <Button
+                    className="w-full py-2 bg-gray-400 text-white hover:bg-gray-500 tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 sm:w-52 sm:rounded-full"
+                    onClick={() => setIsEditing(false)}
+                  >
+                    Batal
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>
