@@ -10,7 +10,8 @@ const useKeluarAkun = () => {
     try {
       await signOut(auth);
       localStorage.removeItem("ID");
-      router.push("/");
+      localStorage.removeItem("keranjang");
+      localStorage.removeItem("orderId");
       toast.error("Anda telah keluar dari aplikasi!");
     } catch (error) {
       toast.error(error.message);

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
   Button,
@@ -9,7 +10,7 @@ import {
   MenuList,
   MenuItem,
 } from "@material-tailwind/react";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 // ICONS
 import {
   MdArrowBack,
@@ -22,19 +23,81 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaPencilAlt, FaChevronDown } from "react-icons/fa";
 import { PiHandCoinsFill, PiHandArrowDownBold } from "react-icons/pi";
 import { BsQrCode, BsCash } from "react-icons/bs";
+// Hooks
+import useCheckout from "@/hooks/Backend/useCheckout";
+import {
+  handleSubmitBiodata,
+  useFetchUserEmail,
+} from "@/hooks/Backend/useBiodata";
+import useKeranjangPesanan from "@/hooks/Backend/useKeranjangPesanan";
+import { formatRupiah } from "@/utils/formatRupiah";
 
 const Konten = () => {
   const router = useRouter();
   const [openMenuPembayaran, setOpenMenuPembayaran] = React.useState(false);
   const [openMenuPengiriman, setOpenMenuPengiriman] = React.useState(false);
-  const alamat = `Jalan Desa Batujajar, RT.2/RW.1, Kp Batujajar, Batujajar, Batujajar, KAB. Bandung Jalan Desa Batujajar, RT.2/RW.1, Kp Batujajar, Batujajar, Batujajar, KAB. Bandung`;
   const maxLength = 100;
-  const alamatTerbatas =
-    alamat.length > maxLength ? alamat.substring(0, maxLength) + "..." : alamat;
   const [pembayaranTerpilih, setPembayaranTerpilih] =
     useState("Metode Pembayaran");
-  const [pengirimanTerpilih, setPengirmanTerpilih] =
+  const [pengirimanTerpilih, setPengirimanTerpilih] =
     useState("Metode Pengiriman");
+  const [totalHarga, setTotalHarga] = useState(0);
+  const biayaLayanan = 5000;
+  const { keranjang: keranjangState } = useKeranjangPesanan();
+  const usecheckout = useCheckout(pembayaranTerpilih, pengirimanTerpilih);
+  const { userInfo, keranjang, loading, handleCheckout, isUserInfoLoading } =
+    usecheckout;
+
+  useEffect(() => {
+    if (userInfo) {
+      console.log("User Info:", userInfo);
+    }
+  }, [userInfo]);
+
+  useEffect(() => {
+    const hitungTotal = () => {
+      let total = 0;
+      keranjangState.forEach((item) => {
+        total += item.harga * item.jumlah;
+      });
+      setTotalHarga(total);
+    };
+
+    hitungTotal();
+  }, [keranjangState]);
+
+  const alamat = userInfo?.Alamat
+    ? `${userInfo.Alamat.Alamat_Jalan}, RT ${userInfo.Alamat.RT} RW ${userInfo.Alamat.RW}, ${userInfo.Alamat.Alamat_Detail}, ${userInfo.Alamat.Kecamatan}, ${userInfo.Alamat.Kota}, ${userInfo.Alamat.Provinsi}, ${userInfo.Alamat.Kode_Pos}`
+    : "Alamat belum tersedia. Lengkapi profil Anda!";
+
+  const alamatTerbatas =
+    alamat?.length > maxLength
+      ? alamat?.substring(0, maxLength) + "..."
+      : alamat;
+
+  const handlePembayaranTerpilih = (pembayaran) => {
+    setPembayaranTerpilih(pembayaran);
+    setOpenMenuPembayaran(false);
+  };
+
+  const handlePengirimanTerpilih = (pengiriman) => {
+    setPengirimanTerpilih(pengiriman);
+    setOpenMenuPengiriman(false);
+  };
+
+  const handleKonfirmasiPesanan = async () => {
+    if (!pembayaranTerpilih || pembayaranTerpilih === "Metode Pembayaran") {
+      toast.error("Pilih metode pembayaran terlebih dahulu!");
+      return;
+    }
+
+    if (!pengirimanTerpilih || pengirimanTerpilih === "Metode Pengiriman") {
+      toast.error("Pilih metode pengiriman terlebih dahulu!");
+      return;
+    }
+
+    await handleCheckout();
+  };
 
   return (
     <div className="flex items-center justify-center px-5 md:py-12">
@@ -74,9 +137,13 @@ const Konten = () => {
           <div className="flex w-full sm:gap-2 sm:px-3 py-1">
             <div className="sm:w-56 w-full">
               <Typography className="font-bold text-md">
-                Sandro Anugrah
+                {userInfo
+                  ? `${userInfo.Nama_Depan} ${userInfo.Nama_Belakang}`
+                  : "Nama belum tersedia"}
               </Typography>
-              <Typography className="font-bold text-md">08123456789</Typography>
+              <Typography className="font-bold text-md">
+                {userInfo ? userInfo.No_Telepon : "Nomor belum tersedia"}
+              </Typography>
             </div>
             <div className="w-full">
               <Typography className="text-md">{alamatTerbatas}</Typography>
@@ -102,25 +169,46 @@ const Konten = () => {
               </div>
               <div className="h-[2px] rounded-full bg-gray-300"></div>
               <div className="space-y-3 py-2 sm:max-h-32 overflow-auto">
-                <div className="flex flex-col sm:flex-row justify-between ml-6 mr-3">
-                  <div>
-                    <Typography className="font-bold text-md sm:text-lg">
-                      Nasi Ayam Geprek
-                    </Typography>
-                    <div className="sm:hidden text-sm text-gray-700">
-                      <Typography>Sambal Matah • Level Pedas 1</Typography>
+                {keranjangState.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex flex-col sm:flex-row justify-between ml-6 mr-3"
+                  >
+                    <div>
+                      <Typography className="font-bold text-md sm:text-lg">
+                        {item.nama}
+                      </Typography>
+                      <div className="sm:hidden text-sm text-gray-700">
+                        {item.kategori === "makanan" && (
+                          <Typography>
+                            {item.rasaSambal && `Sambal ${item.rasaSambal} `}
+                            {item.levelPedas && `Level ${item.levelPedas}`}
+                          </Typography>
+                        )}
+                        {item.kategori === "minuman" && (
+                          <Typography>{item.tipeMinuman}</Typography>
+                        )}
+                      </div>
                     </div>
+                    <div className="hidden sm:flex flex-col">
+                      {item.kategori === "makanan" && (
+                        <Typography className="text-md">
+                          {item.rasaSambal && `Sambal ${item.rasaSambal} `}
+                          {item.levelPedas && `Level ${item.levelPedas}`}
+                        </Typography>
+                      )}
+                      {item.kategori === "minuman" && (
+                        <Typography className="text-md">
+                          {item.tipeMinuman}
+                        </Typography>
+                      )}
+                      <Typography className="text-md">{item.jumlah}</Typography>
+                    </div>
+                    <Typography className="font-bold text-md sm:text-lg text-end">
+                      {formatRupiah(item.harga)}
+                    </Typography>
                   </div>
-                  <Typography className="text-lg hidden sm:block">
-                    Sambal Matah
-                  </Typography>
-                  <Typography className="text-lg hidden sm:block">
-                    Level Pedas 1
-                  </Typography>
-                  <Typography className="font-bold text-md sm:text-lg text-end">
-                    Rp 15.000
-                  </Typography>
-                </div>
+                ))}
               </div>
               <div className="h-[2px] rounded-full bg-gray-300"></div>
               <div className="flex justify-end items-center gap-1">
@@ -128,7 +216,7 @@ const Konten = () => {
                   Total:
                 </Typography>
                 <Typography className="text-black font-bold text-lg">
-                  Rp 15.000
+                  {formatRupiah(totalHarga + biayaLayanan)}
                 </Typography>
               </div>
             </div>
@@ -160,14 +248,14 @@ const Konten = () => {
                   <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
                     <MenuItem
                       className="flex items-center gap-2 font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
-                      onClick={() => setPembayaranTerpilih("QRIS")}
+                      onClick={() => handlePembayaranTerpilih("QRIS")}
                     >
                       <BsQrCode className="w-4 h-4" />
                       QRIS
                     </MenuItem>
                     <MenuItem
                       className="flex items-center gap-2 font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
-                      onClick={() => setPembayaranTerpilih("Cash")}
+                      onClick={() => handlePembayaranTerpilih("Cash")}
                     >
                       <BsCash className="w-4 h-4" />
                       Cash
@@ -186,7 +274,7 @@ const Konten = () => {
                   <MenuHandler className="bg-gray-300 w-full flex justify-between border-gray-400 border py-2 rounded-full sm:rounded-lg sm:p-3 tracking-wide">
                     <Button
                       variant="text"
-                      className="flex items-center gap-3 text-base font-normal tracking-normal"
+                      className="flex items-center sm:gap-3 text-base font-normal tracking-normal"
                     >
                       {pengirimanTerpilih}
                       <FaChevronDown
@@ -200,14 +288,14 @@ const Konten = () => {
                   <MenuList className="bg-white w-80 sm:w-60 border border-gray-500 sm:border-gray-300 shadow-lg rounded-md p-2 space-y-1 sm:space-y-0">
                     <MenuItem
                       className="flex items-center gap-2 text-md font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
-                      onClick={() => setPengirmanTerpilih("QRIS")}
+                      onClick={() => handlePengirimanTerpilih("Pick Up")}
                     >
                       <PiHandArrowDownBold className="w-5 h-5" />
                       Pick Up
                     </MenuItem>
                     <MenuItem
                       className="flex items-center gap-2 text-md font-bold hover:!bg-[#AA5656] hover:!bg-opacity-30 transition-all"
-                      onClick={() => setPengirmanTerpilih("Cash")}
+                      onClick={() => handlePengirimanTerpilih("Delivery")}
                     >
                       <MdDeliveryDining className="w-5 h-5" />
                       Delivery
@@ -220,21 +308,34 @@ const Konten = () => {
         </div>
         <div className="flex w-full md:hidden justify-end items-center mt-4">
           <Button
-            onClick={() => router.push("/DetailPesanan")}
-            className="bg-[#AA5656] px-12 py-2  rounded-full shadow-md hover:shadow-md tracking-widest"
+            onClick={handleKonfirmasiPesanan}
+            className="bg-[#AA5656] px-12 py-2 rounded-full shadow-md hover:shadow-md tracking-widest"
+            disabled={loading || isUserInfoLoading}
           >
-            Checkout
+            {loading
+              ? "Memproses..."
+              : isUserInfoLoading
+              ? "Memuat Informasi..."
+              : "Checkout"}
           </Button>
         </div>
         <div className="md:flex hidden w-full justify-center md:justify-between items-center mt-4 px-4">
           <Button
             onClick={() => router.back()}
-            className="bg-gray-600 px-32  shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest"
+            className="bg-gray-600 px-32 shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest"
           >
             Kembali
           </Button>
-          <Button className=" bg-[#AA5656] px-32 shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest">
-            Checkout
+          <Button
+            onClick={handleKonfirmasiPesanan}
+            className="bg-[#AA5656] px-32 shadow-md hover:shadow-md hover:rounded-3xl transition-all ease-in-out duration-500 tracking-widest"
+            disabled={loading || isUserInfoLoading}
+          >
+            {loading
+              ? "Memproses..."
+              : isUserInfoLoading
+              ? "Memuat Informasi..."
+              : "Checkout"}
           </Button>
         </div>
       </Card>

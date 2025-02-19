@@ -26,12 +26,14 @@ import { IoMdClose } from "react-icons/io";
 import useNavbarAktif from "@/hooks/Frontend/useNavbarAktif";
 import useKeluarAkun from "@/hooks/Backend/useKeluarAkun";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
+import useKeranjangPesanan from "@/hooks/Backend/useKeranjangPesanan";
 
 function Nav() {
   const pengguna = useCekPengguna();
   const { keluarAkun } = useKeluarAkun();
   const { navbarAktif, handlenavbarAktif } = useNavbarAktif();
   const [openNav, setOpenNav] = React.useState(false);
+  const { keranjang } = useKeranjangPesanan();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -154,9 +156,11 @@ function Nav() {
                   onClick={() => handlenavbarAktif("/Keranjang")}
                 >
                   <FiShoppingCart className="w-5 h-5 lg:w-6 lg:h-6" />
-                  <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    1
-                  </span>
+                  {keranjang.length > 0 && (
+                    <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {keranjang.length}
+                    </span>
+                  )}
                 </Button>
                 <Menu>
                   <MenuHandler
@@ -170,7 +174,6 @@ function Nav() {
                       <FaCog className="w-5 h-5 text-black" />
                     </IconButton>
                   </MenuHandler>
-
                   <MenuList className="p-2 rounded-lg -ml-12">
                     <MenuItem
                       className={`flex items-center px-3 py-2 gap-2  ${
