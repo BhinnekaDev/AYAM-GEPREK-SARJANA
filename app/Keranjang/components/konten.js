@@ -57,6 +57,9 @@ const Konten = () => {
     } else {
       hapusDariKeranjang(itemId);
       toast.success("Item dihapus dari keranjang!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
   };
 
@@ -98,7 +101,7 @@ const Konten = () => {
                 </tr>
               </thead>
               <tbody>
-                {keranjang.map((item) => (
+              {keranjang.map((item) => (
                   <tr
                     key={item.id}
                     className="text-black font-bold border-b text-sm lg:text-lg"
@@ -232,7 +235,7 @@ const Konten = () => {
             </div>
             <div className="flex flex-col mb-4">
               <ul className="px-4 space-y-3 font-medium">
-                <div className="flex justify-between md:text-sm">
+                <div className="flex justify-between md:text-sm"> 
                   <li className="list-disc">
                     Total Barang ({keranjang.length})
                   </li>
