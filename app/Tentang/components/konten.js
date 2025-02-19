@@ -31,7 +31,7 @@ function Beranda() {
             animate={{ x: 0, y: 0, scale: 1, opacity: 1 }}
             exit={{ x: -300, y: -500, scale: 0.5, opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute"
+            className="absolute md:px-24"
           >
             <Image
               src={images[index]}
@@ -44,13 +44,13 @@ function Beranda() {
       <div className="self-start justify-center text-center w-full lg:w-1/2 transform lg:-translate-y-20 transition-none">
         <Typography
           variant="h1"
-          className="text-3xl lg:text-5xl font-bold text-black mb-6"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6"
         >
           Tentang Kita
         </Typography>
         <Typography
           variant="paragraph"
-          className="text-base lg:text-lg text-black leading-relaxed"
+          className="md:text-2xl lg:text-lg text-black leading-tight"
         >
           Ayam Geprek Sarjana adalah restoran yang menyajikan ayam geprek dengan
           cita rasa khas yang sudah terkenal di kawasan Cimahi. Terletak di Jl.

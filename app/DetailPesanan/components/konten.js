@@ -292,7 +292,7 @@ const DetailPesanan = () => {
                 </Typography>
                 <div className="bg-white h-full mx-1 space-y-1 sm:space-y-0 sm:mx-0 rounded-lg border-gray-700 border-2 flex flex-col">
                   <div className="h-32 overflow-y-auto p-3 space-y-3">
-                    {items &&
+                  {items &&
                       items.map((item) => (
                         <div
                           className="flex gap-2 sm:gap-5 justify-between"

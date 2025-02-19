@@ -1,5 +1,11 @@
 export const formatRW = (value) => {
-  const nomorRW = value.replace(/\D/g, "");
+  if (typeof value !== "string") value = String(value);
+
+  let nomorRW = value.replace(/\D/g, "").slice(0, 3);
+
+  if (nomorRW.includes("e") || nomorRW.includes("E")) {
+    nomorRW = nomorRW.replace(/[eE]/g, "");
+  }
   const escapeHtml = (str) => {
     return str.replace(/[&<>"']/g, (char) => {
       switch (char) {
@@ -18,6 +24,5 @@ export const formatRW = (value) => {
       }
     });
   };
-  const RW = nomorRW.slice(0, 3);
   return escapeHtml(RW);
 };

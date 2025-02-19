@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 // COMPONENTS
 import Navbar from "@/components/navbar";
 import Konten from "@/app/Checkout/components/konten";
+import Loader from "@/components/loader";
 // IMAGE
 import bgCheckout from "@/assets/img/profil/bgProfil.png";
 import bgMobile from "@/assets/img/profil/mobile/bgProfil.png";
+import bgIpad from "@/assets/img/masuk/responsive/bgIpad.png";
 // HOOKS
 import { Toaster } from "react-hot-toast";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
@@ -13,36 +15,53 @@ import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
 function Page() {
   const [isMobile, setIsMobile] = useState(false);
   const pengguna = useCekPengguna();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isIpad, setIsIpad] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
 
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < 640);
+      setIsIpad(width >= 640 && width <= 1024);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
   return (
-    <div>
-      {pengguna ? (
-        <div
-          className="overflow-hidden min-h-screen bg-[#FFE893]"
-          style={{
-            backgroundImage: `url(${isMobile ? bgMobile.src : bgCheckout.src})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div>
-            <Navbar />
-          </div>
+    <div
+      className="overflow-hidden min-h-screen bg-[#FFE893]"
+      style={{
+        backgroundImage: `url(${
+          isMobile ? bgMobile.src : isIpad ? bgIpad.src : bgCheckout.src
+        })`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Toaster position="top-right" reverseOrder={false} />
+
+      {isLoading ? (
+        <Loader />
+      ) : pengguna ? (
+        <>
+          <Navbar />
           <div className="my-6 lg:m-0">
             <Konten />
           </div>
-        </div>
-      ) : (
-        <Toaster position="top-right" reverseOrder={false} />
-      )}
+        </>
+      ) : null}
     </div>
   );
 }

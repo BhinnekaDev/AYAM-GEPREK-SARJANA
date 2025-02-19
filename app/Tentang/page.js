@@ -1,21 +1,36 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 // COMPONENTS
 import Navbar from "@/components/navbar";
 import Tentang from "@/app/Tentang/components/konten";
+import Loader from "@/components/loader";
 // IMAGE
 import bgShape from "@/assets/img/beranda/bgshape.png";
 // HOOKS
 import { Toaster } from "react-hot-toast";
 import useCekPengguna from "@/hooks/Backend/useVerifikasiLogin";
+
 function Page() {
+  const [isLoading, setIsLoading] = useState(true);
   const pengguna = useCekPengguna();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div>
-      {pengguna ? (
-        <div className="overflow-hidden min-h-screen bg-[#FFE893]">
+    <div className="overflow-hidden min-h-screen bg-[#FFE893]">
+      <Toaster position="top-right" reverseOrder={false} />
+
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -29,15 +44,12 @@ function Page() {
               priority
             />
           </motion.div>
-          <div>
-            <Navbar />
-          </div>
+
+          <Navbar />
           <div className="py-2 sm:py-0">
             <Tentang />
           </div>
-        </div>
-      ) : (
-        <Toaster position="top-right" reverseOrder={false} />
+        </>
       )}
     </div>
   );

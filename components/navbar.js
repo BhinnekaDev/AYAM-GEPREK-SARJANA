@@ -43,20 +43,20 @@ function Nav() {
   }, []);
 
   return (
-    <Navbar className="sticky top-0 left-0 max-w-full z-50 px-4 py-2  bg-[#FFE893] bg-opacity-90 backdrop-blur-sm">
+    <Navbar className="sticky top-0 left-0 max-w-full z-50 px-4 py-2 bg-[#FFE893] bg-opacity-90 backdrop-blur-sm md:mb-2 lg:mb-0">
       <div className="flex justify-between items-center">
-        <div className="flex items-center">
+        <div className="flex items-center gap-1 md:gap-1 lg:gap-2">
           <Image
             src={logo}
             alt="Sarjana Geprek Logo"
-            className="w-14 h-14 sm:w-50 sm:h-50 "
+            className="w-14 h-14 md:w-50 md:h-50 lg:w-50 lg:h-50 "
           />
-          <span className="text-md md:text-xl font-bold ml-2 md:ml-3 text-black">
+          <span className="text-md md:text-lg lg:text-xl font-bold text-black">
             Ayam Sarjana Geprek
           </span>
         </div>
         {/* MOBILE */}
-        <div className="md:hidden flex items-center gap-1">
+        <div className="md:hidden lg:hidden flex items-center gap-1">
           {pengguna ? (
             <Button
               variant="text"
@@ -68,7 +68,7 @@ function Nav() {
                   : ""
               }`}
             >
-              <FiShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
+              <FiShoppingCart className="w-5 h-5" />
             </Button>
           ) : (
             <Button
@@ -93,8 +93,8 @@ function Nav() {
           </IconButton>
         </div>
         {/* WEBSITE */}
-        <div className="md:flex hidden flex-row items-center gap-12">
-          <ul className="flex flex-row gap-8 text-black font-medium transition-all duration-300">
+        <div className="hidden flex-row items-center md:flex md:gap-3 lg:gap-12">
+          <ul className="flex flex-row text-black font-medium transition-all duration-300 md:gap-5 lg:gap-8">
             <li
               className={`relative cursor-pointer transition-all ease-in-out duration-700 
       ${
@@ -144,7 +144,7 @@ function Nav() {
               Tentang kita
             </li>
           </ul>
-          <div className="flex gap-1">
+          <div className="flex md:gap-1 lg:gap-3">
             {pengguna ? (
               <>
                 <Button
@@ -174,12 +174,14 @@ function Nav() {
                       <FaCog className="w-5 h-5 text-black" />
                     </IconButton>
                   </MenuHandler>
-                  <MenuList className="p-2 rounded-lg -ml-12">
+
+                  <MenuList className="p-2 rounded-lg bg-[#FFF2C2] border-2 border-black/15 shadow-md md:-ml-2 lg:-ml-4">
+                 
                     <MenuItem
-                      className={`flex items-center px-3 py-2 gap-2  ${
+                      className={`flex items-center px-3 py-2 gap-2 text-black  ${
                         navbarAktif === "/Profil"
-                          ? "bg-blue-200 border border-gray-300 text-black"
-                          : ""
+                          ? "bg-[#AA5656]/55 border border-gray-300 text-black hover:!bg-[#AA5656]/50"
+                          : "hover:!bg-black/20"
                       }`}
                       onClick={() => handlenavbarAktif("/Profil")}
                     >
@@ -187,10 +189,10 @@ function Nav() {
                       <Typography>Profile Saya</Typography>
                     </MenuItem>
                     <MenuItem
-                      className={`flex items-center px-3 py-2 gap-2 ${
+                      className={`flex items-center px-3 py-2 gap-2 text-black ${
                         navbarAktif === "/PesananSaya"
-                          ? "bg-blue-200 border border-gray-300 text-black"
-                          : ""
+                          ? "bg-[#AA5656]/55 border border-gray-300 text-black hover:!bg-[#AA5656]/50"
+                          : "hover:!bg-black/20"
                       }`}
                       onClick={() => handlenavbarAktif("/PesananSaya")}
                     >
@@ -198,7 +200,7 @@ function Nav() {
                       <Typography>Pesanan Saya</Typography>
                     </MenuItem>
                     <MenuItem
-                      className="flex items-center px-3 py-2 gap-2"
+                      className="flex items-center px-3 py-2 gap-2 text-red-500 hover:text-white hover:!bg-red-500/50"
                       onClick={keluarAkun}
                     >
                       <FaPowerOff size={15} />
