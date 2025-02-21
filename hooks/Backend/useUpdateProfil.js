@@ -67,11 +67,7 @@ export const useUpdateProfil = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (
-      ["Nama_Depan", "Nama_Belakang", "Provinsi", "Kota", "Kecamatan"].includes(
-        name
-      )
-    ) {
+    if (["Nama_Depan", "Nama_Belakang"].includes(name)) {
       setFormData((prev) => ({ ...prev, [name]: formatNama(value) }));
       return;
     }

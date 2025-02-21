@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
-const handleSubmitBiodata = async (biodata, setLoading, router) => {
+const handleSubmitBiodata = async (biodata, setIsLoading, router) => {
   const {
     namaDepan,
     namaBelakang,
@@ -69,7 +69,7 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
     return;
   }
 
-  setLoading(true);
+  setIsLoading(true);
 
   try {
     const userId = localStorage.getItem("ID");
@@ -106,7 +106,7 @@ const handleSubmitBiodata = async (biodata, setLoading, router) => {
     console.error("Error saving biodata:", error);
     toast.error("Gagal menyimpan biodata. Silakan coba lagi.");
   } finally {
-    setLoading(false);
+    setIsLoading(false);
   }
 };
 

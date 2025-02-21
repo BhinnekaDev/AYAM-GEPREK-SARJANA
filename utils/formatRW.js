@@ -24,5 +24,5 @@ export const formatRW = (value) => {
       }
     });
   };
-  return escapeHtml(RW);
+  return escapeHtml(nomorRW);
 };

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   Input,
   Typography,
   Button,
   Textarea,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
@@ -14,10 +16,18 @@ import { CgProfile } from "react-icons/cg";
 import { MdArrowBack, MdEdit } from "react-icons/md";
 //HOOKS
 import { useUpdateProfil } from "@/hooks/Backend/useUpdateProfil";
+import useWilayah from "@/api/wilayah";
 
 const Konten = () => {
   const router = useRouter();
   const [activeForm, setActiveForm] = useState("dataDiri");
+  const {
+    provinsiAPI,
+    kabupatenAPI,
+    fetchKabupaten,
+    kecamatanAPI,
+    fetchKecamatan,
+  } = useWilayah();
   const [isEditing, setIsEditing] = useState(false);
   const {
     updateProfile,
@@ -26,6 +36,28 @@ const Konten = () => {
     profileImage,
     handleImageUpload,
   } = useUpdateProfil();
+
+  useEffect(() => {
+    if (formData.Provinsi) {
+      const selectedProvinsi = provinsiAPI.find(
+        (provinsi) => provinsi.name === formData.Provinsi
+      );
+      if (selectedProvinsi) {
+        fetchKabupaten(selectedProvinsi.id);
+      }
+    }
+  }, [formData.Provinsi, provinsiAPI]);
+
+  useEffect(() => {
+    if (formData.Kota) {
+      const selectedKabupaten = kabupatenAPI.find(
+        (kabupaten) => kabupaten.name === formData.Kota
+      );
+      if (selectedKabupaten) {
+        fetchKecamatan(selectedKabupaten.id);
+      }
+    }
+  }, [formData.Kota, kabupatenAPI]);
 
   const handleSave = async () => {
     if (isEditing) {
@@ -183,46 +215,59 @@ const Konten = () => {
                     <Typography className=" text-black font-bold md:text-md">
                       Provinsi
                     </Typography>
-                    <Input
-                      type="text"
-                      name="Provinsi"
-                      placeholder="Masukan Nama Provinsi"
+                    <Select
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
-                      onChange={handleChange}
                       disabled={!isEditing}
-                      value={formData.Provinsi}
-                    />
+                      value={formData.Provinsi || ""}
+                      onChange={(value) => {
+                        console.log("Provinsi yang dipilih:", value);
+                        handleChange({ target: { name: "Provinsi", value } });
+                      }}
+                    >
+                      {provinsiAPI.map((provinsi) => (
+                        <Option key={provinsi.id} value={provinsi.name}>
+                          {provinsi.name}
+                        </Option>
+                      ))}
+                    </Select>
                   </div>
                   <div>
                     <Typography className=" text-black font-bold md:text-md">
                       Kota
                     </Typography>
-                    <Input
-                      type="text"
-                      name="Kota"
-                      placeholder="Masukan Nama Kota"
+                    <Select
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
-                      onChange={handleChange}
                       disabled={!isEditing}
-                      value={formData.Kota}
-                    />
+                      value={formData.Kota || ""}
+                      onChange={(value) =>
+                        handleChange({ target: { name: "Kota", value } })
+                      }
+                    >
+                      {kabupatenAPI.map((kabupaten) => (
+                        <Option key={kabupaten.id} value={kabupaten.name}>
+                          {kabupaten.name}
+                        </Option>
+                      ))}
+                    </Select>
                   </div>
                   <div>
                     <Typography className=" text-black font-bold md:text-md">
                       Kecamatan
                     </Typography>
-                    <Input
-                      type="text"
-                      name="Kecamatan"
-                      placeholder="Masukan Nama Kecamatan"
+                    <Select
                       className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
-                      onChange={handleChange}
                       disabled={!isEditing}
-                      value={formData.Kecamatan}
-                    />
+                      value={formData.Kecamatan || ""}
+                      onChange={(value) =>
+                        handleChange({ target: { name: "Kecamatan", value } })
+                      }
+                    >
+                      {kecamatanAPI.map((kecamatan) => (
+                        <Option key={kecamatan.id} value={kecamatan.name}>
+                          {kecamatan.name}
+                        </Option>
+                      ))}
+                    </Select>
                   </div>
                   <div>
                     <Typography className=" text-black font-bold md:text-md">

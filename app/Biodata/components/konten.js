@@ -6,6 +6,8 @@ import {
   Input,
   Textarea,
   Typography,
+  Select,
+  Option,
 } from "@material-tailwind/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -20,6 +22,7 @@ import {
   handleSubmitBiodata,
   useFetchUserEmail,
 } from "@/hooks/Backend/useBiodata";
+import useWilayah from "@/api/wilayah";
 import { formatNama } from "@/utils/formatNama";
 import { formatNoTelepon } from "@/utils/formatNoTelepon";
 import { formatAlamat } from "@/utils/formatAlamat";
@@ -47,6 +50,32 @@ function halamanBiodata() {
   const [isMobile, setIsMobile] = useState(false);
   const [isIpad, setIsIpad] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const {
+    provinsiAPI,
+    kabupatenAPI,
+    kecamatanAPI,
+    fetchKabupaten,
+    fetchKecamatan,
+  } = useWilayah();
+
+  useFetchUserEmail(setEmail);
+  useEffect(() => {
+    if (provinsi) {
+      const selectedProvinsi = provinsiAPI.find((p) => p.name === provinsi);
+      if (selectedProvinsi) {
+        fetchKabupaten(selectedProvinsi.id);
+      }
+    }
+  }, [provinsi, provinsiAPI, fetchKabupaten]);
+
+  useEffect(() => {
+    if (kota) {
+      const selectedKabupaten = kabupatenAPI.find((k) => k.name === kota);
+      if (selectedKabupaten) {
+        fetchKecamatan(selectedKabupaten.id);
+      }
+    }
+  }, [kota, kabupatenAPI, fetchKecamatan]);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -79,7 +108,7 @@ function halamanBiodata() {
       alamatJalan,
       alamatDetail,
     };
-    handleSubmitBiodata(biodata, router);
+    handleSubmitBiodata(biodata, setIsLoading, router);
   };
 
   if (isLoading) {
@@ -184,39 +213,74 @@ function halamanBiodata() {
               <>
                 <div className="mb-3">
                   <Typography className="mb-1">Provinsi</Typography>
-                  <Input
-                    type="text"
-                    placeholder="Masukkan Nama Provinsi"
-                    name="Provinsi"
-                    className="w-full bg-white rounded-lg"
+                  <Select
+                    className="w-full bg-white text-black rounded-lg"
                     color="blue-gray"
                     value={provinsi}
-                    onChange={(e) => setProvinsi(formatNama(e.target.value))}
-                  />
+                    onChange={(value) => setProvinsi(value)}
+                  >
+                    {provinsiAPI.length > 0 ? (
+                      provinsiAPI.map((item) => (
+                        <Option
+                          key={item.id}
+                          value={item.name}
+                          className="text-black"
+                        >
+                          {item.name}
+                        </Option>
+                      ))
+                    ) : (
+                      <Option disabled>Loading...</Option>
+                    )}
+                  </Select>
                 </div>
                 <div className="mb-3">
                   <Typography className="mb-1">Kota</Typography>
-                  <Input
-                    type="text"
-                    placeholder="Masukkan Nama Kota"
-                    name="Kota"
-                    className="w-full bg-white rounded-lg"
+                  <Select
+                    className="w-full bg-white text-black rounded-lg"
                     color="blue-gray"
                     value={kota}
-                    onChange={(e) => setKota(formatNama(e.target.value))}
-                  />
+                    onChange={(value) => setKota(value)}
+                    disabled={!provinsi}
+                  >
+                    {kabupatenAPI.length > 0 ? (
+                      kabupatenAPI.map((item) => (
+                        <Option
+                          key={item.id}
+                          value={item.name}
+                          className="text-black"
+                        >
+                          {item.name}
+                        </Option>
+                      ))
+                    ) : (
+                      <Option disabled>Loading...</Option>
+                    )}
+                  </Select>
                 </div>
                 <div className="mb-3">
                   <Typography className="mb-1">Kecamatan</Typography>
-                  <Input
-                    type="text"
-                    placeholder="Masukkan Nama Kecamatan"
-                    name="Kota"
-                    className="w-full bg-white rounded-lg"
+                  <Select
+                    className="w-full bg-white text-black rounded-lg"
                     color="blue-gray"
                     value={kecamatan}
-                    onChange={(e) => setKecamatan(formatNama(e.target.value))}
-                  />
+                    onChange={(value) => setKecamatan(value)}
+                    disabled={!kota || kecamatanAPI.length === 0}
+                  >
+                    {kecamatanAPI.length > 0 ? (
+                      kecamatanAPI.map((item) => (
+                        <Option
+                          key={item.id}
+                          value={item.name}
+                          className="text-black"
+                        >
+                          {item.name}
+                        </Option>
+                      ))
+                    ) : (
+                      <Option disabled>Data Kecamatan Tidak Tersedia</Option>
+                    )}
+                  </Select>
                 </div>
                 <div className="mb-3">
                   <Typography className="mb-1">Kode Pos</Typography>
@@ -254,7 +318,7 @@ function halamanBiodata() {
                   <div className="w-full">
                     <Typography className="mb-1">RT</Typography>
                     <Input
-                      type="number"
+                      type="text"
                       placeholder="Masukkan Nomor RT"
                       name="RT"
                       className="w-full bg-white rounded-lg"
@@ -266,8 +330,8 @@ function halamanBiodata() {
                   <div className="w-full">
                     <Typography className="mb-1">RW</Typography>
                     <Input
-                      type="number"
-                      placeholder="Masukkan Nomor RW"
+                      type="text"
+                      placeholder="Masukkan Nomor RT"
                       name="RW"
                       className="w-full bg-white rounded-lg"
                       color="blue-gray"
@@ -316,9 +380,9 @@ function halamanBiodata() {
                     variant="outlined"
                     className="bg-[#CB6040] w-full p-2 border-none rounded-full hover:bg-[#CB6040] text-gray-300 hover:shadow-md transform duration-300 ease-in-out tracking-wider lg:w-1/3"
                     type="submit"
-                    disabled={loading}
+                    disabled={isLoading}
                   >
-                    {loading ? "Mengirim..." : "Simpan"}
+                    {isLoading ? "Mengirim..." : "Simpan"}
                   </Button>
                 </div>
               </>
