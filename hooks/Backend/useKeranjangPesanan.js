@@ -40,11 +40,19 @@ const useKeranjangPesanan = () => {
     setKeranjang(keranjangBaru);
   };
 
+  const kosongkanKeranjang = () => {
+    setKeranjang([]); // Mengosongkan keranjang
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("keranjang"); // Hapus dari localStorage
+    }
+  };
+
   return {
     keranjang,
     tambahKeKeranjang,
     hapusDariKeranjang,
     updateJumlahItem,
+    kosongkanKeranjang,
   };
 };
 

@@ -48,8 +48,7 @@ const DetailPesanan = () => {
   const [isPesananDibatalkan, setIsPesananDibatalkan] = useState(false);
   const [isPesananSelesai, setIsPesananSelesai] = useState(false);
 
-  const { pesanan, loading, batalkanPesanan, tandaiSelesai } =
-    useTampilkanPesanan(orderId);
+  const { pesanan, loading, batalkanPesanan, tandaiSelesai } = useTampilkanPesanan(orderId);
 
   useEffect(() => {
     if (pesanan) {
@@ -104,28 +103,14 @@ const DetailPesanan = () => {
   }
 
   if (loading) {
-    return <Typography>Sedang memuat pesanan...</Typography>;
+    return <Typography className="flex justify-center items-center text-center text-black h-screen font-bold">Sedang memuat pesanan...</Typography>;
   }
 
   if (!pesanan) {
     return <Typography>Pesanan tidak ditemukan.</Typography>;
   }
 
-  const {
-    userId,
-    Nama_Depan,
-    Nama_Belakang,
-    Email,
-    No_Telepon,
-    Alamat,
-    items,
-    metodePembayaran,
-    metodePengiriman,
-    totalAmount,
-    status,
-    createdAt,
-    id,
-  } = pesanan;
+  const { userId, Nama_Depan, Nama_Belakang, Email, No_Telepon, Alamat, items, metodePembayaran, metodePengiriman, totalAmount, status, createdAt, id } = pesanan;
 
   const handleLihatRiwayatPesanan = () => {
     localStorage.removeItem("orderId");
@@ -165,9 +150,7 @@ const DetailPesanan = () => {
               router.back();
             }}
           />
-          <Typography className="font-bold text-black text-sm md:text-md uppercase">
-            Tracking Pesanan
-          </Typography>
+          <Typography className="font-bold text-black text-sm md:text-md uppercase">Tracking Pesanan</Typography>
         </div>
         <CardBody className="rounded-lg p-0">
           <div className="flex justify-center items-center">
@@ -176,12 +159,8 @@ const DetailPesanan = () => {
                 <RiFileList3Line className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
-                  Pesanan Dibuat
-                </Typography>
-                <Typography className="text-sm md:text-[16px] lg:text-lg">
-                  09.00 - 10.00
-                </Typography>
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">Pesanan Dibuat</Typography>
+                <Typography className="text-sm md:text-[16px] lg:text-lg">09.00 - 10.00</Typography>
               </div>
             </div>
             <div className="relative w-20 md:w-52 lg:w-64 h-1 bg-gray-400 overflow-hidden rounded-lg md:-mt-12 md:-mx-6 lg:-mt-14 lg:-mx-8 -mt-16 -mx-5">
@@ -201,12 +180,8 @@ const DetailPesanan = () => {
                 <FaShippingFast className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
-                  Pesanan Diantar
-                </Typography>
-                <Typography className="text-sm md:text-[16px] lg:text-lg">
-                  09.00 - 10.00
-                </Typography>
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">Pesanan Diantar</Typography>
+                <Typography className="text-sm md:text-[16px] lg:text-lg">09.00 - 10.00</Typography>
               </div>
             </div>
             <div className="flex justify-center w-20 md:w-52 lg:w-64 h-1 bg-gray-400 overflow-hidden rounded-lg md:-mt-12 md:-mx-6 lg:-mt-14 lg:-mx-8 -mt-16 -mx-5"></div>
@@ -215,55 +190,35 @@ const DetailPesanan = () => {
                 <LuPackageCheck className="text-black w-6 h-6 sm:w-8 sm:h-8" />
               </div>
               <div className="text-center">
-                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">
-                  Pesanan Selesai
-                </Typography>
-                <Typography className="text-sm md:text-[16px] lg:text-lg">
-                  09.00 - 10.00
-                </Typography>
+                <Typography className="font-bold text-sm md:text-[16px] lg:text-lg">Pesanan Selesai</Typography>
+                <Typography className="text-sm md:text-[16px] lg:text-lg">09.00 - 10.00</Typography>
               </div>
             </div>
           </div>
           <div className="bg-[#EFF3EA] rounded-lg shadow-md p-2 sm:p-5 mt-7 sm:mt-10">
             <div className="flex justify-between">
-              <Typography className="sm:text-lg text-md uppercase font-bold text-black">
-                Detail Pesanan
-              </Typography>
+              <Typography className="sm:text-lg text-md uppercase font-bold text-black">Detail Pesanan</Typography>
               <div className="flex flex-row items-center gap-1">
-                <Typography className="hidden sm:block text-lg uppercase font-bold text-black">
-                  Order ID : {id}
-                </Typography>
-                <Typography className="sm:hidden text-md uppercase font-bold text-black">
-                  {id}
-                </Typography>
+                <Typography className="hidden sm:block text-lg uppercase font-bold text-black">Order ID : {id}</Typography>
+                <Typography className="sm:hidden text-md uppercase font-bold text-black">{id}</Typography>
               </div>
             </div>
             <div className="sm:grid sm:grid-cols-2 w-full sm:py-2 sm:gap-9 space-y-4 sm:space-y-0">
               <div className="h-full flex flex-col">
-                <Typography className="font-bold p-1 text-sm sm:text-lg text-black">
-                  Informasi Pengguna
-                </Typography>
+                <Typography className="font-bold p-1 text-sm sm:text-lg text-black">Informasi Pengguna</Typography>
                 <div className="bg-white mx-1 space-y-1 sm:space-y-0 sm:mx-0 p-2 sm:p-3 rounded-lg border-gray-700 border-2 flex-grow overflow-y-auto scrollbar-none max-h-48">
                   <div className="flex gap-2">
-                    <Typography className="font-bold text-sm sm:text-lg text-black">
-                      Nama Lengkap :
-                    </Typography>
+                    <Typography className="font-bold text-sm sm:text-lg text-black">Nama Lengkap :</Typography>
                     <Typography className="text-sm sm:text-lg text-black">
                       {Nama_Depan} {Nama_Belakang}
                     </Typography>
                   </div>
                   <div className="flex gap-2">
-                    <Typography className="font-bold text-sm sm:text-lg text-black">
-                      No Telepon :
-                    </Typography>
-                    <Typography className="text-sm sm:text-lg text-black">
-                      {No_Telepon}
-                    </Typography>
+                    <Typography className="font-bold text-sm sm:text-lg text-black">No Telepon :</Typography>
+                    <Typography className="text-sm sm:text-lg text-black">{No_Telepon}</Typography>
                   </div>
                   <div className="py-2">
-                    <Typography className="font-bold text-sm sm:text-lg text-black">
-                      Alamat:
-                    </Typography>
+                    <Typography className="font-bold text-sm sm:text-lg text-black">Alamat:</Typography>
                     {/* Render address */}
                     {Alamat && (
                       <>
@@ -278,159 +233,100 @@ const DetailPesanan = () => {
                         </Typography>
                       </>
                     )}
-                    {!Alamat && (
-                      <Typography className="text-sm sm:text-lg text-black">
-                        Alamat tidak tersedia
-                      </Typography>
-                    )}
+                    {!Alamat && <Typography className="text-sm sm:text-lg text-black">Alamat tidak tersedia</Typography>}
                   </div>
                 </div>
               </div>
               <div className="h-full flex flex-col">
-                <Typography className="font-bold p-1 text-sm sm:text-lg text-black">
-                  Informasi Pesanan
-                </Typography>
+                <Typography className="font-bold p-1 text-sm sm:text-lg text-black">Informasi Pesanan</Typography>
                 <div className="bg-white h-full mx-1 space-y-1 sm:space-y-0 sm:mx-0 rounded-lg border-gray-700 border-2 flex flex-col">
                   <div className="h-32 overflow-y-auto p-3 space-y-3">
-                  {items &&
+                    {items &&
                       items.map((item) => (
-                        <div
-                          className="flex gap-2 sm:gap-5 justify-between"
-                          key={item.id}
-                        >
+                        <div className="flex gap-2 sm:gap-5 justify-between" key={item.id}>
                           <div className="flex items-center justify-start gap-3">
                             <div className="bg-gray-300 hidden sm:block border border-gray-400 rounded-lg">
-                              {item.kategori === "makanan" && (
-                                <Image
-                                  className="w-full h-24 p-1"
-                                  src={MMakanan}
-                                  alt="gambarMakanan"
-                                />
-                              )}
-                              {item.kategori === "minuman" && (
-                                <Image
-                                  className="w-full h-24 p-1"
-                                  src={MMinuman1}
-                                  alt="gambarMinuman"
-                                />
-                              )}
+                              {item.kategori === "makanan" && <Image className="w-full h-24 p-1" src={MMakanan} alt="gambarMakanan" />}
+                              {item.kategori === "minuman" && <Image className="w-full h-24 p-1" src={MMinuman1} alt="gambarMinuman" />}
                             </div>
                             <div className="flex flex-col justify-center">
-                              <Typography className="text-sm lg:text-md font-bold text-gray-600">
-                                {item.kategori === "makanan"
-                                  ? "Makanan"
-                                  : "Minuman"}
-                              </Typography>
-                              <Typography className="font-bold text-black text-md md:text-sm lg:text-lg">
-                                {item.nama}
-                              </Typography>
+                              <Typography className="text-sm lg:text-md font-bold text-gray-600">{item.kategori === "makanan" ? "Makanan" : "Minuman"}</Typography>
+                              <Typography className="font-bold text-black text-md md:text-sm lg:text-lg">{item.nama}</Typography>
                               <Typography className="text-sm md:text-xs lg:text-md ">
                                 {item.kategori === "makanan" && (
                                   <span>
-                                    {item.rasaSambal &&
-                                      `Sambal ${item.rasaSambal} - `}
-                                    {item.levelPedas &&
-                                      `Pedas ${item.levelPedas}`}
+                                    {item.rasaSambal && `Sambal ${item.rasaSambal} - `}
+                                    {item.levelPedas && `Pedas ${item.levelPedas}`}
                                   </span>
                                 )}
-                                {item.kategori === "minuman" && (
-                                  <span>{item.tipeMinuman}</span>
-                                )}
+                                {item.kategori === "minuman" && <span>{item.tipeMinuman}</span>}
                               </Typography>
                             </div>
                           </div>
                           <div className="flex justify-center items-center gap-3">
-                            <Typography className="font-bold text-gray-600 text-md md:text-sm lg:text-md">
-                              x{item.jumlah}
-                            </Typography>
-                            <Typography className="font-bold text-black text-md md:text-sm lg:text-md">
-                              {formatRupiah(item.harga)}
-                            </Typography>
+                            <Typography className="font-bold text-gray-600 text-md md:text-sm lg:text-md">x{item.jumlah}</Typography>
+                            <Typography className="font-bold text-black text-md md:text-sm lg:text-md">{formatRupiah(item.harga)}</Typography>
                           </div>
                         </div>
                       ))}
                   </div>
                   <div className="flex w-full p-2 flex-grow items-end justify-between mt-auto">
-                    <Typography className="text-md font-bold sm:text-lg text-black">
-                      Total Pesanan:
-                    </Typography>
-                    <Typography className="font-bold text-md sm:text-lg text-black">
-                      {formatRupiah(totalAmount)}
-                    </Typography>
+                    <Typography className="text-md font-bold sm:text-lg text-black">Total Pesanan:</Typography>
+                    <Typography className="font-bold text-md sm:text-lg text-black">{formatRupiah(totalAmount)}</Typography>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            className={`flex ${
-              !isHidden
-                ? "justify-end"
-                : "justify-between sm:justify-end sm:gap-5"
-            } items-center mt-3 sm:mt-4 px-2 sm:px-4`}
-          >
+          <div className={`flex ${!isHidden ? "justify-end" : "justify-between sm:justify-end sm:gap-5"} items-center mt-3 sm:mt-4 px-2 sm:px-4`}>
             {/* Button Batalkan Pesanan */}
-            {!isHidden &&
-              !isPesananDibatalkan &&
-              pesanan?.status !== "Selesai" && (
-                <button
-                  onClick={handleBatalkanPesanan}
-                  className="flex items-center justify-center gap-1 sm:gap-3 text-center border tracking-wider bg-red-400 text-xs sm:text-sm text-white border-white shadow-md px-3 py-2 sm:px-6 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
-                >
-                  <svg className="h-4 w-4 sm:w-6 sm:h-6" viewBox="0 0 100 100">
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="white"
-                      strokeWidth="8"
-                      fill="transparent"
-                      opacity="0.2"
-                    />
-                    <circle
-                      cx="50"
-                      cy="50"
-                      r="40"
-                      stroke="white"
-                      strokeWidth="8"
-                      fill="transparent"
-                      strokeDasharray="251.2"
-                      strokeDashoffset={`${251.2 - (progress / 100) * 251.2}`}
-                      strokeLinecap="round"
-                      transform="rotate(-90 50 50)"
-                      style={{ transition: "stroke-dashoffset 1s linear" }}
-                    />
-                  </svg>
-                  Batalkan Pesanan
-                </button>
-              )}
+            {!isHidden && !isPesananDibatalkan && pesanan?.status !== "Selesai" && (
+              <button
+                onClick={handleBatalkanPesanan}
+                className="flex items-center justify-center gap-1 sm:gap-3 text-center border tracking-wider bg-red-400 text-xs sm:text-sm text-white border-white shadow-md px-3 py-2 sm:px-6 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+              >
+                <svg className="h-4 w-4 sm:w-6 sm:h-6" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="40" stroke="white" strokeWidth="8" fill="transparent" opacity="0.2" />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    stroke="white"
+                    strokeWidth="8"
+                    fill="transparent"
+                    strokeDasharray="251.2"
+                    strokeDashoffset={`${251.2 - (progress / 100) * 251.2}`}
+                    strokeLinecap="round"
+                    transform="rotate(-90 50 50)"
+                    style={{ transition: "stroke-dashoffset 1s linear" }}
+                  />
+                </svg>
+                Batalkan Pesanan
+              </button>
+            )}
 
             {/* Button Beri Penilaian dan Pesanan Selesai */}
-            {showButtons &&
-              !isPesananDibatalkan &&
-              pesanan?.status !== "Dibatalkan" && (
-                <>
-                  {!isPesananSelesai && (
-                    <Button
-                      onClick={handleTandaiSelesai}
-                      className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
-                    >
-                      Pesanan Selesai
-                    </Button>
-                  )}
+            {showButtons && !isPesananDibatalkan && pesanan?.status !== "Dibatalkan" && (
+              <>
+                {!isPesananSelesai && (
                   <Button
-                    onClick={handleOpen}
-                    className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+                    onClick={handleTandaiSelesai}
+                    className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
                   >
-                    Beri Penilaian
+                    Pesanan Selesai
                   </Button>
-                </>
-              )}
+                )}
+                <Button
+                  onClick={handleOpen}
+                  className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+                >
+                  Beri Penilaian
+                </Button>
+              </>
+            )}
 
             {/* ModalRating hanya ditampilkan jika status pesanan adalah "Selesai" atau "Sedang Dikirim" */}
-            {(isPesananSelesai || pesanan?.status === "Sedang Dikirim") && (
-              <ModalRating open={open} handleOpen={handleOpen} />
-            )}
+            {(isPesananSelesai || pesanan?.status === "Sedang Dikirim") && <ModalRating open={open} handleOpen={handleOpen} />}
           </div>
         </CardBody>
       </Card>

@@ -65,9 +65,7 @@ const useCheckout = (pembayaranTerpilih, pengirimanTerpilih) => {
       const newOrderId = Date.now().toString();
       const orderDocRef = doc(firestore, "pesanan", newOrderId);
 
-      const totalAmount =
-        keranjang.reduce((acc, item) => acc + item.harga * item.jumlah, 0) +
-        biayaLayanan;
+      const totalAmount = keranjang.reduce((acc, item) => acc + item.harga * item.jumlah, 0) + biayaLayanan;
 
       await setDoc(orderDocRef, {
         userId: userInfo.id,
