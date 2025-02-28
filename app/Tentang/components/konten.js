@@ -22,8 +22,8 @@ function Beranda() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center px-10 lg:px-20 lg:py-1 gap-16">
-      <div className="relative flex px-12 justify-end items-end w-full h-[300px] sm:h-[400px]">
+    <div className="flex flex-col items-center px-10 md:px-0 lg:px-20 lg:py-1 gap-16">
+      <div className="relative flex px-12 md:px-0 justify-end items-end w-full h-[300px] sm:h-[400px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
@@ -31,19 +31,33 @@ function Beranda() {
             animate={{ x: 0, y: 0, scale: 1, opacity: 1 }}
             exit={{ x: -300, y: -500, scale: 0.5, opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="absolute md:px-24"
+            className="absolute md:px-0 lg:px-12"
           >
-            <Image src={images[index]} alt="Ayam Geprek" className="w-56 h-56 sm:w-[400px] sm:h-[400px]" />
+            <Image
+              src={images[index]}
+              alt="Ayam Geprek"
+              className="w-56 h-56 sm:w-[400px] sm:h-[400px]"
+            />
           </motion.div>
         </AnimatePresence>
       </div>
       <div className="self-start justify-center text-center w-full lg:w-1/2 transform lg:-translate-y-20 transition-none">
-        <Typography variant="h1" className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6">
+        <Typography
+          variant="h1"
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-6"
+        >
           Tentang Kami
         </Typography>
-        <Typography variant="paragraph" className="md:text-2xl lg:text-lg text-black leading-tight">
-          Ayam Geprek Sarjana adalah restoran yang menyajikan ayam geprek dengan cita rasa khas yang sudah terkenal di kawasan Cimahi. Terletak di Jl. Ibu Ganirah No.115, Cibeber, Kec. Cimahi Sel., Kota Cimahi, Jawa Barat, kami menyajikan
-          hidangan ayam geprek yang lezat dan pedas, siap memanjakan lidah Anda. Nikmati pengalaman makan yang tak terlupakan hanya di Ayam Geprek Sarjana!
+        <Typography
+          variant="paragraph"
+          className="md:text-2xl lg:text-lg text-black leading-tight"
+        >
+          Ayam Geprek Sarjana adalah restoran yang menyajikan ayam geprek dengan
+          cita rasa khas yang sudah terkenal di kawasan Cimahi. Terletak di Jl.
+          Ibu Ganirah No.115, Cibeber, Kec. Cimahi Sel., Kota Cimahi, Jawa
+          Barat, kami menyajikan hidangan ayam geprek yang lezat dan pedas, siap
+          memanjakan lidah Anda. Nikmati pengalaman makan yang tak terlupakan
+          hanya di Ayam Geprek Sarjana!
         </Typography>
       </div>
     </div>

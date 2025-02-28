@@ -31,6 +31,18 @@ function Beranda() {
   const { daftarMakanan, sedangMemuatMakanan } = useTampilkanMakanan();
   const { daftarMinuman, sedangMemuatMinuman } = useTampilkanMinuman();
   const { tambahKeKeranjang } = useKeranjangPesanan();
+  const [batasKeteranganGambar, setBatasKeteranganGambar] = useState(20);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setBatasKeteranganGambar(window.innerWidth < 640 ? -50 : 20);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     if (daftarMakanan.length > 0 || daftarMinuman.length > 0) {
@@ -190,9 +202,19 @@ function Beranda() {
                                   logoImage
                                 }
                                 alt={`menu-${
-                                  item.Nama_Makanan ||
-                                  item.Nama_Minuman ||
-                                  "tidak diketahui"
+                                  (
+                                    item.Nama_Makanan ||
+                                    item.Nama_Minuman ||
+                                    "tidak diketahui"
+                                  ).length > batasKeteranganGambar
+                                    ? (
+                                        item.Nama_Makanan ||
+                                        item.Nama_Minuman ||
+                                        "tidak diketahui"
+                                      ).slice(0, batasKeteranganGambar) + "..."
+                                    : item.Nama_Makanan ||
+                                      item.Nama_Minuman ||
+                                      "tidak diketahui"
                                 }`}
                                 width={200}
                                 height={200}

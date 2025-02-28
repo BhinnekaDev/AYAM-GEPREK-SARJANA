@@ -216,7 +216,7 @@ const Konten = () => {
                       Provinsi
                     </Typography>
                     <Select
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 font-bold text-gray-700"
                       disabled={!isEditing}
                       value={formData.Provinsi || ""}
                       onChange={(value) => {
@@ -225,7 +225,15 @@ const Konten = () => {
                       }}
                     >
                       {provinsiAPI.map((provinsi) => (
-                        <Option key={provinsi.id} value={provinsi.name}>
+                        <Option
+                          key={provinsi.id}
+                          value={provinsi.name}
+                          className={`hover:!bg-black/25 text-gray-600 ${
+                            formData.Provinsi === provinsi.name
+                              ? "bg-[#AA5656]/50 text-black"
+                              : ""
+                          }`}
+                        >
                           {provinsi.name}
                         </Option>
                       ))}
@@ -236,7 +244,7 @@ const Konten = () => {
                       Kota
                     </Typography>
                     <Select
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 font-bold text-gray-700"
                       disabled={!isEditing}
                       value={formData.Kota || ""}
                       onChange={(value) =>
@@ -244,7 +252,15 @@ const Konten = () => {
                       }
                     >
                       {kabupatenAPI.map((kabupaten) => (
-                        <Option key={kabupaten.id} value={kabupaten.name}>
+                        <Option
+                          key={kabupaten.id}
+                          value={kabupaten.name}
+                          className={`hover:!bg-black/25 text-gray-600 ${
+                            formData.Kota === kabupaten.name
+                              ? "bg-[#AA5656]/50 text-black"
+                              : ""
+                          }`}
+                        >
                           {kabupaten.name}
                         </Option>
                       ))}
@@ -255,7 +271,7 @@ const Konten = () => {
                       Kecamatan
                     </Typography>
                     <Select
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 font-bold text-gray-700"
                       disabled={!isEditing}
                       value={formData.Kecamatan || ""}
                       onChange={(value) =>
@@ -263,7 +279,15 @@ const Konten = () => {
                       }
                     >
                       {kecamatanAPI.map((kecamatan) => (
-                        <Option key={kecamatan.id} value={kecamatan.name}>
+                        <Option
+                          key={kecamatan.id}
+                          value={kecamatan.name}
+                          className={`hover:!bg-black/25 text-gray-600 ${
+                            formData.Kecamatan === kecamatan.name
+                              ? "bg-[#AA5656]/50 text-black"
+                              : ""
+                          }`}
+                        >
                           {kecamatan.name}
                         </Option>
                       ))}
@@ -277,8 +301,7 @@ const Konten = () => {
                       type="number"
                       name="Kode_Pos"
                       placeholder="Masukan Nomor Kode Pos"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 !font-bold !text-gray-700"
                       onChange={handleChange}
                       disabled={!isEditing}
                       value={formData.Kode_Pos}
@@ -293,8 +316,7 @@ const Konten = () => {
                       type="number"
                       name="RT"
                       placeholder="Masukan Nomor RT"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 !font-bold !text-gray-700"
                       onChange={handleChange}
                       disabled={!isEditing}
                       value={formData.RT}
@@ -308,8 +330,7 @@ const Konten = () => {
                       type="number"
                       name="RW"
                       placeholder="Masukan Nomor RW"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 !font-bold !text-gray-700"
                       onChange={handleChange}
                       disabled={!isEditing}
                       value={formData.RW}
@@ -325,8 +346,7 @@ const Konten = () => {
                       size="md"
                       name="Alamat_Jalan"
                       placeholder="Nama Jalan, Gedung, No. Rumah"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 !font-bold !text-gray-700"
                       onChange={handleChange}
                       disabled={!isEditing}
                       value={formData.Alamat_Jalan}
@@ -340,8 +360,7 @@ const Konten = () => {
                       size="lg"
                       name="Alamat_Detail"
                       placeholder="Blok / Unit No. / Patokan"
-                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100"
-                      color="blue-gray"
+                      className="w-full rounded-lg bg-white md:text-md disabled:bg-gray-100 !font-bold !text-gray-700"
                       onChange={handleChange}
                       disabled={!isEditing}
                       value={formData.Alamat_Detail}
@@ -361,18 +380,18 @@ const Konten = () => {
                 Edit
               </Button>
               {isEditing && (
-                <div className="flex flex-col w-full md:flex-row md:justify-between gap-4">
-                  <Button
-                    className="w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 sm:w-52 sm:rounded-full"
-                    onClick={handleSave}
-                  >
-                    Simpan
-                  </Button>
+                <div className="flex flex-row w-full md:justify-between gap-4">
                   <Button
                     className="w-full py-2 bg-gray-400 text-white hover:bg-gray-500 tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 sm:w-52 sm:rounded-full"
                     onClick={() => setIsEditing(false)}
                   >
                     Batal
+                  </Button>
+                  <Button
+                    className="w-full py-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-widest rounded-full hover:scale-95 transform transition-all ease-in-out duration-500 sm:w-52 sm:rounded-full"
+                    onClick={handleSave}
+                  >
+                    Simpan
                   </Button>
                 </div>
               )}

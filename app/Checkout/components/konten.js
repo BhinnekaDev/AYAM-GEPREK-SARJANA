@@ -169,42 +169,53 @@ const Konten = () => {
               </div>
               <div className="h-[2px] rounded-full bg-gray-300"></div>
               <div className="space-y-3 py-2 sm:max-h-32 overflow-auto">
-              {keranjangState.map((item) => (
-                <div key={item.id} 
-                className="flex flex-col sm:flex-row justify-between ml-6 mr-3">
-                  <div>
-                  <Typography className="font-bold text-md lg:text-lg">
-                  {item.nama}
-                    </Typography>
-                    <div className="sm:hidden text-sm text-gray-700">
-                    {item.kategori === "makanan" && (
-                          <Typography>
-                            {item.rasaSambal && `Sambal ${item.rasaSambal} `}
-                            {item.levelPedas && `Level ${item.levelPedas}`}
-                          </Typography>
+                {keranjangState.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex flex-col sm:flex-row justify-between ml-6 mr-3"
+                  >
+                    <div>
+                      <Typography className="font-bold text-md lg:text-lg">
+                        {item.nama.length > 25
+                          ? item.nama.slice(0, 30) + " ..."
+                          : item.nama}
+                      </Typography>
+                      <div className="sm:hidden text-sm text-gray-700">
+                        {item.kategori === "makanan" && (
+                          <div className="flex justify-between">
+                            <Typography>
+                              {item.rasaSambal && `${item.rasaSambal} `}
+                            </Typography>
+                            <Typography>
+                              {item.levelPedas && `Level ${item.levelPedas}`}
+                            </Typography>
+                          </div>
                         )}
-                          {item.kategori === "minuman" && (
+                        {item.kategori === "minuman" && (
                           <Typography>{item.tipeMinuman}</Typography>
                         )}
+                      </div>
                     </div>
-                  </div>
-                  {item.kategori === "makanan" && (
-                  <Typography className="text-md lg:text-lg hidden sm:block">
-                  {item.rasaSambal && `Sambal ${item.rasaSambal} `}
+                    {item.kategori === "makanan" && (
+                      <div className="flex md:gap-2 lg:gap-5">
+                        <Typography className="text-md lg:text-lg hidden sm:block">
+                          {item.rasaSambal && `${item.rasaSambal} `}
+                        </Typography>
+                        <Typography className="text-md lg:text-lg hidden sm:block">
                           {item.levelPedas && `Level ${item.levelPedas}`}
-                  
-                  </Typography>
-                )}
-                  {item.kategori === "minuman" && (
-                  <Typography className="text-md lg:text-lg hidden sm:block">
-                  {item.tipeMinuman}
-                  </Typography>
-                         )}
-                  <Typography className="font-bold text-md lg:text-lg text-end">
-                  {formatRupiah(item.harga)}
-                  </Typography>
-                </div>
-                   ))}
+                        </Typography>
+                      </div>
+                    )}
+                    {item.kategori === "minuman" && (
+                      <Typography className="text-md lg:text-lg hidden sm:block">
+                        {item.tipeMinuman}
+                      </Typography>
+                    )}
+                    <Typography className="font-bold text-md lg:text-lg text-end">
+                      {formatRupiah(item.harga)}
+                    </Typography>
+                  </div>
+                ))}
               </div>
               <div className="h-[2px] rounded-full bg-gray-300"></div>
               <div className="flex justify-end items-center gap-1">
