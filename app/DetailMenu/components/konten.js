@@ -64,6 +64,15 @@ const Konten = ({ item, onBack }) => {
   const isMakanan = item?.kategori === "makanan";
   const isMinuman = item?.kategori === "minuman";
 
+  // Validasi apakah rasa sambal atau tipe minuman sudah dipilih
+  const sambalSudahDipilih = !isMakanan || (isMakanan && sambalTerpilih !== "");
+  const tipeMinumanSudahDipilih =
+    !isMinuman || (isMinuman && tipeMinuman !== "");
+
+  //Gabungan validasi
+  const itemSiapDitambahkan =
+    (isMakanan && sambalSudahDipilih) || (isMinuman && tipeMinumanSudahDipilih);
+
   return (
     <div className="flex items-center w-full justify-center px-5 py-6 sm:pt-16">
       <Card className="bg-[#FFF2C2] bg-opacity-60 border border-gray-400 md:border-none flex justify-center items-center w-full max-w-xl sm:max-w-4xl shadow-md md:shadow-lg p-6">
@@ -223,8 +232,12 @@ const Konten = ({ item, onBack }) => {
             </div>
             <div className="mt-12 w-full flex flex-col sm:flex-row justify-center items-center gap-2">
               <Button
-                className="sm:flex hidden justify-center text-sm items-center w-full py-2 gap-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-wider hover:bg-opacity-90 hover:shadow-md border-2 border-gray-300 rounded-lg transition-all duration-500"
-                onClick={handleTambahKeKeranjang}
+                className={`sm:flex hidden justify-center text-sm items-center w-full py-2 gap-2 bg-[#AA5656] text-white hover:bg-[#AA5656] tracking-wider hover:bg-opacity-90 hover:shadow-md border-2 border-gray-300 rounded-lg transition-all duration-500 
+                  ${
+                    !itemSiapDitambahkan ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                onClick={itemSiapDitambahkan ? handleTambahKeKeranjang : null}
+                disabled={!itemSiapDitambahkan}
               >
                 <FaPlus className=" w-4 h-4" />
                 Tambahkan
