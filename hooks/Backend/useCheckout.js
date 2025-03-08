@@ -53,6 +53,21 @@ const useCheckout = (pembayaranTerpilih, pengirimanTerpilih) => {
       toast.error("Keranjang belanja kosong!");
       return;
     }
+    if (
+      !userInfo.Alamat ||
+      !userInfo.Alamat.Alamat_Jalan ||
+      !userInfo.Alamat.RT ||
+      !userInfo.Alamat.RW ||
+      !userInfo.Alamat.Alamat_Detail ||
+      !userInfo.Alamat.Kecamatan ||
+      !userInfo.Alamat.Kota ||
+      !userInfo.Alamat.Provinsi ||
+      !userInfo.Alamat.Kode_Pos
+    ) {
+      toast.error("Alamat belum lengkap. Harap lengkapi alamat Anda.");
+      router.push("/Profil");
+      return;
+    }
 
     if (!userInfo.id) {
       console.error("User ID is undefined!");
@@ -65,7 +80,9 @@ const useCheckout = (pembayaranTerpilih, pengirimanTerpilih) => {
       const newOrderId = Date.now().toString();
       const orderDocRef = doc(firestore, "pesanan", newOrderId);
 
-      const totalAmount = keranjang.reduce((acc, item) => acc + item.harga * item.jumlah, 0) + biayaLayanan;
+      const totalAmount =
+        keranjang.reduce((acc, item) => acc + item.harga * item.jumlah, 0) +
+        biayaLayanan;
 
       await setDoc(orderDocRef, {
         userId: userInfo.id,

@@ -154,6 +154,9 @@ const DetailPesanan = () => {
     }
   };
 
+  const isPesananSedangDibuat = pesanan?.status === "Sedang Dibuat";
+  const isPesananSedangDikirim = pesanan?.status === "Sedang Dikirim";
+
   return (
     <div className="flex items-center justify-center px-5 md:pt-12">
       <Toaster position="top-right" reverseOrder={false} />
@@ -374,9 +377,10 @@ const DetailPesanan = () => {
                 : "justify-between sm:justify-end sm:gap-5"
             } items-center mt-3 sm:mt-4 px-2 sm:px-4`}
           >
-            {!isHidden &&
+            {/* Tombol Batalkan Pesanan */}
+            {isPesananSedangDibuat &&
               !isPesananDibatalkan &&
-              pesanan?.status !== "Selesai" && (
+              progress < 100 && (
                 <button
                   onClick={handleBatalkanPesanan}
                   className="flex items-center justify-center gap-1 sm:gap-3 text-center border tracking-wider bg-red-400 text-xs sm:text-sm text-white border-white shadow-md px-3 py-2 sm:px-6 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
@@ -408,30 +412,30 @@ const DetailPesanan = () => {
                   Batalkan Pesanan
                 </button>
               )}
-            {showButtons &&
-              !isPesananDibatalkan &&
-              pesanan?.status !== "Dibatalkan" && (
-                <>
-                  {!isPesananSelesai && (
-                    <Button
-                      onClick={handleTandaiSelesai}
-                      className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
-                    >
-                      Pesanan Selesai
-                    </Button>
-                  )}
-                  <Button
-                    onClick={handleOpen}
-                    className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
-                  >
-                    Beri Penilaian
-                  </Button>
-                </>
+
+            {/* Tombol Pesanan Selesai*/}
+            {(isPesananSedangDikirim ||
+              (progress >= 100 && !isPesananSelesai)) &&
+              !isPesananDibatalkan && (
+                <Button
+                  onClick={handleTandaiSelesai}
+                  className="text-center border tracking-wider bg-[#AA5656] sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+                >
+                  Pesanan Selesai
+                </Button>
               )}
 
-            {(isPesananSelesai || pesanan?.status === "Sedang Dikirim") && (
-              <ModalRating open={open} handleOpen={handleOpen} />
+            {/* Tombol Beri Penilaian */}
+            {isPesananSelesai && (
+              <Button
+                onClick={handleOpen}
+                className="text-center border tracking-wider bg-orange-600 sm:text-sm text-white border-white shadow-md px-4 py-2 sm:px-9 rounded-full capitalize hover:bg-opacity-70 hover:shadow-md transition-all duration-300"
+              >
+                Beri Penilaian
+              </Button>
             )}
+
+            <ModalRating open={open} handleOpen={handleOpen} />
           </div>
         </CardBody>
       </Card>
