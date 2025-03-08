@@ -3,8 +3,14 @@ import { useState, useEffect } from "react";
 const useKeranjangPesanan = () => {
   const [keranjang, setKeranjang] = useState(() => {
     if (typeof window !== "undefined") {
-      const storedKeranjang = localStorage.getItem("keranjang");
-      return storedKeranjang ? JSON.parse(storedKeranjang) : [];
+      try {
+        const storedKeranjang = localStorage.getItem("keranjang");
+        const parsed = storedKeranjang ? JSON.parse(storedKeranjang) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        console.error("Error parsing keranjang:", error);
+        return [];
+      }
     }
     return [];
   });
